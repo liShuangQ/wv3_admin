@@ -1,0 +1,41 @@
+module.exports = {
+  env: {
+    browser: true,
+    es2021: true,
+  },
+  parser: "vue-eslint-parser",
+  parserOptions: {
+    ecmaVersion: 12,
+    parser: "@typescript-eslint/parser",
+    sourceType: "module",
+  },
+  plugins: ["vue", "@typescript-eslint"],
+  // extends的优先级也是从后往前的
+  extends: [
+    "plugin:@typescript-eslint/recommended",
+    "plugin:vue/vue3-recommended",
+    "eslint:recommended",
+  ],
+  rules: {
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/ban-types": "off",
+    quotes: "off",
+    semi: "off",
+    "comma-dangle": "off",
+    "no-undef": "off",
+    "prefer-const": "off",
+    "vue/multi-word-component-names": "off",
+    "no-async-promise-executor": "off",
+    "no-debugger": "off",
+    eqeqeq: "error",
+    "default-case": "error",
+    "@typescript-eslint/no-unused-vars": "off",
+    "no-useless-escape": "off",
+    "vue/singleline-html-element-content-newline": "off",
+    "vue/multiline-html-element-content-newline": "off",
+    "vue/html-self-closing": "off",
+    "no-unused-vars": "off",
+    "vue/attributes-order": "off",
+    "vue/max-attributes-per-line": "off",
+  },
+};
