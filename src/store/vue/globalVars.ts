@@ -1,5 +1,5 @@
 import { reactive } from "vue";
-import { GlobalVars } from "../../types/globalVars";
+import { GlobalVars } from "../../../types/globalVars";
 // const globalVars = inject<GlobalVars>("globalVars");
 // watch(
 //   () => globalVars?.demo,

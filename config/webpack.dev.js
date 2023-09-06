@@ -9,6 +9,9 @@ module.exports = merge(baseConfig, {
   devServer: {
     hot: true,
     open: true,
+    client: {
+      overlay: false,
+    },
   },
   plugins: [
     new FriendlyErrorsWebpackPlugin(),

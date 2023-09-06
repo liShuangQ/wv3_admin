@@ -3,11 +3,9 @@ import App from "./App.vue";
 import router, { setupRouter } from "./router/index";
 import { setupPlugins } from "@/plugins";
 import "./style/tailwind.css"
-// ------store文件夹中除了这3个应均为pinia------
-import setGlobalProperties from "./store/globalProperties";
-import globalVars from "./store/globalVars";
-import setDirective from './store/directive'
-//-------------------------------------------
+import setGlobalProperties from "./store/vue/globalProperties";
+import globalVars from "./store/vue/globalVars";
+import setDirective from './store/vue/directive'
 
 const bootstrap = async () => {
   const app = createApp(App);
