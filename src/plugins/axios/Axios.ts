@@ -80,7 +80,6 @@ export default class Axios {
           this.lastTime = nowTime
         }
         config.spinning && this.abilityStore.setSpinning(true);
-        // 在发送请求之前做些什么 (NODE: 携带token,不是覆盖,为了在方法中可自定义)
         config.headers && (config.headers['token'] = "123")
         return config
         
@@ -97,14 +96,12 @@ export default class Axios {
         this.abilityStore.getSpinning() && this.abilityStore.setSpinning(false);
 
         // 2xx 范围内的状态码都会触发该函数。
-        // 对响应数据做点什么
         return response;
       },
       (error) => {
         this.abilityStore.getSpinning() && this.abilityStore.setSpinning(false);
 
         // 超出 2xx 范围的状态码都会触发该函数。
-        // 对响应错误做点什么
         switch (error.response.status) {
           case 'Throttling':
             break;

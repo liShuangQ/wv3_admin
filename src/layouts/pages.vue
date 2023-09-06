@@ -10,7 +10,6 @@
 </template>
 <script lang="ts">
 export default {
-  // 登录才可进入
   route: {
     meta: {
       auth: true,
@@ -19,15 +18,15 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { nextTick, ref } from "vue";
+import { ref } from "vue";
 
 let refreshPageValue = ref<boolean>(true);
-const refreshPage = () => {
-  refreshPageValue.value = false;
-  nextTick(() => {
-    refreshPageValue.value = true;
-  });
-  return;
-};
+// const refreshPage = () => {
+//   refreshPageValue.value = false;
+//   nextTick(() => {
+//     refreshPageValue.value = true;
+//   });
+//   return;
+// };
 </script>
 <style scoped></style>

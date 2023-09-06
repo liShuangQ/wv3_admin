@@ -2,20 +2,23 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
+    node: true,
+    "vue/setup-compiler-macros": true,
   },
   parser: "vue-eslint-parser",
+  extends: [
+    "eslint:recommended",
+    "plugin:vue/vue3-essential",
+    // "standard-with-typescript",
+    "plugin:@typescript-eslint/recommended",
+  ],
+  overrides: [],
   parserOptions: {
     ecmaVersion: 12,
-    parser: "@typescript-eslint/parser",
     sourceType: "module",
+    parser: "@typescript-eslint/parser",
   },
   plugins: ["vue", "@typescript-eslint"],
-  // extends的优先级也是从后往前的
-  extends: [
-    "plugin:@typescript-eslint/recommended",
-    "plugin:vue/vue3-recommended",
-    "eslint:recommended",
-  ],
   rules: {
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/ban-types": "off",
@@ -29,7 +32,6 @@ module.exports = {
     "no-debugger": "off",
     eqeqeq: "error",
     "default-case": "error",
-    "@typescript-eslint/no-unused-vars": "off",
     "no-useless-escape": "off",
     "vue/singleline-html-element-content-newline": "off",
     "vue/multiline-html-element-content-newline": "off",

@@ -10,7 +10,6 @@ let views:{} = {}
 viewsFun.keys().forEach((k:string )=>{
     views[k] = viewsFun(k)
 })
-console.log(views);
 
 
 function getRoutes() {
