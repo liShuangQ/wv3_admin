@@ -81,4 +81,9 @@ module.exports = {
     cache: {
         type: "filesystem",
     },
+    output: {
+        filename: './js/[name].js',
+        path: path.resolve('/wv3', ''),
+        publicPath: devMode ? '/' : '/wv3/'
+    }
 };
