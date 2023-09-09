@@ -27,6 +27,10 @@
       <div>{{y}}</div>
     </div>
 
+    <div >
+      <div class="text-blue-400">element自动导入：</div>
+      <el-button type="primary">Primary</el-button>
+    </div>
   </div>
 </template>
 <script lang="ts">
@@ -81,4 +85,5 @@ const setColor = () => {
   const b = Math.floor(Math.random() * 255)
   document.body.style.setProperty("--test--",  `rgb(${r}, ${g}, ${b})`);
 }
+
 </script>
