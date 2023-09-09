@@ -6,6 +6,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require("path");
 const AutoImport = require('unplugin-auto-import/webpack')
 const AutoComponents = require('unplugin-vue-components/webpack')
+const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
 const webpack = require("webpack");
 
 module.exports = {
@@ -64,11 +65,12 @@ module.exports = {
         }),
         new VueLoaderPlugin(),
         AutoImport({
+            resolvers: [ElementPlusResolver()],
             imports: ["vue", "vue-router"],
             dts: "types/auto-imports.d.ts",
         }),
         AutoComponents({
-            resolvers: [],
+            resolvers: [ElementPlusResolver()],
             dts: 'types/components.d.ts'
         })
     ],
