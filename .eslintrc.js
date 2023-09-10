@@ -39,5 +39,7 @@ module.exports = {
     "no-unused-vars": "off",
     "vue/attributes-order": "off",
     "vue/max-attributes-per-line": "off",
+    "vue/valid-v-slot": "off",
+    "@typescript-eslint/no-unused-vars": "off",
   },
 };

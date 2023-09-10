@@ -5,4 +5,6 @@
 </template>
 <script setup lang="ts">
 </script>
-<style lang="" scoped></style>
+<style lang="scss">
+@import url("./style/app.scss");
+</style>

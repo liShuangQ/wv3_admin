@@ -3,7 +3,7 @@
 </template>
 <script>
 export default {
-  route: { meta: { title: "123123" } },
+  route: { meta: { title: "1.1.1" } },
 };
 </script>
 <script lang="ts" setup></script>
