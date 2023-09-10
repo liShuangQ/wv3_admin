@@ -2,13 +2,13 @@ import {RouteRecordRaw} from "vue-router";
 
 const layoutsFun = (require as any).context('../../layouts', false, /\.vue$/, 'sync');
 let layouts: {} = {}
-layoutsFun.keys().forEach((k: string):void => {
+layoutsFun.keys().forEach((k: string) => {
     layouts[k] = layoutsFun(k)
 })
 
 const viewsFun = (require as any).context('../../views', true, /\index.vue$/, 'sync');
 let views: {} = {}
-viewsFun.keys().forEach((k: string):void => {
+viewsFun.keys().forEach((k: string) => {
     views[k] = viewsFun(k)
 })
 
@@ -24,9 +24,10 @@ function getRoutes() {
     return layoutRoutes;
 }
 
-function getChildrenRoutes(layoutRoute: RouteRecordRaw):RouteRecordRaw[] {
-    const routes:RouteRecordRaw[] = [] ;
-    Object.entries(views).forEach(([file, module]):void => {
+function getChildrenRoutes(layoutRoute: RouteRecordRaw) {
+    const routes = [] as RouteRecordRaw[];
+    Object.entries(views).forEach(([file, module]) => {
+
         if (file.includes(`${layoutRoute.name as string}`)) {
             const route = getRouteByModule(file, module as any, '2');
             routes.push(route);
@@ -37,13 +38,13 @@ function getChildrenRoutes(layoutRoute: RouteRecordRaw):RouteRecordRaw[] {
 }
 
 function getRouteByModule(file: string, module: { [key: string]: any }, type: string) {
-    const path:string = file.replace(/^\.|\/index|\.vue/gi, "");
-    const router:RouteRecordRaw = {
+    const path = file.replace(/^\.|\/index|\.vue/gi, "");
+    const router = {
         name: path.replace(/^\//, '').replace(/\//g, '.'),
         path: path,
         component: type === '1' ? module.default :() => import(`../../views${path}/index.vue`),
         meta: {}
-    };
+    } as RouteRecordRaw;
 
     //自定义路由: export default {
     //   route: { path: "/user" },
