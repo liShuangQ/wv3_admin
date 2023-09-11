@@ -13,6 +13,7 @@ module.exports = merge(baseConfig, {
       overlay: false,
     },
   },
+  devtool: false,//eval-cheap-module-source-map
   plugins: [
     new FriendlyErrorsWebpackPlugin(),
     new ESLintPlugin({ extensions: ["js", "ts", "vue"] }),

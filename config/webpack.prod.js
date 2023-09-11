@@ -15,6 +15,7 @@ module.exports = merge(baseConfig, {
   output: {
     clean: true,
   },
+  devtool: false,
   optimization: {
     splitChunks: {
       // 选择对哪些文件进行拆分，默认是async，即只对动态导入的文件进行拆分

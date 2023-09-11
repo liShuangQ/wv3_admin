@@ -1,6 +1,6 @@
 <template>
-  <h1 class="text-red-500 w-[100px]">
-    <div v-for="(item, index) in layoutRoute" :key="index">
+  <div class="text-red-500 w-full">
+    <div v-for="(item, index) in view_Routes" :key="index">
       <div class="flex gap-4">
         <div class="text-blue-500">{{ item.meta?.title ?? item.name }}</div>
         <div class="cursor-pointer" @click="to(item.path)">{{ item.path }}</div>
@@ -19,10 +19,10 @@
         </div>
       </div>
     </div>
-  </h1>
+  </div>
 </template>
 <script lang="ts" setup>
-import router, { layoutRoute } from "@/router/index";
+import router, { view_Routes } from "@/router/index";
 const to = (path: string) => {
   router.push({ path: path });
 };

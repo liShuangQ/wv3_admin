@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-full">
-    <div class="w-full h-[40px] text-center leading-10">
+    <div class="w-full h-[40px] text-center leading-10 bg-gray-200">
       WV3
     </div>
     <el-menu
@@ -41,10 +41,11 @@
 </template>
 
 <script lang="ts">
-import menuData, {PagesMenu} from '@/router/menu/pages'
+import {PagesMenu} from '@/router/menu/pages'
 import SubMenu from "./SubMenu.vue";
 import router from "@/router";
-import {cloneDeep} from 'lodash'
+import flatMenu from "@/router/config/fultMenu";
+import menu from "@/store/menu";
 
 export default defineComponent({
   components: {
@@ -53,30 +54,16 @@ export default defineComponent({
   setup() {
     const isCollapse = ref<boolean>(false)
     let menuRef = ref<any>(null)
-    const flatMenu: PagesMenu[] = []
-
-
-    function deep(d: PagesMenu[]) {
-      d.forEach(ele => {
-        if (!ele.children || ele.children.length === 0) {
-          flatMenu.push(ele);
-          return;
-        } else {
-          ele.children && deep(ele.children);
-        }
-      })
-    }
-
-    cloneDeep(menuData).forEach(e => {
-      if (!e.children || e.children.length === 0) {
-        flatMenu.push(e)
-      } else {
-        deep(e.children)
-      }
-    })
-    let getNowMenu = (type: 'faPath' | 'path'): string[]|string => {
+    const menuData = ref<object | null>(null)
+    menuData.value = menu().getMenu()
+    let getNowMenu = (type: 'faPath' | 'path'): string[] | string => {
       const menu = flatMenu.find(e => e.path === router.currentRoute.value.path) as PagesMenu
-      return menu[type]
+      try {
+        return menu[type]
+      } catch (err) {
+        console.warn(err)
+        return type === 'faPath' ? (process.env.START_FA_PATH as string).split(',') : process.env.START_PATH as string
+      }
     }
 
     const menuSelect = (index: string, indexPath: string[], item: object, routeResult: object) => {

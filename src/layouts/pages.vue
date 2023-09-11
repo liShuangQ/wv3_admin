@@ -5,11 +5,11 @@
         <Menu></Menu>
       </el-aside>
       <el-container>
-        <el-header>Header</el-header>
+        <el-header class="bg-red-500">Header</el-header>
         <el-main>
           <router-view
               v-slot="{ Component }"
-              :class="'overflow-auto h-full w-full bg-white'"
+              class="overflow-auto h-max w-max bg-white"
           >
             <Transition appear enter-active-class="animate__animated animate__fadeIn">
               <component v-if="refreshPageValue" :is="Component"></component>
