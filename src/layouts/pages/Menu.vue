@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts">
-import {PagesMenu} from '@/router/menu/pages'
+import {PagesMenu} from '@/router/menu'
 import SubMenu from "./SubMenu.vue";
 import router from "@/router";
 import flatMenu from "@/router/config/fultMenu";

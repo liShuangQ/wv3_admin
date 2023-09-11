@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import menuData from '@/router/menu/pages'
+import menuData from '@/router/menu'
 import user from "@/store/user";
 
 export default defineStore("menu", {

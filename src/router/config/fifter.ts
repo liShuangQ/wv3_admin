@@ -1,6 +1,6 @@
 import {RouteRecordRaw} from "vue-router";
 import {view_Routes} from "@/router";
-import {PagesMenu} from "@/router/menu/pages";
+import {PagesMenu} from "@/router/menu";
 import {cloneDeep} from "lodash";
 
 export function beforeRouter(): RouteRecordRaw[] {

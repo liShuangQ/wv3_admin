@@ -1,5 +1,5 @@
 import {cloneDeep} from "lodash";
-import menu, {PagesMenu} from "@/router/menu/pages";
+import menu, {PagesMenu} from "@/router/menu";
 
 const flatMenu: PagesMenu[] = []
 
