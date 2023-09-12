@@ -1,8 +1,8 @@
 import {defineStore} from "pinia";
 import {store} from "@/utils";
 import router from "@/router";
+import menuData, {PagesMenu} from "@/router/menu";
 import menu from "@/store/menu";
-import {PagesMenu} from "@/router/menu";
 
 export default defineStore("user", {
     state: (): { info: object | null } => {
@@ -58,7 +58,11 @@ export default defineStore("user", {
                     },
                 ]
             }
-            menu().setMenu(res.menu as PagesMenu[])
+            if (process.env.AFTER_MENU === 'true'){
+                menu().setMenu(res.menu as PagesMenu[])
+            }else{
+                menu().setMenu(menuData as PagesMenu[])
+            }
             this.setUserInfo(res)
         },
         //前端登出

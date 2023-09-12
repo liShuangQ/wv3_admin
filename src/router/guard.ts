@@ -11,8 +11,8 @@ class Guard {
         this.userStore = user()
     }
 
-    public run():void {
-        this.router.beforeEach(async (to:RouteLocationNormalized, from:RouteLocationNormalized) => {
+    public run(): void {
+        this.router.beforeEach(async (to: RouteLocationNormalized, from: RouteLocationNormalized) => {
             if (to.meta.auth && !this.getToken()) {
                 return {name: "login"};
             }
@@ -23,10 +23,12 @@ class Guard {
             if (this.getToken() && !this.userStore.info) {
                 // 设置用户信息
                 await this.userStore.getUserInfo(this.getToken())
-                // 后台权限菜单 （适应变换的用户信息所以any）
-                afterRouter((this.userStore.info as any).menu).forEach((e:RouteRecordRaw):void=>{
-                    this.router.removeRoute(e.name as string)
-                })
+                if (process.env.AFTER_MENU === 'true') {
+                    // 后台权限菜单 （适应变换的用户信息所以any）
+                    afterRouter((this.userStore.info as any).menu).forEach((e: RouteRecordRaw): void => {
+                        this.router.removeRoute(e.name as string)
+                    })
+                }
             }
         });
     }
@@ -37,6 +39,6 @@ class Guard {
     }
 }
 
-export default (router: Router):void => {
+export default (router: Router): void => {
     new Guard(router).run();
 };
