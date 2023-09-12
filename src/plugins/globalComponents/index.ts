@@ -7,9 +7,9 @@ componentsFun.keys().forEach((k:string )=>{
 })
 
 export default function autoRegisterComponents(app: App) {
-  Object.keys(components).forEach((k) => {
-    const cache = k.split("/")
-    const name = k.split("/")[cache.length -2] as string;
-    app.component(name, components[k].default);
-  });
+    Object.keys(components).forEach((k) => {
+        const cache = k.split("/")
+        const name = k.split("/")[cache.length -2] as string;
+        app.component(name, components[k].default);
+    });
 }

@@ -21,22 +21,22 @@ export default defineStore("user", {
         },
         //登录
         async userLogin(userData: object) {
-            console.log(userData,'登录')
+            console.log(userData, '登录')
             let token = 'tokentokentokentokentokentokentoken'
             store.set(process.env.TOKEN_KEY as string, {
-                expire: 1,
+                expire: 20,
                 token
             });
             // HACK 初始
             await router.push({path: process.env.START_PATH as string});
         },
         //获取用户信息
-        async getUserInfo(token:string){
+        async getUserInfo(token: string) {
             console.log('获取用户信息')
             const res = {
-                name:'xxx',
-                age:'18',
-                menu:[
+                name: 'xxx',
+                age: '18',
+                menu: [
                     {
                         path: '/pages/home',
                         faPath: [],
@@ -58,9 +58,9 @@ export default defineStore("user", {
                     },
                 ]
             }
-            if (process.env.AFTER_MENU === 'true'){
+            if (process.env.AFTER_MENU === 'true') {
                 menu().setMenu(res.menu as PagesMenu[])
-            }else{
+            } else {
                 menu().setMenu(menuData as PagesMenu[])
             }
             this.setUserInfo(res)

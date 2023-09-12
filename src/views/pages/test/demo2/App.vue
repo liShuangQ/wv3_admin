@@ -6,6 +6,6 @@
 import { ref } from "vue";
 const text = ref<string>("+");
 const add = () => {
-  text.value += "+";
+    text.value += "+";
 };
 </script>

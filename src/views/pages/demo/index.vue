@@ -35,7 +35,7 @@
 </template>
 <script lang="ts">
 export default {
-  route: {mate: {title: "1"}},
+    route: {mate: {title: "1"}},
 };
 </script>
 <script lang="ts" setup>
@@ -44,46 +44,46 @@ import {http} from "@/plugins/axios";
 import {useDraggable} from "@vueuse/core";
 
 const axiosTest = (t: string) => {
-  if (t === '1') {
-    http.request<any>({
-      baseURL:"xxxxx",
-      url: 'xxxxx',
-      method: "post",
-      data:{ "pageIndex": 1, "pageRowSize": 10},
-      headers: {
-        'demo': '111111111111111'
-      }
-    }).then(res=>{
-      console.log(res)
-    }).catch(err=>{
-      console.log(err)
-    })
-  }
-  if (t === '2') {
-    http.request<any>({
-      url: 'xxxxx',
-      method: "post",
-      throttle: true,
-      data:{ "pageIndex": 1, "pageRowSize": 10},
-    }).then(res=>{
-      console.log(res)
-    }).catch(err=>{
-      console.log(err)
-    })
-  }
+    if (t === '1') {
+        http.request<any>({
+            baseURL:"xxxxx",
+            url: 'xxxxx',
+            method: "post",
+            data:{ "pageIndex": 1, "pageRowSize": 10},
+            headers: {
+                'demo': '111111111111111'
+            }
+        }).then(res=>{
+            console.log(res)
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+    if (t === '2') {
+        http.request<any>({
+            url: 'xxxxx',
+            method: "post",
+            throttle: true,
+            data:{ "pageIndex": 1, "pageRowSize": 10},
+        }).then(res=>{
+            console.log(res)
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
 }
 
 const draggable = ref<HTMLElement|null>()
 const { x, y, style } = useDraggable(draggable, {
-  initialValue: { x: 1700, y: 600 },
+    initialValue: { x: 1700, y: 600 },
 })
 
 
 const setColor = () => {
-  const r = Math.floor(Math.random() * 255)
-  const g = Math.floor(Math.random() * 255)
-  const b = Math.floor(Math.random() * 255)
-  document.body.style.setProperty("--test--",  `rgb(${r}, ${g}, ${b})`);
+    const r = Math.floor(Math.random() * 255)
+    const g = Math.floor(Math.random() * 255)
+    const b = Math.floor(Math.random() * 255)
+    document.body.style.setProperty("--test--",  `rgb(${r}, ${g}, ${b})`);
 }
 
 </script>

@@ -107,13 +107,13 @@ export default class Axios {
 
                 // 超出 2xx 范围的状态码都会触发该函数。
                 switch (error.response.status) {
-                    case 'Throttling':
-                        break;
-                    case 401:
-                        break;
-                    case 422:
-                        break;
-                    default:
+                case 'Throttling':
+                    break;
+                case 401:
+                    break;
+                case 422:
+                    break;
+                default:
 
                 }
                 return Promise.reject(error);
