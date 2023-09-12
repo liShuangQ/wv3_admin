@@ -1,15 +1,16 @@
 import {defineStore} from "pinia";
-import menuData from '@/router/menu'
-import user from "@/store/user";
+import menuData, {PagesMenu} from '@/router/menu'
 
 export default defineStore("menu", {
-    state: (): { menu: object | null } => {
+    state: (): {
+        menu: PagesMenu[] | null
+    } => {
         return {
             menu: null,
         };
     },
     actions: {
-        setMenu(data: any) {
+        setMenu(data: PagesMenu[]) {
             this.menu = data;
         },
         getMenu() {

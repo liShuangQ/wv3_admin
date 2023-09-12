@@ -1,8 +1,8 @@
-import {Router, RouteRecordRaw} from "vue-router";
+import {RouteLocationNormalized, Router, RouteRecordRaw} from "vue-router";
 import user from "@/store/user";
 import {toRaw} from "vue";
 import {store} from "@/utils";
-import {afterRouter, beforeRouter} from "@/router/config/fifter";
+import {afterRouter} from "@/router/config/fifter";
 
 class Guard {
     private userStore
@@ -11,11 +11,8 @@ class Guard {
         this.userStore = user()
     }
 
-    public run() {
-        // beforeRouter().forEach(e=>{
-        //     this.router.addRoute(e)
-        // })
-        this.router.beforeEach(async (to, from) => {
+    public run():void {
+        this.router.beforeEach(async (to:RouteLocationNormalized, from:RouteLocationNormalized) => {
             if (to.meta.auth && !this.getToken()) {
                 return {name: "login"};
             }
@@ -26,8 +23,8 @@ class Guard {
             if (this.getToken() && !this.userStore.info) {
                 // 设置用户信息
                 await this.userStore.getUserInfo(this.getToken())
-                // 后台权限菜单
-                afterRouter((this.userStore.info as any).menu).forEach((e:RouteRecordRaw)=>{
+                // 后台权限菜单 （适应变换的用户信息所以any）
+                afterRouter((this.userStore.info as any).menu).forEach((e:RouteRecordRaw):void=>{
                     this.router.removeRoute(e.name as string)
                 })
             }
@@ -40,6 +37,6 @@ class Guard {
     }
 }
 
-export default (router: Router) => {
+export default (router: Router):void => {
     new Guard(router).run();
 };

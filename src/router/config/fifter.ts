@@ -3,14 +3,16 @@ import {view_Routes} from "@/router";
 import {PagesMenu} from "@/router/menu";
 import {cloneDeep} from "lodash";
 
-export function beforeRouter(): RouteRecordRaw[] {
-    return view_Routes
-}
-
+/**
+ * 过滤pages布局路由后台传过来的菜单信息
+ * 将收到的菜单根据path变换为string[]，根据这个数组对比path筛选出自动注册的路由中没有的，在守卫中根据name删除
+ * @param menu
+ */
 export function afterRouter(menu: any): RouteRecordRaw[] {
     const flatMenu: PagesMenu[] = []
-    function deep(d: PagesMenu[]) {
-        d.forEach(ele => {
+
+    function deep(d: PagesMenu[]): void {
+        d.forEach((ele: PagesMenu): void => {
             if (!ele.children || ele.children.length === 0) {
                 flatMenu.push(ele);
                 return;
@@ -19,14 +21,15 @@ export function afterRouter(menu: any): RouteRecordRaw[] {
             }
         })
     }
-    cloneDeep(menu).forEach((e:PagesMenu) => {
+
+    cloneDeep(menu).forEach((e: PagesMenu): void => {
         if (!e.children || e.children.length === 0) {
             flatMenu.push(e)
         } else {
             deep(e.children)
         }
     })
-    const flatMenuKey = flatMenu.map(e=>e.path)
-    const page: RouteRecordRaw[] | undefined = view_Routes.find(e => e.name === 'pages')!.children
-    return page?.filter(e => !flatMenuKey.includes(e.path)) as RouteRecordRaw[]
+    const flatMenuKey: string[] = flatMenu.map((e: PagesMenu) => e.path)
+    const page: RouteRecordRaw[] | undefined = view_Routes.find((e: RouteRecordRaw): boolean => e.name === 'pages')!.children
+    return page?.filter((e: RouteRecordRaw) => !flatMenuKey.includes(e.path)) as RouteRecordRaw[]
 }
