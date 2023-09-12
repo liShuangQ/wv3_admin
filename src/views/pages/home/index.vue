@@ -24,7 +24,7 @@
 <script lang="ts" setup>
 import router, { view_Routes } from "@/router/index";
 const to = (path: string) => {
-  router.push({ path: path });
+    router.push({ path: path });
 };
 
 </script>

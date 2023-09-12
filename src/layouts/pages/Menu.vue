@@ -48,37 +48,37 @@ import flatMenu from "@/router/config/fultMenu";
 import menu from "@/store/menu";
 
 export default defineComponent({
-  components: {
-    "sub-menu": SubMenu,
-  },
-  setup() {
-    const isCollapse = ref<boolean>(false)
-    let menuRef = ref<any>(null)
-    const menuData = ref<object | null>(null)
-    menuData.value = menu().getMenu()
-    let getNowMenu = (type: 'faPath' | 'path'): string[] | string => {
-      const menu = flatMenu.find(e => e.path === router.currentRoute.value.path) as PagesMenu
-      try {
-        return menu[type]
-      } catch (err) {
-        console.warn(err)
-        return type === 'faPath' ? (process.env.START_FA_PATH as string).split(',') : process.env.START_PATH as string
-      }
-    }
+    components: {
+        "sub-menu": SubMenu,
+    },
+    setup() {
+        const isCollapse = ref<boolean>(false)
+        let menuRef = ref<any>(null)
+        const menuData = ref<object | null>(null)
+        menuData.value = menu().getMenu()
+        let getNowMenu = (type: 'faPath' | 'path'): string[] | string => {
+            const menu = flatMenu.find(e => e.path === router.currentRoute.value.path) as PagesMenu
+            try {
+                return menu[type]
+            } catch (err) {
+                console.warn(err)
+                return type === 'faPath' ? (process.env.START_FA_PATH as string).split(',') : process.env.START_PATH as string
+            }
+        }
 
-    const menuSelect = (index: string, indexPath: string[], item: object, routeResult: object) => {
-      router.push({path: index});
+        const menuSelect = (index: string, indexPath: string[], item: object, routeResult: object) => {
+            router.push({path: index});
 
-      // console.log(index)
-      // console.log(indexPath)
-      // console.log(item)
-      // console.log(routeResult)
-    }
+            // console.log(index)
+            // console.log(indexPath)
+            // console.log(item)
+            // console.log(routeResult)
+        }
 
-    return {
-      menuData, isCollapse, menuRef, menuSelect, getNowMenu
+        return {
+            menuData, isCollapse, menuRef, menuSelect, getNowMenu
+        }
     }
-  }
 })
 
 </script>

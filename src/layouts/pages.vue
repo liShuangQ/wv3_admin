@@ -22,11 +22,11 @@
 </template>
 <script lang="ts">
 export default {
-  route: {
-    meta: {
-      auth: true,
+    route: {
+        meta: {
+            auth: true,
+        },
     },
-  },
 };
 </script>
 <script lang="ts" setup>

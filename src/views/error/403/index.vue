@@ -25,7 +25,7 @@
 </template>
 <script>
 export default {
-  route: { meta: { title: "403页面" } },
+    route: { meta: { title: "403页面" } },
 };
 </script>
 <script setup lang="ts"></script>
