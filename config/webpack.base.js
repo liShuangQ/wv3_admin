@@ -8,7 +8,17 @@ const AutoImport = require('unplugin-auto-import/webpack')
 const AutoComponents = require('unplugin-vue-components/webpack')
 const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
 const webpack = require("webpack");
-
+const dotenv = require('dotenv');
+const DotenvWebpack = require('dotenv-webpack');
+const envConfig = dotenv.config({
+    path: path.resolve(__dirname, '../.env'),
+    encoding: 'utf8',
+    debug: false,
+}).parsed;
+if (!envConfig) {
+    console.log('配置文件不存在');
+    process.exit(1);
+}
 module.exports = {
     entry: "./src/main.ts",
     module: {
@@ -72,7 +82,10 @@ module.exports = {
         AutoComponents({
             resolvers: [ElementPlusResolver()],
             dts: 'types/components.d.ts'
-        })
+        }),
+        new DotenvWebpack({
+            path: path.resolve(__dirname, '../.env'),
+        }),
     ],
     resolve: {
         extensions: [".js", ".ts", ".tsx", ".json", ".vue"], // 改变引入文件， 可以不写后缀名
