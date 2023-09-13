@@ -13,7 +13,7 @@
                         <HistoryTags></HistoryTags>
                     </div>
                 </el-header>
-                <el-main class="overflow-hidden " style="padding: 8px">
+                <el-main class="overflow-hidden " style="padding: 8px;overflow: hidden;">
                     <router-view
                         v-slot="{ Component }"
                         class="h-full w-full bg-white "
