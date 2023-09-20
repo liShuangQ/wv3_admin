@@ -5,15 +5,16 @@
                 <Menu></Menu>
             </el-aside>
             <el-container>
-                <el-header style="height: max-content;padding: 4px 8px 4px 8px;border-bottom: 1px solid #dcdfe6">
-                    <div class="h-8 flex">
+                <el-header style="height: max-content;padding:0;">
+                    <div class="h-[40px] flex bg-white mb-2">
                     </div>
-                    <div class="flex items-center justify-between">
+                    <div class="flex items-center justify-between ml-1">
                         <div>
                             <HistoryTags></HistoryTags>
                         </div>
-                        <div>
+                        <div class="flex items-center justify-between mr-4">
                             <SearchMenu></SearchMenu>
+                            <MenuUtil></MenuUtil>
                         </div>
                     </div>
                 </el-header>
@@ -44,6 +45,7 @@ export default {
 import Menu from './pages/Menu.vue'
 import HistoryTags from './pages/HistoryTags.vue'
 import SearchMenu from './pages/Search.vue'
+import MenuUtil from './pages/MenuUtil.vue'
 
 let refreshPageValue = ref<boolean>(true);
 // const refreshPage = () => {
