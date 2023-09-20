@@ -64,4 +64,5 @@ let refreshPageValue = ref<boolean>(true);
     width: 200px;
     min-height: 400px;
 }
+
 </style>

@@ -10,6 +10,7 @@ const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
 const webpack = require("webpack");
 const dotenv = require('dotenv');
 const DotenvWebpack = require('dotenv-webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const envConfig = dotenv.config({
     path: path.resolve(__dirname, '../.env'),
     encoding: 'utf8',
@@ -85,6 +86,11 @@ module.exports = {
         }),
         new DotenvWebpack({
             path: path.resolve(__dirname, '../.env'),
+        }),
+        new CopyWebpackPlugin({
+            patterns: [
+                { from: "public", to: "public" },
+            ],
         }),
     ],
     resolve: {
