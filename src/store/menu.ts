@@ -46,8 +46,6 @@ export default defineStore("menu", {
             })
             this.flatMenu = flatMenu
         },
-
-
         setHistoryAdd(data: PagesMenu): void {
             if (this.history.length >= 7) {
                 this.history.splice(1);
@@ -62,6 +60,38 @@ export default defineStore("menu", {
         },
         getHistory(): PagesMenu[] {
             return this.history
+        },
+        handleHistoryMenu(
+            selectedKeys: string,
+            type: "left" | "right" | "now"
+        ) {
+            if (type === "left") {
+                let i = 0;
+                for (let index = 0; index < this.history.length; index++) {
+                    if (this.history[index].path === selectedKeys) {
+                        i = index;
+                        break;
+                    }
+                }
+                this.history.splice(0, i);
+            }
+            if (type === "right") {
+                let i = 0;
+                for (let index = 0; index < this.history.length; index++) {
+                    if (this.history[index].path === selectedKeys) {
+                        i = index;
+                        break;
+                    }
+                }
+                this.history.splice(i + 1, this.history.length);
+            }
+            if (type === "now") {
+                this.history = [
+                    this.history.find((e) => {
+                        return e.path === selectedKeys;
+                    }) as PagesMenu,
+                ];
+            }
         },
     },
 });
