@@ -1,5 +1,5 @@
 import axios, {AxiosRequestConfig} from "axios";
-import ability from "../../store/ability";
+import {ElLoading, ElMessage} from "element-plus";
 
 export interface MyAxiosRequestConfig extends AxiosRequestConfig {
     throttle?: boolean
@@ -11,20 +11,17 @@ export default class Axios {
     private instance;
     private lastTime;
     private throttleTime;
-    private abilityStore;
+    private loadingInstance: any;
 
     constructor(config: MyAxiosRequestConfig) {
         this.instance = axios.create(config);
-        this.abilityStore = null as any
         this.interceptors();
         this.lastTime = 0
         this.throttleTime = 2000
+        this.loadingInstance = null
     }
 
     public request<T, D = ResponseResult<T>>(config: MyAxiosRequestConfig) {
-        if (!this.abilityStore) {
-            this.abilityStore = ability()
-        }
         return new Promise(async (res, rej) => {
             try {
                 const response = await this.instance.request<D>(config);
@@ -74,7 +71,6 @@ export default class Axios {
     private interceptorsRequest() {
         this.instance.interceptors.request.use(
             (config: MyAxiosRequestConfig) => {
-
                 if (config.throttle) {
                     const nowTime = new Date().getTime()
 
@@ -83,8 +79,12 @@ export default class Axios {
                     }
                     this.lastTime = nowTime
                 }
-                config.spinning && this.abilityStore.setSpinning(true);
-                config.headers && (config.headers['X-Token'] ="123")
+                config.spinning && (this.loadingInstance = ElLoading.service({
+                    lock: true,
+                    text: 'Loading',
+                    background: 'rgba(0, 0, 0, 0.7)',
+                }))
+                config.headers && (config.headers['X-Token'] = "123")
                 return config
             },
             (error) => {
@@ -97,14 +97,14 @@ export default class Axios {
     private interceptorsResponse() {
         this.instance.interceptors.response.use(
             (response) => {
-                this.abilityStore.getSpinning() && this.abilityStore.setSpinning(false);
+                this.loadingInstance && this.loadingInstance.close()
 
                 // 2xx 范围内的状态码都会触发该函数。
                 return response;
             },
             (error) => {
-                this.abilityStore.getSpinning() && this.abilityStore.setSpinning(false);
-
+                this.loadingInstance && this.loadingInstance.close()
+                ElMessage.error('请求失败，请联系管理员。')
                 // 超出 2xx 范围的状态码都会触发该函数。
                 switch (error.response.status) {
                 case 'Throttling':
@@ -114,7 +114,6 @@ export default class Axios {
                 case 422:
                     break;
                 default:
-
                 }
                 return Promise.reject(error);
             }

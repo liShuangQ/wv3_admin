@@ -49,6 +49,7 @@ const axiosTest = (t: string) => {
             baseURL: "xxxxx",
             url: 'xxxxx',
             method: "post",
+            spinning:true,
             data: {"pageIndex": 1, "pageRowSize": 10},
             headers: {
                 'demo': '111111111111111'

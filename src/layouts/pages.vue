@@ -6,11 +6,15 @@
             </el-aside>
             <el-container>
                 <el-header style="height: max-content;padding: 4px 8px 4px 8px;border-bottom: 1px solid #dcdfe6">
-                    <div class="h-8 flex justify-between">
-                        <SearchMenu></SearchMenu>
+                    <div class="h-8 flex">
                     </div>
-                    <div>
-                        <HistoryTags></HistoryTags>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <HistoryTags></HistoryTags>
+                        </div>
+                        <div>
+                            <SearchMenu></SearchMenu>
+                        </div>
                     </div>
                 </el-header>
                 <el-main class="overflow-hidden " style="padding: 8px;overflow: hidden;">
