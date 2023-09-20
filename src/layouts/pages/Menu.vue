@@ -1,10 +1,10 @@
 <template>
-    <div class="w-full h-full">
-        <div class="w-full h-[40px] text-center leading-10 bg-gray-200">
+    <div class="w-full h-full overflow-hidden">
+        <div class="w-[calc(100%-1px)] h-[40px] text-center leading-10 bg-gray-400">
             WV3
         </div>
         <el-menu
-            style="height: calc(100% - 40px)"
+            style="height:calc(100% - 40px);"
             class="el-menu-vertical-demo"
             :collapse="isCollapse"
             :unique-opened="true"
@@ -12,12 +12,11 @@
             @select="menuSelect"
             :default-active="getNowMenu('path')"
             :default-openeds="getNowMenu('faPath')"
-            background-color="#545c64"
+            background-color="#001624"
             text-color="#fff"
-            active-text-color="#ffd04b"
+            active-text-color="#0089fa"
         >
             <!--      router-->
-
             <template v-for="item in menuData" :key="item.path">
                 <template v-if="!item.children || item.children === 0">
                     <el-menu-item :index="item.path">
