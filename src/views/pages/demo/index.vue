@@ -30,6 +30,7 @@
         <div>
             <div class="text-blue-400">element自动导入：</div>
             <el-button type="primary">Primary</el-button>
+            <button class="ml-20">修改tailwind的默认背景色为element的</button>
         </div>
     </div>
 </template>
@@ -49,7 +50,7 @@ const axiosTest = (t: string) => {
             baseURL: "xxxxx",
             url: 'xxxxx',
             method: "post",
-            spinning:true,
+            spinning: true,
             data: {"pageIndex": 1, "pageRowSize": 10},
             headers: {
                 'demo': '111111111111111'
