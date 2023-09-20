@@ -25,13 +25,13 @@ export default defineStore("menu", {
         },
         setFlatMenu(): void {
             const flatMenu: PagesMenu[] = []
-
             function deep(d: PagesMenu[]) {
                 d.forEach(ele => {
                     if (!ele.children || ele.children.length === 0) {
                         flatMenu.push(ele);
                         return;
                     } else {
+                        flatMenu.push(ele);
                         ele.children && deep(ele.children);
                     }
                 })
@@ -41,6 +41,7 @@ export default defineStore("menu", {
                 if (!e.children || e.children.length === 0) {
                     flatMenu.push(e)
                 } else {
+                    flatMenu.push(e)
                     deep(e.children)
                 }
             })

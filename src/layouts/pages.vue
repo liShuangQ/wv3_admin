@@ -6,7 +6,8 @@
             </el-aside>
             <el-container>
                 <el-header style="height: max-content;padding:0;">
-                    <div class="h-[40px] flex bg-white mb-2">
+                    <div class="h-[40px] flex items-center bg-white mb-2">
+                        <Breadcrumb></Breadcrumb>
                     </div>
                     <div class="flex items-center justify-between ml-1">
                         <div>
@@ -46,6 +47,7 @@ import Menu from './pages/Menu.vue'
 import HistoryTags from './pages/HistoryTags.vue'
 import SearchMenu from './pages/Search.vue'
 import MenuUtil from './pages/MenuUtil.vue'
+import Breadcrumb from './pages/Breadcrumb.vue'
 
 let refreshPageValue = ref<boolean>(true);
 // const refreshPage = () => {

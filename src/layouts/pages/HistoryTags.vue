@@ -3,11 +3,12 @@
         v-for="item in menuStore.history"
         :key="item.path"
         class="mx-1 cursor-pointer hover:bg-blue-200"
-        closable
+        :closable="router.currentRoute.value.path !== item.path"
         @click="router.push({path: item.path});"
         @close="historyClose(item)"
         :effect="router.currentRoute.value.path === item.path ? 'dark':'plain'"
     >
+<!--     closable   -->
         {{ item.title }}
     </el-tag>
 </template>
