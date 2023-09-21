@@ -17,6 +17,7 @@ export default defineStore("menu", {
     },
     actions: {
         setMenu(data: PagesMenu[]): void {
+            this.history=[]
             this.menu = data;
             this.setFlatMenu()
         },
@@ -25,6 +26,7 @@ export default defineStore("menu", {
         },
         setFlatMenu(): void {
             const flatMenu: PagesMenu[] = []
+
             function deep(d: PagesMenu[]) {
                 d.forEach(ele => {
                     if (!ele.children || ele.children.length === 0) {
@@ -62,10 +64,7 @@ export default defineStore("menu", {
         getHistory(): PagesMenu[] {
             return this.history
         },
-        handleHistoryMenu(
-            selectedKeys: string,
-            type: "left" | "right" | "now"
-        ) {
+        handleHistoryMenu(selectedKeys: string, type: "left" | "right" | "now"): void {
             if (type === "left") {
                 let i = 0;
                 for (let index = 0; index < this.history.length; index++) {
