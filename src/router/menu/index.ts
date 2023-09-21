@@ -1,7 +1,7 @@
 import {cloneDeep} from "lodash";
 
 export interface PagesMenu {
-    path: string,
+    path: string, //菜单就随便写，路由就对应路由地址
     title: string,
     faPath: string[]
     icon?: string, //element的icon
@@ -19,7 +19,7 @@ export default [
         path: '1',
         faPath: [],
         title: '演示',
-        icon: '',
+        icon: 'Menu',
         children: [
             {
                 title: '试例',
@@ -32,6 +32,7 @@ export default [
         path: '2',
         faPath: [],
         title: '一级菜单',
+        icon: 'Menu',
         children: [
             {
                 title: '测试1.1',
@@ -53,9 +54,10 @@ export default [
         ]
     },
     {
-        title: '测试1.2',
-        faPath: [],
         path: '/pages/test/demo1/demo1.2',
+        faPath: [],
+        title: '测试1.2',
+        icon: 'Menu',
     }
 ] as PagesMenu[]
 

@@ -3,6 +3,7 @@ import user from "@/store/user";
 import {toRaw} from "vue";
 import {store} from "@/utils";
 import {afterRouter} from "@/router/config/fifter";
+import {ElMessage} from "element-plus";
 
 class Guard {
     private userStore
@@ -14,6 +15,7 @@ class Guard {
     public run(): void {
         this.router.beforeEach(async (to: RouteLocationNormalized, from: RouteLocationNormalized) => {
             if (to.meta.auth && !this.getToken()) {
+                ElMessage.warning("当前无用户信息！")
                 return {name: "login"};
             }
             if (to.meta.guest && this.getToken()) {
@@ -21,7 +23,7 @@ class Guard {
             }
             // 获取用户信息 （登陆和获取接口分开）
             if (this.getToken() && !this.userStore.info) {
-                // 设置用户信息 菜单等设置在pinia中进行
+                // 设置用户信息 菜单等设置在user的pinia中进行
                 await this.userStore.getUserInfo(this.getToken())
                 if (process.env.AFTER_MENU === 'true') {
                     // 后台权限菜单 （适应变换的用户信息所以any）

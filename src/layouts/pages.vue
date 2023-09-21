@@ -1,13 +1,15 @@
 <template>
     <div class="common-layout h-screen bg-gray-100">
         <el-container>
-            <el-aside class="h-screen" style="width: auto;">
+            <el-aside class="h-screen"
+                      :style="{display:fullScreenValue?'none':'block',width:'auto'}">
                 <Menu></Menu>
             </el-aside>
             <el-container>
-                <el-header style="height: max-content;padding:0;">
-                    <div class="h-[40px] flex items-center bg-white mb-2">
+                <el-header :style="{display:fullScreenValue?'none':'block',height: 'max-content',padding:'0'}">
+                    <div class="h-[40px] flex justify-between items-center bg-white mb-2">
                         <Breadcrumb></Breadcrumb>
+                        <BarUtil @refreshPage="refreshPage" @pageFullScreen="pageFullScreen"></BarUtil>
                     </div>
                     <div class="flex items-center justify-between ml-1">
                         <div>
@@ -25,7 +27,8 @@
                         class="h-full w-full bg-white "
                     >
                         <Transition appear enter-active-class="animate__animated animate__fadeIn">
-                            <component v-if="refreshPageValue" :is="Component"></component>
+                            <component
+                                v-if="refreshPageValue" :is="Component"></component>
                         </Transition>
                     </router-view>
                 </el-main>
@@ -48,15 +51,30 @@ import HistoryTags from './pages/HistoryTags.vue'
 import SearchMenu from './pages/Search.vue'
 import MenuUtil from './pages/MenuUtil.vue'
 import Breadcrumb from './pages/Breadcrumb.vue'
+import BarUtil from './pages/BarUtil.vue'
+import {ElMessage} from "element-plus";
 
 let refreshPageValue = ref<boolean>(true);
-// const refreshPage = () => {
-//   refreshPageValue.value = false;
-//   nextTick(() => {
-//     refreshPageValue.value = true;
-//   });
-//   return;
-// };
+const refreshPage = () => {
+    refreshPageValue.value = false;
+    nextTick(() => {
+        refreshPageValue.value = true;
+    });
+    return;
+};
+
+let fullScreenValue = ref<boolean>(false)
+const setFullFun = (e: any) => {
+    if (e.keyCode === 27) {
+        fullScreenValue.value = false;
+        document.removeEventListener("keyup", setFullFun);
+    }
+};
+const pageFullScreen = () => {
+    fullScreenValue.value = true;
+    ElMessage('按下ESC键退出')
+    document.addEventListener("keyup", setFullFun);
+};
 
 </script>
 <style scoped>

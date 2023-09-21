@@ -44,6 +44,12 @@ export default {
 import {http} from "@/plugins/axios";
 import {useDraggable} from "@vueuse/core";
 
+onBeforeUnmount(() => {
+    console.log('组件挂载之前');
+});
+onUnmounted(() => {
+    console.log('组件被销毁之前');
+});
 const axiosTest = (t: string) => {
     if (t === '1') {
         http.request<any>({

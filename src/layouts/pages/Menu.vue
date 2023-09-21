@@ -1,6 +1,6 @@
 <template>
     <div class="w-full h-full overflow-hidden">
-        <div class="w-[calc(100%-1px)] h-[40px] text-center leading-10 bg-gray-400">
+        <div class="w-[calc(100%-1px)] h-[40px] text-center leading-10 bg-[#001f37] text-white font-bold">
             WV3
         </div>
         <el-menu
@@ -67,7 +67,7 @@ export default defineComponent({
                 return menu[type]
             } catch (err) {
                 console.warn(err)
-                return type === 'faPath' ? (process.env.START_FA_PATH as string).split(',') : process.env.START_PATH as string
+                return type === 'faPath' ? ("" as string).split(',') : "" as string
             }
         }
 

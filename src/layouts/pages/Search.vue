@@ -20,8 +20,8 @@ import router from "@/router";
 
 const menuStore = menu()
 const value = ref('')
-const options: PagesMenu[] | null = toRaw(menuStore.flatMenu)
-
+// HACK: 通过特征/pages/筛选出真实的路由
+const options: PagesMenu[] | null = toRaw(menuStore.flatMenu).filter(e => e.path.indexOf('/pages/') !== -1)
 const change = (path: string): void => {
     router.push({path: path})
 }

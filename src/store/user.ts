@@ -27,8 +27,7 @@ export default defineStore("user", {
                 expire: 20,
                 token
             });
-            // HACK 初始
-            await router.push({path: process.env.START_PATH as string});
+            await router.push({path: '/'});
         },
         //获取用户信息
         async getUserInfo(token: string) {
@@ -47,7 +46,7 @@ export default defineStore("user", {
                         path: '1',
                         faPath: [],
                         title: '演示',
-                        icon: '',
+                        icon: 'Menu',
                         children: [
                             {
                                 title: '试例',
