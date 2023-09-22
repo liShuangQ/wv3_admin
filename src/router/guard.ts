@@ -14,10 +14,12 @@ class Guard {
     }
 
     public run(): void {
-        fifterPagesRouter(menu).forEach((e: RouteRecordRaw): void => {
-            console.log(e.name,'11')
-            this.router.removeRoute(e.name as string)
-        })
+        if (process.env.AFTER_MENU !== 'true') {
+            fifterPagesRouter(menu).forEach((e: RouteRecordRaw): void => {
+                console.warn(`WV3:Pay attention to checking for redundant routing file addresses: "${e.path}"`)
+                this.router.removeRoute(e.name as string)
+            })
+        }
         this.router.beforeEach(async (to: RouteLocationNormalized, from: RouteLocationNormalized) => {
             if (to.meta.auth && !this.getToken()) {
                 ElMessage.warning("当前无用户信息！")
@@ -33,7 +35,7 @@ class Guard {
                 if (process.env.AFTER_MENU === 'true') {
                     // 后台权限菜单 （适应变换的用户信息所以any）
                     fifterPagesRouter((this.userStore.info as any).menu).forEach((e: RouteRecordRaw): void => {
-                        console.log(e.name,'22')
+                        console.warn(`WV3:Pay attention to checking for redundant routing file addresses: "${e.path}"`)
                         this.router.removeRoute(e.name as string)
                     })
                 }

@@ -1,5 +1,3 @@
-import {cloneDeep} from "lodash";
-
 export interface PagesMenu {
     path: string, //菜单就随便写，路由就对应路由地址
     title: string,
