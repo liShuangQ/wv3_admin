@@ -8,5 +8,6 @@ module.exports = {
             },
         ],
     ],
+    "plugins": ["@vue/babel-plugin-jsx"]
     // plugins: ["@babel/plugin-syntax-dynamic-import"],
 };
