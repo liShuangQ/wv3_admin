@@ -46,7 +46,7 @@ function getRouteByModule(file: string, module: { [key: string]: any }, type: st
         meta: {}
     } as RouteRecordRaw;
 
-    // HACK: 如果想在菜单搜索中出现，注意加上 pages/ 的关键字特征
+    // HACK: 如果想在菜单搜索中出现，注意 path 加上 pages/xxx 的关键字特征
     //自定义路由: export default {
     //   route: { path: "/user" },
     // };
