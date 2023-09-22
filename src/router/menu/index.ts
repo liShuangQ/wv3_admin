@@ -34,7 +34,7 @@ export default [
         children: [
             {
                 title: '测试1.1',
-                path: '/pages/test/demo1/demo1.1',
+                path: '/pages/test',
                 faPath: ['2']
             },
             {
@@ -43,19 +43,24 @@ export default [
                 title: '二级菜单',
                 children: [
                     {
-                        path: '/pages/test/demo1/demo1.1/demo1.1.1',
+                        path: '/pages/test/two1',
                         faPath: ['2', '3'],
-                        title: '测试1.1.1',
+                        title: '测试2.1',
+                    },
+                    {
+                        path: '/pages/test/two2',
+                        faPath: ['2', '3'],
+                        title: '测试2.2',
                     },
                 ]
             }
         ]
     },
     {
-        path: '/pages/test/demo1/demo1.2',
+        path: '/404',
         faPath: [],
-        title: '测试1.2',
+        title: '自定义路由',
         icon: 'Menu',
-    }
+    },
 ] as PagesMenu[]
 
