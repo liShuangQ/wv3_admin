@@ -14,6 +14,7 @@ class Guard {
     }
 
     public run(): void {
+        // 检查不被展示的路由
         if (process.env.AFTER_MENU !== 'true') {
             fifterPagesRouter(menu).forEach((e: RouteRecordRaw): void => {
                 console.warn(`WV3:Pay attention to checking for redundant routing file addresses: "${e.path}"`)
