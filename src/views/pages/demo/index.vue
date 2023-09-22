@@ -36,6 +36,7 @@
 </template>
 <script lang="ts">
 export default {
+    auto:true,
     route: {mate: {title: "1"}},
 };
 </script>

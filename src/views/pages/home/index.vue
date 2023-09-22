@@ -21,6 +21,11 @@
     </div>
   </div>
 </template>
+<script lang="ts">
+export default {
+    auto:true,
+};
+</script>
 <script lang="ts" setup>
 import router, { view_Routes } from "@/router/index";
 const to = (path: string) => {
