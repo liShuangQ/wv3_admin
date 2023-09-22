@@ -2,8 +2,9 @@ import {RouteLocationNormalized, Router, RouteRecordRaw} from "vue-router";
 import user from "@/store/user";
 import {toRaw} from "vue";
 import {store} from "@/utils";
-import {afterRouter} from "@/router/config/fifter";
+import {fifterPagesRouter} from "@/router/config/fifter";
 import {ElMessage} from "element-plus";
+import menu from "@/router/menu";
 
 class Guard {
     private userStore
@@ -13,6 +14,13 @@ class Guard {
     }
 
     public run(): void {
+        // 检查不被展示的路由
+        if (process.env.AFTER_MENU !== 'true') {
+            fifterPagesRouter(menu).forEach((e: RouteRecordRaw): void => {
+                console.warn(`WV3:Pay attention to checking for redundant routing file addresses: "${e.path}"`)
+                this.router.removeRoute(e.name as string)
+            })
+        }
         this.router.beforeEach(async (to: RouteLocationNormalized, from: RouteLocationNormalized) => {
             if (to.meta.auth && !this.getToken()) {
                 ElMessage.warning("当前无用户信息！")
@@ -27,7 +35,8 @@ class Guard {
                 await this.userStore.getUserInfo(this.getToken())
                 if (process.env.AFTER_MENU === 'true') {
                     // 后台权限菜单 （适应变换的用户信息所以any）
-                    afterRouter((this.userStore.info as any).menu).forEach((e: RouteRecordRaw): void => {
+                    fifterPagesRouter((this.userStore.info as any).menu).forEach((e: RouteRecordRaw): void => {
+                        console.warn(`WV3:Pay attention to checking for redundant routing file addresses: "${e.path}"`)
                         this.router.removeRoute(e.name as string)
                     })
                 }

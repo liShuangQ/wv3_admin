@@ -25,6 +25,7 @@
 </template>
 <script>
 export default {
+    auto:true,
     route: { meta: { title: "403页面" } },
 };
 </script>
