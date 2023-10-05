@@ -22,3 +22,4 @@ export const PagesRouters: RouteRecordRaw[] = [
         meta: {title: "404页面", icon: "", show: true},
     }
 ]
+
