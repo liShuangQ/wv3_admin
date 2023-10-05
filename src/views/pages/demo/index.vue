@@ -36,7 +36,7 @@
 </template>
 <script lang="ts">
 export default {
-    auto:true,
+    auto: true,
     route: {mate: {title: "1"}},
 };
 </script>
@@ -54,11 +54,11 @@ onUnmounted(() => {
 const axiosTest = (t: string) => {
     if (t === '1') {
         http.request<any>({
-            baseURL: "xxxxx",
-            url: 'xxxxx',
+            baseURL: "http://127.0.0.1:8083",
+            url: '/user/adminLogin',
             method: "post",
             spinning: true,
-            data: {"pageIndex": 1, "pageRowSize": 10},
+            data: {"userName": 'test', "password": 'testtest'},
             headers: {
                 'demo': '111111111111111'
             }

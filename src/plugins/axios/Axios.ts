@@ -1,5 +1,7 @@
 import axios, {AxiosRequestConfig} from "axios";
 import {ElLoading, ElMessage} from "element-plus";
+import qs from 'qs'
+
 
 export interface MyAxiosRequestConfig extends AxiosRequestConfig {
     throttle?: boolean
@@ -24,6 +26,7 @@ export default class Axios {
     public request<T, D = ResponseResult<T>>(config: MyAxiosRequestConfig) {
         return new Promise(async (res, rej) => {
             try {
+                config.data = qs.stringify(config.data)
                 const response = await this.instance.request<D>(config);
                 //处理直接返回数据
                 res(response.data);
