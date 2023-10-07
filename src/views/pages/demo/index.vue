@@ -58,6 +58,7 @@ const axiosTest = (t: string) => {
             url: '/user/adminLogin',
             method: "post",
             spinning: true,
+            // contentType: 'form',
             data: {"userName": 'test', "password": 'testtest'},
             headers: {
                 'demo': '111111111111111'
