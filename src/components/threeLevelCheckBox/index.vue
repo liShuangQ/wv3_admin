@@ -21,7 +21,6 @@
                 <el-checkbox-group
                     v-model="item2.value"
                     @change="(val) => handleCheckedCitiesChange(val,item,item2)"
-                >
                     <el-checkbox v-for="(ele,ind) in item2.option" :key="ind" :label="ele">{{
                             ele
                         }}
