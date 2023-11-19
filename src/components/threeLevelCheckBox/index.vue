@@ -79,7 +79,7 @@ const handleCheckAllChangeTwo = (val: boolean, item: any, item2: any) => {
     }
 }
 const handleCheckedCitiesChange = (value: string[], item: any, item2: any) => {
-    item2.checkAll = valuec.length >= 1
+    item2.checkAll = value.length >= 1
     item.checkAll = item.children.some((e: any) => e.checkAll)
 }
 </script>
