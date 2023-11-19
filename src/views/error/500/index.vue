@@ -23,7 +23,7 @@
         </div>
     </div>
 </template>
-<script>
+<script lang="ts">
 export default {
     auto: true,
     route: {meta: {title: "500页面"}},
