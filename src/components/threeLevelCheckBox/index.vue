@@ -20,7 +20,7 @@
                 >
                 <el-checkbox-group
                     v-model="item2.value"
-                    @change="(val) => handleCheckedCitiesChange(val,item2)"
+                    @change="(val) => handleCheckedCitiesChange(val,item,item2)"
                 >
                     <el-checkbox v-for="(ele,ind) in item2.option" :key="ind" :label="ele">{{
                             ele
@@ -44,13 +44,13 @@ const All = ref<any>(
                     name: '1-1',
                     checkAll: false,
                     option: ['1', '2', '3'],
-                    value: ['1']
+                    value: []
                 },
                 {
                     name: '1-2',
                     checkAll: false,
                     option: ['1', '2', '3'],
-                    value: ['2']
+                    value: []
                 }
             ]
         }
@@ -79,7 +79,8 @@ const handleCheckAllChangeTwo = (val: boolean, item: any, item2: any) => {
         item2.value = []
     }
 }
-const handleCheckedCitiesChange = (value: string[], item2: any) => {
-    item2.checkAll = value.length >= 1
+const handleCheckedCitiesChange = (value: string[], item: any, item2: any) => {
+    item2.checkAll = valuec.length >= 1
+    item.checkAll = item.children.some((e: any) => e.checkAll)
 }
 </script>
