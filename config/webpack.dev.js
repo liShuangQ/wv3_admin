@@ -9,7 +9,7 @@ module.exports = merge(baseConfig, {
     devServer: {
         port: '8077',
         hot: true,
-        open: false,
+        open: true,
         client: {
             overlay: false,
         },
@@ -18,7 +18,7 @@ module.exports = merge(baseConfig, {
             // '/api': 'http://localhost:3000'
         },
     },
-    devtool: false,//eval-cheap-module-source-map
+    devtool: "eval-cheap-module-source-map",//eval-cheap-module-source-map
     plugins: [
         new FriendlyErrorsWebpackPlugin(),
         new ESLintPlugin({extensions: ["js", "ts", "vue"]}),
