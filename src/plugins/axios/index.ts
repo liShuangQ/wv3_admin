@@ -2,7 +2,7 @@ import Axios from "./Axios";
 
 
 // axios基础设置
-const http = new Axios({
+const http: Axios = new Axios({
     baseURL: 'localhost:8080',
     timeout: 300000,
     throttle: false, // 自定义 是否开启节流
