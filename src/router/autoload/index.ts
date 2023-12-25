@@ -1,5 +1,4 @@
 import {RouteRecordRaw} from "vue-router";
-import {view_Routes} from "@/router";
 import {PagesRouters} from "@/router/routes";
 
 const layoutsFun = (require as any).context('../../layouts', false, /\.vue$/, 'sync');
@@ -47,9 +46,8 @@ function getRouteByModule(file: string, module: { [key: string]: any }, type: st
             name: path.replace(/^\//, '').replace(/\//g, '.'),
             path: path,
             component: module.default,
-            meta: {}
         } as RouteRecordRaw;
-        return Object.assign(router, module.default?.route);
+        return Object.assign(router, module.default.route || {});
     }
     if (type === '2') {
         const moduleDefault = module.default
@@ -58,14 +56,13 @@ function getRouteByModule(file: string, module: { [key: string]: any }, type: st
                 name: path.replace(/^\//, '').replace(/\//g, '.'),
                 path: path,
                 component: () => import(`../../views${path}/index.vue`),
-                meta: {}
             } as RouteRecordRaw;
 
             // HACK: 如果想在菜单搜索中出现，注意 path 加上 pages/xxx 的关键字特征
             //自定义路由: export default {
             //   route: { path: "/user" },
             // };
-            return Object.assign(router, module.default?.route);
+            return Object.assign(router, module.default.route || {});
         } else {
             return null
         }

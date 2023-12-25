@@ -13,6 +13,13 @@
             <button class="mr-8" @click="axiosTest('1')">普通请求</button>
             <button @click="axiosTest('2')">节流请求</button>
         </div>
+        <div class="bg-red-200">
+            <div class="text-blue-400">获取当前路由对象</div>
+            <button @click="getNowRoute">获取</button>
+            <div>
+                {{ currentRoute }}
+            </div>
+        </div>
         <div class="bg-test">
             <div class="text-blue-400">tailwind颜色配置</div>
             <div class="w-screen flex gap-4">
@@ -21,7 +28,7 @@
             </div>
         </div>
 
-        <div ref="draggable" class="bg-amber-400 w-[200px] h-[200px] fixed cursor-move select-none" :style="style">
+        <div ref="draggable" :style="style" class="bg-amber-400 w-[200px] h-[200px] fixed cursor-move select-none">
             <div>VueUse例子</div>
             <div>{{ x }}</div>
             <div>{{ y }}</div>
@@ -37,7 +44,12 @@
 <script lang="ts">
 export default {
     auto: true,
-    route: {mate: {title: "1"}},
+    route: {
+        meta: {
+            title: "demo",
+            demo: 'test'
+        }
+    },
 };
 </script>
 <script lang="ts" setup>
@@ -95,5 +107,10 @@ const setColor = () => {
     const b = Math.floor(Math.random() * 255)
     document.body.style.setProperty("--test--", `rgb(${r}, ${g}, ${b})`);
 }
-
+let currentRoute = ref<any>();
+const router = useRouter();
+const getNowRoute = () => {
+    currentRoute.value = router.currentRoute.value;
+    console.log(toRaw(currentRoute.value))
+}
 </script>
