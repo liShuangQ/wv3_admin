@@ -8,8 +8,6 @@ export const routes: RouteRecordRaw[] = [
         name: "notfound",
         path: "/:any(.*)",
         component: () => import("@/views/error/404/index.vue"),
-        children: [],
-        meta: {title: "404页面", icon: "", show: true},
     },
 ];
 // pages布局路由
@@ -18,8 +16,7 @@ export const PagesRouters: RouteRecordRaw[] = [
         name: "404",
         path: "/404",
         component: () => import("@/views/error/404/index.vue"),
-        children: [],
-        meta: {title: "404页面", icon: "", show: true},
+        
     }
 ]
 

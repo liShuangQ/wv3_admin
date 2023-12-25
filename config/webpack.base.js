@@ -6,7 +6,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require("path");
 const AutoImport = require('unplugin-auto-import/webpack')
 const AutoComponents = require('unplugin-vue-components/webpack')
-const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
+const {ElementPlusResolver} = require('unplugin-vue-components/resolvers')
 const webpack = require("webpack");
 const dotenv = require('dotenv');
 const DotenvWebpack = require('dotenv-webpack');
@@ -17,7 +17,7 @@ const envConfig = dotenv.config({
     debug: false,
 }).parsed;
 if (!envConfig) {
-    console.log('配置文件不存在');
+    console.warn('配置文件不存在');
     process.exit(1);
 }
 module.exports = {
@@ -89,7 +89,7 @@ module.exports = {
         }),
         new CopyWebpackPlugin({
             patterns: [
-                { from: "public", to: "public" },
+                {from: "public", to: "public"},
             ],
         }),
     ],
