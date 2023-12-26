@@ -70,7 +70,7 @@ const axiosTest = (t: string) => {
             url: '/user/adminLogin',
             method: "post",
             spinning: true,
-            // contentType: 'form',
+            // contentType: 'json',
             data: {"userName": 'test', "password": 'testtest'},
             headers: {
                 'demo': '111111111111111'
@@ -87,6 +87,7 @@ const axiosTest = (t: string) => {
             method: "post",
             throttle: true,
             data: {"pageIndex": 1, "pageRowSize": 10},
+
         }).then(res => {
             console.log(res)
         }).catch(err => {

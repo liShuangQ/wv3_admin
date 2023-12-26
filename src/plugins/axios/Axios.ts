@@ -31,6 +31,9 @@ export default class Axios {
                 config['contentType'] = config?.contentType ?? 'form'
                 if (config.contentType === 'form') {
                     config.data = qs.stringify(config.data)
+                    config.headers && (config.headers['Content-Type'] = 'application/x-www-form-urlencoded')
+                } else {
+                    config.headers && (config.headers['Content-Type'] = 'application/json')
                 }
                 const response: AxiosResponse<D, any> = await this.instance.request<D>(config);
                 //处理直接返回数据
