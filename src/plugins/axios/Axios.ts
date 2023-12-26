@@ -1,6 +1,7 @@
 import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from "axios";
 import {ElLoading, ElMessage} from "element-plus";
 import qs from 'qs'
+import {store} from "@/utils";
 
 
 export interface MyAxiosRequestConfig extends AxiosRequestConfig {
@@ -91,7 +92,7 @@ export default class Axios {
                     text: 'Loading',
                     background: 'rgba(0, 0, 0, 0.7)',
                 }))
-                config.headers && (config.headers['X-Token'] = "123")
+                config.headers && (config.headers[process.env.TOKEN_KEY as string] = store.token())
                 return config
             },
             (error) => {
