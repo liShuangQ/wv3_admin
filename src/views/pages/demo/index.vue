@@ -69,8 +69,8 @@ const axiosTest = (t: string) => {
             baseURL: "http://127.0.0.1:8083",
             url: '/user/adminLogin',
             method: "post",
-            spinning: true,
-            // contentType: 'form',
+            q_spinning: true,
+            // q_contentType: 'json',
             data: {"userName": 'test', "password": 'testtest'},
             headers: {
                 'demo': '111111111111111'
@@ -85,8 +85,9 @@ const axiosTest = (t: string) => {
         http.request<any>({
             url: 'xxxxx',
             method: "post",
-            throttle: true,
+            q_throttle: true,
             data: {"pageIndex": 1, "pageRowSize": 10},
+
         }).then(res => {
             console.log(res)
         }).catch(err => {

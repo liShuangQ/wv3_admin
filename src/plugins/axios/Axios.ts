@@ -1,12 +1,22 @@
 import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from "axios";
 import {ElLoading, ElMessage} from "element-plus";
 import qs from 'qs'
+import {store} from "@/utils";
 
 
 export interface MyAxiosRequestConfig extends AxiosRequestConfig {
-    throttle?: boolean
-    spinning?: boolean
-    contentType?: 'form' | 'json'
+    /**
+     * 是否节流
+     */
+    q_throttle?: boolean
+    /**
+     * 是否蒙层
+     */
+    q_spinning?: boolean
+    /**
+     * 格式
+     */
+    q_contentType?: 'form' | 'json'
 }
 
 
@@ -27,9 +37,12 @@ export default class Axios {
     public request<T, D = ResponseResult<T>>(config: MyAxiosRequestConfig): Promise<D> {
         return new Promise(async (res, rej): Promise<void> => {
             try {
-                config['contentType'] = config?.contentType ?? 'form'
-                if (config.contentType === 'form') {
+                config['q_contentType'] = config?.q_contentType ?? 'form'
+                if (config.q_contentType === 'form') {
                     config.data = qs.stringify(config.data)
+                    config.headers && (config.headers['Content-Type'] = 'application/x-www-form-urlencoded')
+                } else {
+                    config.headers && (config.headers['Content-Type'] = 'application/json')
                 }
                 const response: AxiosResponse<D, any> = await this.instance.request<D>(config);
                 //处理直接返回数据
@@ -78,7 +91,7 @@ export default class Axios {
     private interceptorsRequest(): void {
         this.instance.interceptors.request.use(
             (config: MyAxiosRequestConfig): Promise<any> | MyAxiosRequestConfig => {
-                if (config.throttle) {
+                if (config.q_throttle) {
                     const nowTime: number = new Date().getTime()
 
                     if (nowTime - this.lastTime < this.throttleTime) {
@@ -86,12 +99,12 @@ export default class Axios {
                     }
                     this.lastTime = nowTime
                 }
-                config.spinning && (this.loadingInstance = ElLoading.service({
+                config.q_spinning && (this.loadingInstance = ElLoading.service({
                     lock: true,
                     text: 'Loading',
                     background: 'rgba(0, 0, 0, 0.7)',
                 }))
-                config.headers && (config.headers['X-Token'] = "123")
+                config.headers && (config.headers[process.env.TOKEN_KEY as string] = store.token())
                 return config
             },
             (error) => {
