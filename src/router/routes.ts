@@ -16,7 +16,6 @@ export const PagesRouters: RouteRecordRaw[] = [
         name: "404",
         path: "/404",
         component: () => import("@/views/error/404/index.vue"),
-        
     }
 ]
 
