@@ -89,7 +89,7 @@ module.exports = {
         }),
         new CopyWebpackPlugin({
             patterns: [
-                {from: "public", to: "public"},
+                {from: "static", to: "static"},
             ],
         }),
     ],
@@ -105,6 +105,6 @@ module.exports = {
     output: {
         filename: './js/[name].js',
         path: path.resolve(__dirname, '../dist/wv3'),
-        publicPath: devMode ? '/' : '/wv3/'
+        publicPath: devMode ? '/' : '/'
     }
 };
