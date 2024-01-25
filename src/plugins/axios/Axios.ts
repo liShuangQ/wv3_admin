@@ -14,7 +14,9 @@ export interface MyAxiosRequestConfig extends AxiosRequestConfig {
      */
     q_spinning?: boolean
     /**
-     * 格式
+     * 影响请求头中的 Content-Type
+     * form: application/x-www-form-urlencoded
+     * json: application/json
      */
     q_contentType?: 'form' | 'json'
 }
@@ -37,6 +39,7 @@ export default class Axios {
     public request<T, D = ResponseResult<T>>(config: MyAxiosRequestConfig): Promise<D> {
         return new Promise(async (res, rej): Promise<void> => {
             try {
+                config['method'] = config?.method ?? 'post'
                 config['q_contentType'] = config?.q_contentType ?? 'form'
                 if (config.q_contentType === 'form') {
                     config.data = qs.stringify(config.data)

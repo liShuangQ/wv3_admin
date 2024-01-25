@@ -9,4 +9,6 @@ const http: Axios = new Axios({
     q_spinning: true,  // 自定义 是否出现旋转蒙层
     headers: {},
 });
+
 export {http};
+
