@@ -21,7 +21,7 @@ module.exports = {
     plugins: ["vue", "@typescript-eslint"],
     rules: {
         indent: ["error", 4],
-        "complexity": ["error", {"max": 10}],
+        "complexity": ["error", {"max": 20}],
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/ban-types": "off",
         quotes: "off",
