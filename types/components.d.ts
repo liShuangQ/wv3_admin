@@ -9,6 +9,8 @@ declare module 'vue' {
   export interface GlobalComponents {
     All1: typeof import('./../src/components/globalComponents/all1/index.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElTable: typeof import('element-plus/es')['ElTable']
+    ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     ThreeLevelCheckBox: typeof import('./../src/components/threeLevelCheckBox/index.vue')['default']
