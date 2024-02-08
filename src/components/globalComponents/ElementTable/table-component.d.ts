@@ -23,11 +23,34 @@ export interface TableConfig {
      * XXX 自定义el-table-column，要使用插槽时使用，插槽名称为 #subColumn
      * 可配合sub-column组件进行使用
      */
-    CustomColumn?: boolean
+    customColumn?: boolean
     /**
      * 实现多选
      */
     selection?: boolean
+    /**
+     * 实现单选
+     */
+    highlightCurrentRow?: boolean
+    /**
+     * 通过设置 type="expand" 和 slot 可以开启展开行功能， el-table-column 的模板会被渲染成为展开行的内容，展开行可访问的属性与使用自定义列模板时的 slot 相同。
+     * <template #expand">
+     * </template>
+     */
+    expand?: Boolean
+    /**
+     * 通过给 type=index 的列传入 index 属性，可以自定义索引。 该属性传入数字时，将作为索引的起始值。 也可以传入一个方法，它提供当前行的行号（从 0 开始）作为参数，返回值将作为索引展示。
+     */
+    index?: Boolean
+    /**
+     * 通过属性 table-layout 可以指定表格中单元格、行和列的布局方式
+     *
+     */
+    tableLayout?: 'auto' | 'fixed'
+    /**
+     * 表格尺寸
+     */
+    size?: 'large' | 'default' | 'small'
 }
 
 export interface TableColumnConfig {
@@ -68,5 +91,14 @@ export interface TableColumnConfig {
      * filter-method 是一个方法，它用于决定某些数据是否显示， 会传入三个参数：value, row 和 column。
      */
     filterMethod?: Function
+    /**
+     * 对齐方式，默认center
+     */
+    align?: 'left' | 'center' | 'right'
+    /**
+     * 表头对齐方式，默认center
+     */
+    headerAlign?: 'left' | 'center' | 'right'
+
 }
 

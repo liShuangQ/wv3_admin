@@ -1,9 +1,10 @@
 <template>
-
     <el-table-column
+        :align="columnConfig.align || 'center'"
         :column-key="columnConfig.prop"
         :filter-method="columnConfig.filterMethod"
         :filters="columnConfig.filters"
+        :header-align="columnConfig.headerAlign || 'center'"
         :label="columnConfig.label"
         :prop="columnConfig.prop"
         :show-overflow-tooltip="props.tooltip"
@@ -25,7 +26,7 @@
 
 
 <script lang="ts" setup>
-import {TableColumnConfig} from "@/views/pages/componentDemo/table/types";
+import {TableColumnConfig} from "./table-component";
 
 
 const props = defineProps<{
