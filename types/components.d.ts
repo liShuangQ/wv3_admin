@@ -10,6 +10,7 @@ declare module 'vue' {
     All1: typeof import('./../src/components/globalComponents/all1/index.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElementTable: typeof import('./../src/components/globalComponents/ElementTable/index.vue')['default']
+    ElPagination: typeof import('element-plus/es')['ElPagination']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

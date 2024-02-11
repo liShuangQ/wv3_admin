@@ -1,8 +1,10 @@
 <template>
     <div class="overflow-y-scroll">
-        <el-button @click="tableConfig.border = !tableConfig.border">边框</el-button>
-        <div class="h-[500px]">
-            <ElementTable ref="tableComRef" :tableColumnConfig="tableColumnConfig" :tableConfig="tableConfig"
+        <div class="h-[500px] ">
+            <ElementTable ref="tableComRef"
+                          :pageConfig="pageConfig"
+                          :tableColumnConfig="tableColumnConfig"
+                          :tableConfig="tableConfig"
                           :tableData="tableData"
                           @handle="tableHandle"
                           @indexMethod="indexMethod"
@@ -13,8 +15,6 @@
                     <div m="4">
                         <p m="t-0 b-2">State: state </p>
                         <p m="t-0 b-2">City: city </p>
-                        <p m="t-0 b-2">Address: address</p>
-                        <p m="t-0 b-2">Zip: zip </p>
                     </div>
                 </template>
                 <template #header-address>
@@ -40,7 +40,8 @@
         </div>
         <div style="margin-top: 20px">
             <el-button @click="tableComRef.resetDateFilter(['date22'])">清除筛选</el-button>
-
+            <el-button @click="tdadd()">添加数据</el-button>
+            <el-button @click="pageChange()">改变页码</el-button>
         </div>
     </div>
 </template>
@@ -52,83 +53,27 @@ export default {
 </script>
 <script lang="ts" setup>
 
-import {TableColumnConfig, TableConfig} from "@/components/globalComponents/ElementTable/table-component";
+import {pageConfig, tableColumnConfig, tableConfig, tableData} from "@/views/pages/componentDemo/table/config";
 
 const tableComRef = ref<any>(null)
-let tableColumnConfig = ref<TableColumnConfig[]>([
-    {
-        label: '表头1',
-        prop: 'date',
-        width: 200,
-        sortable: true
-    },
-    {
-        label: '表头2',
-        prop: 'name',
-        width: 500,
-        children: [
-            {
-                label: '2-1',
-                prop: 'name00',
-            },
-            {
-                label: '2-2',
-                prop: 'name11',
-                children: [
-                    {
-                        label: '2-2-1',
-                        prop: 'date22',
-                        sortable: true,
-                        filters: [
-                            {text: '1', value: '1'},
-                            {text: '2', value: '2'},
-                        ],
-                        filterMethod: (value: string, row: any, column: any) => {
-                            const property = column['property']
-                            return row[property].toString() === value.toString()
-                        }
-                    },
-                    {
-                        label: '2-2-2',
-                        prop: 'name22',
-                        slot: true,
-                    },
-                ]
-            },
-        ]
-    },
-    {
-        label: '表头3',
-        prop: 'address',
-        width: 'auto',
-        slot: true,
-    }
-])
-let tableConfig = ref<TableConfig>({
-    // stripe: true,
-    border: false,
-    // tooltip: true,
-    selection: true,
-    // expand: true,
-    // index: true,
-    // highlightCurrentRow: true,
-    // customColumn: false,
-    // height: 500,
-    // maxHeight: 500,
-    // tableLayout: 'fixed'
-})
-let tableData = ref<any>(['', '', '', ''].map((e, index) => {
-    return {
-        date: '0',
-        date11: '0',
-        date22: index,
-        name: '0',
-        name00: '0',
-        name11: '0',
-        name22: '0',
-        address: '0',
-    }
-}))
+
+const tdadd = () => {
+    tableData.value.push({
+        date: new Date(),
+        date11: 'add',
+        date22: 'add',
+        name: 'add',
+        name00: 'add',
+        name11: 'add',
+        name22: 'add',
+        address: 'add',
+    })
+}
+const pageChange = () => {
+    pageConfig.value.currentPage = 3
+    pageConfig.value.background = !pageConfig.value.background
+    console.log(pageConfig, 'pageConfig')
+}
 
 // 注意和stripe会冲突
 const tableRowClassName = (e: {

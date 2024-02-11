@@ -10,7 +10,7 @@ export interface TableConfig {
     /**
      * 纵向内容过多时，可选择固定表头。只要在 el-table 元素中定义了 height 属性，即可实现固定表头的表格，而不需要额外的代码。
      */
-    height?: number | string
+    // height?: number | string
     /**
      * 通过设置 max-height 属性为 el-table 指定最大高度。 此时若表格所需的高度大于最大高度，则会显示一个滚动条。
      */
@@ -102,3 +102,12 @@ export interface TableColumnConfig {
 
 }
 
+export interface PageConfig {
+    currentPage: number
+    pageSize: number
+    total: number
+    background?: boolean
+    disabled?: boolean
+    small?: boolean
+    layout?: string
+}

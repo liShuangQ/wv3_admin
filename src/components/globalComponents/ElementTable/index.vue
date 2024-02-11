@@ -8,15 +8,14 @@
 <template>
     <el-table
         ref="tableRef"
-        :border="props.tableConfig.border ||true "
+        :border="props.tableConfig.border || false "
         :data="props.tableData"
-        :height="props.tableConfig.height || 500"
         :highlight-current-row="props.tableConfig.highlightCurrentRow || false"
         :row-class-name="tableRowClassNameFun"
         :size="props.tableConfig.size || 'default'"
-        :stripe="props.tableConfig.stripe || true "
+        :stripe="props.tableConfig.stripe || false "
         :table-layout="props.tableConfig.tableLayout || 'fixed'"
-        style="width: 100%"
+        style="width: 100%;height: calc(100% - 48px);"
         @selection-change="(e)=>emit('handle', 'selection', e)"
         @current-change="(e)=>emit('handle', 'current', e)"
     >
@@ -40,7 +39,7 @@
                 :header-align="item.headerAlign || 'center'"
                 :label="item.label"
                 :prop="item.prop"
-                :show-overflow-tooltip="props.tableConfig.tooltip || true"
+                :show-overflow-tooltip="props.tableConfig.tooltip || false"
                 :width="item.width || ''"
             >
                 <template #header>
@@ -50,12 +49,25 @@
                     <slot :name="item.prop" :row="scope.row"></slot>
                 </template>
             </el-table-column>
-            <sub-column v-else :columnConfig="item" :tooltip="props.tableConfig.tooltip || true"></sub-column>
+            <sub-column v-else :columnConfig="item" :tooltip="props.tableConfig.tooltip || false"></sub-column>
         </template>
     </el-table>
+    <el-pagination
+        v-model:current-page="pageData.currentPage"
+        v-model:page-size="pageData.pageSize"
+        :background="pageData.background"
+        :disabled="pageData.disabled"
+        :layout="pageData.layout||'total, sizes, prev, pager, next, jumper'"
+        :page-sizes="[10, 20, 50, 100, 200, 500]"
+        :small="pageData.small"
+        :total="pageData.total"
+        class="mt-4 float-right"
+        @size-change="(e:number)=>emit('handle', 'handleSizeChange', e)"
+        @current-change="(e:number)=>emit('handle', 'handleCurrentChange', e)"
+    />
 </template>
 <script lang="ts" setup>
-import {TableColumnConfig, TableConfig} from './table-component'
+import {PageConfig, TableColumnConfig, TableConfig} from './table-component'
 import subColumn from "@/components/globalComponents/ElementTable/subColumn.vue";
 import {ElTable} from "element-plus";
 
@@ -63,6 +75,7 @@ const props = withDefaults(
     defineProps<{
         tableConfig: TableConfig
         tableColumnConfig: TableColumnConfig[]
+        pageConfig: PageConfig
         tableData: any[]; // 是否必传
     }>(),
     {
@@ -75,6 +88,13 @@ const props = withDefaults(
                 label: '',
             }]
         },
+        pageConfig: () => {
+            return {
+                currentPage: 1,
+                pageSize: 10,
+                total: 0
+            }
+        },
         tableData: () => {
             return [];
         },
@@ -83,9 +103,10 @@ const props = withDefaults(
 let emit = defineEmits<{
     (event: "handle", type: string, data: any): string
     (event: "tableRowClassName", e: any, fn: Function): string
-    (event: "indexMethod", index: number, fn: Function): number
+    (event: "indexMethod", e: number, fn: Function): string
 }>();
 const tableRef = ref<InstanceType<typeof ElTable>>()
+let pageData = ref<PageConfig>(props.pageConfig)
 /**
  * 设置表格行的样式信息，注意配合element的表格样式，详情见官网同名方法
  * @param e
