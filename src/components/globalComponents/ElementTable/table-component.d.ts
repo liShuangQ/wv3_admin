@@ -102,7 +102,7 @@ export interface TableColumnConfig {
 
 }
 
-export interface PageConfig {
+export interface PaginationConfig {
     currentPage: number
     pageSize: number
     total: number

@@ -1,4 +1,8 @@
-import {PageConfig, TableColumnConfig, TableConfig} from "@/components/globalComponents/ElementTable/table-component";
+import {
+    PaginationConfig,
+    TableColumnConfig,
+    TableConfig
+} from "@/components/globalComponents/ElementTable/table-component";
 
 export let tableColumnConfig = ref<TableColumnConfig[]>([
     {
@@ -62,19 +66,8 @@ export let tableConfig = ref<TableConfig>({
     // maxHeight: 500,
     // tableLayout: 'fixed'
 })
-export let tableData = ref<any>(['', '', '', ''].map((e, index) => {
-    return {
-        date: '0',
-        date11: '0',
-        date22: index,
-        name: '0',
-        name00: '0',
-        name11: '0',
-        name22: '0',
-        address: '0',
-    }
-}))
-export let pageConfig = ref<PageConfig>({
+export let tableData = ref<any[]>([])
+export let paginationConfig = ref<PaginationConfig>({
     currentPage: 1,
     pageSize: 10,
     total: 0,

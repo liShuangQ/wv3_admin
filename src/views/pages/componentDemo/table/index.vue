@@ -2,7 +2,7 @@
     <div class="overflow-y-scroll">
         <div class="h-[500px] ">
             <ElementTable ref="tableComRef"
-                          :pageConfig="pageConfig"
+                          :paginationConfig="paginationConfig"
                           :tableColumnConfig="tableColumnConfig"
                           :tableConfig="tableConfig"
                           :tableData="tableData"
@@ -53,7 +53,7 @@ export default {
 </script>
 <script lang="ts" setup>
 
-import {pageConfig, tableColumnConfig, tableConfig, tableData} from "@/views/pages/componentDemo/table/config";
+import {paginationConfig, tableColumnConfig, tableConfig, tableData} from "@/views/pages/componentDemo/table/config";
 
 const tableComRef = ref<any>(null)
 
@@ -68,11 +68,12 @@ const tdadd = () => {
         name22: 'add',
         address: 'add',
     })
+    paginationConfig.value.total = tableData.value.length
 }
 const pageChange = () => {
-    pageConfig.value.currentPage = 3
-    pageConfig.value.background = !pageConfig.value.background
-    console.log(pageConfig, 'pageConfig')
+    paginationConfig.value.currentPage = 3
+    paginationConfig.value.background = !paginationConfig.value.background
+    console.log(paginationConfig, 'paginationConfig')
 }
 
 // 注意和stripe会冲突

@@ -62,12 +62,12 @@
         :small="pageData.small"
         :total="pageData.total"
         class="mt-4 float-right"
-        @size-change="(e:number)=>emit('handle', 'handleSizeChange', e)"
-        @current-change="(e:number)=>emit('handle', 'handleCurrentChange', e)"
+        @size-change="(e:number)=>emit('handle', 'handleSizeChange', {val:e,currentPage:pageData.currentPage,pageSize:pageData.pageSize})"
+        @current-change="(e:number)=>emit('handle', 'handleCurrentChange', {val:e,currentPage:pageData.currentPage,pageSize:pageData.pageSize})"
     />
 </template>
 <script lang="ts" setup>
-import {PageConfig, TableColumnConfig, TableConfig} from './table-component'
+import {PaginationConfig, TableColumnConfig, TableConfig} from './table-component'
 import subColumn from "@/components/globalComponents/ElementTable/subColumn.vue";
 import {ElTable} from "element-plus";
 
@@ -75,7 +75,7 @@ const props = withDefaults(
     defineProps<{
         tableConfig: TableConfig
         tableColumnConfig: TableColumnConfig[]
-        pageConfig: PageConfig
+        paginationConfig: PaginationConfig
         tableData: any[]; // 是否必传
     }>(),
     {
@@ -88,7 +88,7 @@ const props = withDefaults(
                 label: '',
             }]
         },
-        pageConfig: () => {
+        paginationConfig: () => {
             return {
                 currentPage: 1,
                 pageSize: 10,
@@ -106,7 +106,7 @@ let emit = defineEmits<{
     (event: "indexMethod", e: number, fn: Function): string
 }>();
 const tableRef = ref<InstanceType<typeof ElTable>>()
-let pageData = ref<PageConfig>(props.pageConfig)
+let pageData = ref<PaginationConfig>(props.paginationConfig)
 /**
  * 设置表格行的样式信息，注意配合element的表格样式，详情见官网同名方法
  * @param e
@@ -161,7 +161,7 @@ const toggleSelection = (rows?: any[]): void => {
     }
 }
 /**
- * 清除筛选信息，d不传入时全部去除
+ * 清除筛选信息，columnKeys不传入时全部去除
  * @param columnKeys
  */
 const resetDateFilter = (columnKeys: string[] | undefined = undefined): void => {
