@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ElementFormC ref="formRef" :config="formConfig"></ElementFormC>
+        <ElementFormC ref="formRef" :formConfig="formConfig" :formItemConfig="formItemConfig"></ElementFormC>
         <el-button @click="setFormOption()">改变</el-button>
     </div>
 </template>
@@ -12,16 +12,12 @@ export default {
 </script>
 <script lang="ts" setup>
 
-import {FormConfig} from "@/components/globalComponents/ElementFormC/form-component";
+import {FormConfig, FormItemConfig} from "@/components/globalComponents/ElementFormC/form-component";
 
 const formRef = ref<any>(null)
 const setFormOption = () => {
     formRef.value.setFormOption(
         [
-            {
-                key: 'name',
-                value: '111',
-            },
             {
                 key: 'name1',
                 value: '',
@@ -35,11 +31,14 @@ const setFormOption = () => {
                         value: '222'
                     }
                 ],
+                rule: []
             }
         ]
     )
 }
-let formConfig: FormConfig[][] = [
+
+let formConfig = {}
+let formItemConfig: FormItemConfig[][] = [
     [
         {
             value: '',

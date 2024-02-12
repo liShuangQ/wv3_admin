@@ -1,3 +1,7 @@
+export interface FormConfig {
+
+}
+
 interface BaseConfig {
     type: string
     key: string,
@@ -19,4 +23,4 @@ interface Select extends BaseConfig {
     }[]
 }
 
-export type FormConfig = Input | Select
+export type FormItemConfig = Input | Select

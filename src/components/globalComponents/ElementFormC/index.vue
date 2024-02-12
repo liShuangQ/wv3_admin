@@ -6,7 +6,7 @@
         {{ formModel }}
     </div>
     <div>
-        {{ formConfig }}
+        {{ formItemConfig }}
     </div>
     <el-form
         ref="formRef"
@@ -16,7 +16,7 @@
         label-width="120px"
     >
         <!--        :gutter="20"-->
-        <el-row v-for="(row,rowIndex) in formConfig" :key="rowIndex">
+        <el-row v-for="(row,rowIndex) in formItemConfig" :key="rowIndex">
             <el-col v-for="item in row" :key="item.key" :span="item.col">
                 <el-form-item :label="item.label" :prop="item.key">
                     <!--                    input-->
@@ -33,25 +33,29 @@
 
 
         <!--        &#45;&#45;&#45;&#45;-->
-        <el-form-item>
-            <el-button type="primary" @click="submitForm(formRef)">
-                Create
-            </el-button>
-            <el-button @click="resetForm(formRef)">Reset</el-button>
-        </el-form-item>
+        <!--        <el-form-item>-->
+        <!--            <el-button type="primary" @click="submitForm(formRef)">-->
+        <!--                Create-->
+        <!--            </el-button>-->
+        <!--            <el-button @click="resetForm(formRef)">Reset</el-button>-->
+        <!--        </el-form-item>-->
     </el-form>
 </template>
 
 <script lang="ts" setup>
 import type {FormInstance} from 'element-plus'
-import {FormConfig} from "@/components/globalComponents/ElementFormC/form-component";
+import {FormConfig, FormItemConfig} from "@/components/globalComponents/ElementFormC/form-component";
 
 const props = withDefaults(
     defineProps<{
-        config: FormConfig[][]
+        formConfig: FormConfig,
+        formItemConfig: FormItemConfig[][]
     }>(),
     {
-        config: () => {
+        formConfig: () => {
+            return {}
+        },
+        formItemConfig: () => {
             return [[]]
         },
     }
@@ -60,11 +64,12 @@ let emit = defineEmits<{
     (event: "handle", type: string, data: any): string
 }>();
 const formRef = ref<FormInstance>()
-const formConfig = ref<FormConfig[][]>(props.config)
+const formItemConfig = ref<FormItemConfig[][]>(props.formItemConfig)
 const formModel = ref<Object>({})
 const formRule = ref<any>({})
-formConfig.value.forEach((row: FormConfig[]) => {
-    row.forEach((item: FormConfig) => {
+formItemConfig.value.forEach((row: FormItemConfig[]) => {
+    row.forEach((item: FormItemConfig) => {
+        // XXX 影响setFormOption方法。此时formConfig里面的value和rule是冗余的，但是为了避免不必要的开销，暂时不动
         formModel.value[item.key] = item.value
         formRule.value[item.key] = item?.rule ?? []
     })
@@ -72,15 +77,15 @@ formConfig.value.forEach((row: FormConfig[]) => {
 
 
 // ---外部调用方法---
-const setFormOption = (options: FormConfig[]) => {
-    options.forEach((item: FormConfig) => {
-        for (let i = 0; i < formConfig.value.length; i++) {
-            let fi = formConfig.value[i].findIndex((formItem: FormConfig) => formItem.key === item.key)
+const setFormOption = (options: FormItemConfig[]) => {
+    options.forEach((item: FormItemConfig) => {
+        for (let i = 0; i < formItemConfig.value.length; i++) {
+            let fi = formItemConfig.value[i].findIndex((formItem: FormItemConfig) => formItem.key === item.key)
             if (fi !== -1) {
                 // HACK 根据是否单独管理的变量调整
                 Object.hasOwn(item, 'value') && (formModel.value[item.key] = item.value);
                 Object.hasOwn(item, 'rule') && (formRule.value[item.key] = item.rule);
-                formConfig.value[i][fi] = {...formConfig.value[i][fi], ...item};
+                formItemConfig.value[i][fi] = {...formItemConfig.value[i][fi], ...item};
                 break
             }
         }
