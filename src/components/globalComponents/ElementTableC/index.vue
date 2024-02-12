@@ -68,7 +68,7 @@
 </template>
 <script lang="ts" setup>
 import {PaginationConfig, TableColumnConfig, TableConfig} from './table-component'
-import subColumn from "@/components/globalComponents/ElementTable/subColumn.vue";
+import subColumn from "@/components/globalComponents/ElementTableC/subColumn.vue";
 import {ElTable} from "element-plus";
 
 const props = withDefaults(

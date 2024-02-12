@@ -71,6 +71,11 @@ export default [
                 title: '表格组件',
                 path: '/pages/componentDemo/table',
                 faPath: ['zhujian']
+            },
+            {
+                title: '表单组件',
+                path: '/pages/componentDemo/form',
+                faPath: ['zhujian']
             }
         ]
     },

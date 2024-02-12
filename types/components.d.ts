@@ -9,12 +9,18 @@ declare module 'vue' {
   export interface GlobalComponents {
     All1: typeof import('./../src/components/globalComponents/all1/index.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
-    ElementTable: typeof import('./../src/components/globalComponents/ElementTable/index.vue')['default']
-    ElPagination: typeof import('element-plus/es')['ElPagination']
-    ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
+    ElCol: typeof import('element-plus/es')['ElCol']
+    ElementFormC: typeof import('./../src/components/globalComponents/ElementFormC/index.vue')['default']
+    ElementTableC: typeof import('./../src/components/globalComponents/ElementTableC/index.vue')['default']
+    ElForm: typeof import('element-plus/es')['ElForm']
+    ElFormItem: typeof import('element-plus/es')['ElFormItem']
+    ElInput: typeof import('element-plus/es')['ElInput']
+    ElOption: typeof import('element-plus/es')['ElOption']
+    ElRow: typeof import('element-plus/es')['ElRow']
+    ElSelect: typeof import('element-plus/es')['ElSelect']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    SubColumn: typeof import('./../src/components/globalComponents/ElementTable/subColumn.vue')['default']
+    SubColumn: typeof import('./../src/components/globalComponents/ElementTableC/subColumn.vue')['default']
     ThreeLevelCheckBox: typeof import('./../src/components/threeLevelCheckBox/index.vue')['default']
   }
 }

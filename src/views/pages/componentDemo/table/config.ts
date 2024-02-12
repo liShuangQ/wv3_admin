@@ -2,7 +2,7 @@ import {
     PaginationConfig,
     TableColumnConfig,
     TableConfig
-} from "@/components/globalComponents/ElementTable/table-component";
+} from "@/components/globalComponents/ElementTableC/table-component";
 
 export let tableColumnConfig = ref<TableColumnConfig[]>([
     {

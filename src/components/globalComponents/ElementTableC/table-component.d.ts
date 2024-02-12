@@ -111,3 +111,4 @@ export interface PaginationConfig {
     small?: boolean
     layout?: string
 }
+

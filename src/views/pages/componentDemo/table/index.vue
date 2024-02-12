@@ -1,14 +1,14 @@
 <template>
     <div class="overflow-y-scroll">
         <div class="h-[500px] ">
-            <ElementTable ref="tableComRef"
-                          :paginationConfig="paginationConfig"
-                          :tableColumnConfig="tableColumnConfig"
-                          :tableConfig="tableConfig"
-                          :tableData="tableData"
-                          @handle="tableHandle"
-                          @indexMethod="indexMethod"
-                          @tableRowClassName="tableRowClassName"
+            <ElementTableC ref="tableComRef"
+                           :paginationConfig="paginationConfig"
+                           :tableColumnConfig="tableColumnConfig"
+                           :tableConfig="tableConfig"
+                           :tableData="tableData"
+                           @handle="tableHandle"
+                           @indexMethod="indexMethod"
+                           @tableRowClassName="tableRowClassName"
             >
                 <template #expand="props">
                     {{ props.row }}
@@ -23,7 +23,7 @@
                 <template #address="scope">
                     <div>自定义表格（只支持一级表头的表格）{{ scope.row }}</div>
                 </template>
-            </ElementTable>
+            </ElementTableC>
         </div>
         <div style="margin-top: 20px">
             <el-button @click="tableComRef.toggleSelection([tableData[1], tableData[2]])"
@@ -55,8 +55,7 @@ export default {
 
 import {paginationConfig, tableColumnConfig, tableConfig, tableData} from "@/views/pages/componentDemo/table/config";
 
-const tableComRef = ref<any>(null)
-
+const tableComRef = ref<any>()
 const tdadd = () => {
     tableData.value.push({
         date: new Date(),
