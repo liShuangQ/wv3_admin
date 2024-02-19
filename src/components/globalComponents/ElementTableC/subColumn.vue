@@ -2,7 +2,7 @@
     <el-table-column
         :align="columnConfig.align || 'center'"
         :column-key="columnConfig.prop"
-        :filter-method="columnConfig.filterMethod"
+        :filter-method="(columnConfig.filterMethod as any)"
         :filters="columnConfig.filters"
         :header-align="columnConfig.headerAlign || 'center'"
         :label="columnConfig.label"

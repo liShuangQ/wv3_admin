@@ -3,7 +3,6 @@ import user from "@/store/user";
 import {toRaw} from "vue";
 import {store} from "@/utils";
 import {fifterPagesRouter} from "@/router/config/fifter";
-import {ElMessage} from "element-plus";
 import menu from "@/router/menu";
 
 class Guard {

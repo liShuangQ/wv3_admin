@@ -1,92 +1,69 @@
 <template>
     <div>
-        <ElementFormC ref="formRef" :formConfig="formConfig" :formItemConfig="formItemConfig"></ElementFormC>
+        <ElementFormC
+            ref="formComRef"
+            :formConfig="formConfig"
+            :formItemConfig="formItemConfig"
+        ></ElementFormC>
+        <el-button @click="getFromValue()">获取表单值</el-button>
         <el-button @click="setFormOption()">改变</el-button>
+        <el-button @click="submitForm()">校验提交</el-button>
+        <el-button @click="formComRef!.resetForm()">重置</el-button>
     </div>
 </template>
 
 <script lang="ts">
 export default {
-    auto: true
-}
+    auto: true,
+};
 </script>
 <script lang="ts" setup>
+import { formConfig, formItemConfig } from "./config";
+import {
+    FormConfig,
+    FormDefineExpose,
+    FormItemConfig,
+} from "@/components/globalComponents/ElementFormC/form-component";
 
-import {FormConfig, FormItemConfig} from "@/components/globalComponents/ElementFormC/form-component";
-
-const formRef = ref<any>(null)
+const formComRef = ref<FormDefineExpose>();
 const setFormOption = () => {
-    formRef.value.setFormOption(
-        [
-            {
-                key: 'name1',
-                value: '',
-                option: [
-                    {
-                        label: '111',
-                        value: '111'
-                    },
-                    {
-                        label: '222',
-                        value: '222'
-                    }
-                ],
-                rule: []
-            }
-        ]
-    )
-}
-
-let formConfig = {}
-let formItemConfig: FormItemConfig[][] = [
-    [
+    formComRef.value!.setFormOption([
         {
-            value: '',
-            key: 'name',
-            type: 'input',
-            label: '输入框测试',
-            rule: [
-                {required: true, message: 'Please input Activity name', trigger: 'blur'},
-                {min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur'},
-            ],
-            col: 12
-        },
-    ],
-    [
-        {
-            value: '',
-            key: 'name1',
-            type: 'select',
-            label: '选择框测试',
-            rule: [
-                {
-                    required: true,
-                    message: 'Please select Activity zone',
-                    trigger: 'change',
-                },
-            ],
-            col: 12,
+            key: "name1",
+            value: "",
             option: [
                 {
-                    value: '1',
-                    label: "1"
+                    label: "111",
+                    value: "111",
                 },
                 {
-                    value: '2',
-                    label: "2"
+                    label: "222",
+                    value: "222",
                 },
-                {
-                    value: '3',
-                    label: "3"
-                }
-            ]
+            ],
+            rule: [],
         },
-    ],
+    ]);
+};
 
-]
-
+const submitForm = () => {
+    formComRef
+        .value!.submitForm()
+        .then((res) => {
+            console.log(res, "成功");
+        })
+        .catch((rej: any) => {
+            console.log(rej, "失败");
+            Object.keys(rej).forEach((k) => {
+                rej[k].forEach((e: any) => {
+                    ElMessage.warning(e.message);
+                });
+            });
+        });
+};
+const getFromValue = () => {
+    console.log(formComRef.value!.getFromValue());
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
