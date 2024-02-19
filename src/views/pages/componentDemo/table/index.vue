@@ -26,20 +26,20 @@
             </ElementTableC>
         </div>
         <div style="margin-top: 20px">
-            <el-button @click="tableComRef.toggleSelection([tableData[1], tableData[2]])"
+            <el-button @click="tableComRef!.toggleSelection([tableData[1], tableData[2]])"
             >控制选中
             </el-button>
 
-            <el-button @click="tableComRef.toggleSelection()">清除选中</el-button>
+            <el-button @click="tableComRef!.toggleSelection()">清除选中</el-button>
 
-            <el-button @click="tableComRef.tableMethod('clearSelection')">
+            <el-button @click="tableComRef!.tableMethod('clearSelection')">
                 清除选中2
             </el-button>
 
 
         </div>
         <div style="margin-top: 20px">
-            <el-button @click="tableComRef.resetDateFilter(['date22'])">清除筛选</el-button>
+            <el-button @click="tableComRef!.resetDateFilter(['date22'])">清除筛选</el-button>
             <el-button @click="tdadd()">添加数据</el-button>
             <el-button @click="pageChange()">改变页码</el-button>
         </div>
@@ -52,10 +52,11 @@ export default {
 }
 </script>
 <script lang="ts" setup>
-
+import { TableDefineExpose } from "@/components/globalComponents/ElementTableC/table-component";
 import {paginationConfig, tableColumnConfig, tableConfig, tableData} from "@/views/pages/componentDemo/table/config";
 
-const tableComRef = ref<any>()
+
+const tableComRef = ref<TableDefineExpose>()
 const tdadd = () => {
     tableData.value.push({
         date: new Date(),
