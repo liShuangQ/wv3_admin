@@ -6,7 +6,6 @@
         </div>
         <div class="bg-red-200">
             <div class="text-blue-400">全局组件：</div>
-            <all1></all1>
         </div>
         <div class="bg-red-200">
             <div class="text-blue-400">请求：</div>
