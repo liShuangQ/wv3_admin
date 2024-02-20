@@ -1,6 +1,9 @@
-import { FormItemConfig } from "@/components/globalComponents/ElementFormC/form-component"
+import { FormConfig, FormItemConfig } from "@/components/globalComponents/ElementFormC/form-component"
 
-export let formConfig = {}
+export let formConfig:FormConfig = {
+    size:'large',
+    showMessage:false
+}
 export let formItemConfig: FormItemConfig[][] = [
     [
         {

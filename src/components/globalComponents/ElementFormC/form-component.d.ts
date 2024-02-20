@@ -1,5 +1,41 @@
 export interface FormConfig {
-
+    inline?:boolean
+    labelPosition?:'left' | 'right' | 'top'
+    labelWidth?:string|number
+    /**
+     * 表单域标签的后缀
+     */
+    labelSuffix?:string
+    /**
+     * 是否隐藏必填字段标签旁边的红色星号。
+     */
+    hideRequiredAsterisk?:boolean
+    /**
+     * 星号的位置。
+     */
+    requireAsteriskPosition?:'left' | 'right'
+    showMessage?:boolean
+    /**
+     * 是否以行内形式展示校验信息
+     */
+    inlineMessage?:boolean
+    /**
+     * 是否在输入框中显示校验结果反馈图标
+     */
+    statusIcon?:boolean
+    /**
+     * 是否在 rules 属性改变后立即触发一次验证
+     */
+    validateOnRuleChange?:boolean
+    size?:'' | 'large' | 'default' | 'small'
+    /**
+     * 是否禁用该表单内的所有组件。 如果设置为 true, 它将覆盖内部组件的 disabled 属性
+     */
+    disabled?:boolean
+    /**
+     * 当校验失败时，滚动到第一个错误表单项
+     */
+    scrollToError?:boolean
 }
 
 interface BaseConfig {
@@ -42,11 +78,11 @@ interface InputConfig {
      */
     autosize?:boolean
     /**
-     * 启用在输入框中前置或后置一个元素的插槽，通常是标签或按钮。:name="'prepend-' + item.key",只对非 type="textarea" 有效
+     * 启用在输入框中前置一个元素的插槽，通常是标签或按钮。:name="'prepend-' + item.key",只对非 type="textarea" 有效
      */
     prepend?:boolean
     /**
-     * 启用在输入框中前置或后置一个元素的插槽，通常是标签或按钮。:name="'prepend-' + item.key",只对非 type="textarea" 有效
+     * 启用在输入框中后置一个元素的插槽，通常是标签或按钮。:name="'prepend-' + item.key",只对非 type="textarea" 有效
      */
     append?:boolean
     /**

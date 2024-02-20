@@ -1,5 +1,5 @@
 <!---->
-<!-- XXX：不同类型的表单形式，暂不考虑使用compinent is分离组件，认为存在多余变量和方法的开销，为了可维护性 下面要更加注意表单之间的代码分离-->
+<!-- XXX：不同类型的表单形式，暂不考虑使用component is分离组件，认为存在多余变量和方法的开销，为了可维护性 下面要更加注意表单之间的代码分离-->
 <!---->
 <template>
     <div>
@@ -12,8 +12,22 @@
         ref="formRef"
         :model="formModel"
         :rules="formRule"
+        :inline="formConfig.inline"
+        :label-position="formConfig.labelPosition || 'right'"
+        :label-width="formConfig.labelWidth || ''"
+        :label-suffix="formConfig.labelSuffix || ''"
+        :hide-required-asterisk="formConfig.hideRequiredAsterisk"
+        :require-asterisk-position="
+            formConfig.requireAsteriskPosition || 'left'
+        "
+        :show-message="formConfig?.showMessage ?? true"
+        :inline-message="formConfig.inlineMessage"
+        :status-icon="formConfig.statusIcon"
+        :validate-on-rule-change="formConfig?.validateOnRuleChange ?? true"
+        :size="formConfig.size"
+        :disabled="formConfig.disabled"
+        :scroll-to-error="formConfig.scrollToError"
         class="demo-ruleForm"
-        label-width="120px"
     >
         <!--        :gutter="20"-->
         <el-row v-for="(row, rowIndex) in formItemConfig" :key="rowIndex">
