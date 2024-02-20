@@ -18,8 +18,13 @@
         <!--        :gutter="20"-->
         <el-row v-for="(row, rowIndex) in formItemConfig" :key="rowIndex">
             <el-col v-for="item in row" :key="item.key" :span="item.col">
-                <el-form-item :label="item.label" :prop="item.key">
+                <el-form-item
+                    v-if="item.type !== 'custom'"
+                    :label="item.label"
+                    :prop="item.key"
+                >
                     <!--                    input-->
+                    <!-- formatter,parser 是否存在冗余性能问题？ -->
                     <el-input
                         v-if="item.type === 'input'"
                         v-model="formModel[item.key]"
@@ -28,7 +33,34 @@
                                 ? item.placeholder
                                 : '请输入' + item.label
                         "
-                    />
+                        :disabled="item.disabled"
+                        :clearable="item.clearable"
+                        :formatter="
+                            (value:string | number) =>
+                                item.formatter ? item.formatter(value) : value
+                        "
+                        :parser="
+                            (value:string | number) =>
+                                item.parser ? item.parser(value) : value
+                        "
+                        :showPassword="item.showPassword"
+                        :suffix-icon="item.suffixIcon"
+                        :prefix-icon="item.prefixIcon"
+                        :type="item.textarea ? 'textarea' : 'text'"
+                        :autosize="item.autosize"
+                        :size="item.size || 'default'"
+                        :maxlength="item.maxlength"
+                        :minlength="item.minlength"
+                        :show-word-limit="item.showWordLimit"
+                        @change="(value:string|number)=>emit('handle','change',item.key,value,'')"
+                    >
+                        <template v-if="item.prepend" #prepend>
+                            <slot :name="'prepend-' + item.key"></slot>
+                        </template>
+                        <template v-if="item.append" #append>
+                            <slot :name="'append-' + item.key"></slot>
+                        </template>
+                    </el-input>
                     <!--                    select-->
                     <el-select
                         v-if="item.type === 'select'"
@@ -38,6 +70,7 @@
                                 ? item.placeholder
                                 : '请选择' + item.label
                         "
+                        :disabled="item.disabled"
                     >
                         <el-option
                             v-for="op in item.option"
@@ -47,6 +80,8 @@
                         />
                     </el-select>
                 </el-form-item>
+                <!-- 自定义 -->
+                <slot v-if="item.type === 'custom-'" :name="item.key"></slot>
             </el-col>
         </el-row>
     </el-form>
@@ -75,7 +110,7 @@ const props = withDefaults(
     }
 );
 let emit = defineEmits<{
-    (event: "handle", type: string, data: any): string;
+    (event: "handle", type: string, key: string, data: any, other: any): void;
 }>();
 const formRef = ref<FormInstance>();
 const formItemConfig = ref<FormItemConfig[][]>(props.formItemConfig);

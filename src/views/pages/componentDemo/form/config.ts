@@ -12,7 +12,30 @@ export let formItemConfig: FormItemConfig[][] = [
                 {required: true, message: 'Please input Activity name', trigger: 'blur'},
                 {min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur'},
             ],
-            col: 12
+            col: 12,
+            disabled: false,
+            clearable: true,
+            showPassword: false,
+            prepend:true,
+            append:true,
+            size:'default',
+            maxlength:'10',
+            showWordLimit:true,
+            // formatter: (value:string)=>{
+            //     return `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+            // },
+            // parser: (value:string)=>{
+            //     return  value.replace(/\$\s?|(,*)/g, '')
+            // },
+            // suffixIcon:'Calendar',
+            // prefixIcon:'Search',
+            // textarea:true,
+            // autosize:true,
+        },
+        {
+            col: 12,
+            key: 'customDemo',
+            type: 'custom',
         },
     ],
     [
