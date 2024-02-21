@@ -29,6 +29,7 @@
                 v-if="scope.row[columnConfig.prop + 'Edit']"
                 v-model="scope.row[columnConfig.prop]"
                 placeholder=""
+                :size="'default'"
             />
             <span v-else>{{ scope.row[columnConfig.prop] }}</span>
         </template>
