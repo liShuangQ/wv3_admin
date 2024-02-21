@@ -99,6 +99,10 @@ export interface TableColumnConfig {
      * 表头对齐方式，默认center
      */
     headerAlign?: 'left' | 'center' | 'right'
+    /**
+     * 表格中的数据是否可编辑，*需要在表格数据中（tableData）的每个list中添加用于控制编辑状态的变量，变量key为 [prop + 'Edit']*
+     */
+    isEdit?:boolean
 
 }
 
@@ -156,5 +160,4 @@ export interface TableDefineExpose {
     */
     tableMethod: (methodName: string, ...d: any) => void
 
-  
 }

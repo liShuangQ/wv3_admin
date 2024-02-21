@@ -2,7 +2,6 @@
 <!-- 不支持树形-->
 <!-- 合计功能考虑没必要，后端返回或自己计算即可-->
 <!-- 合并单元格后续考虑加入-->
-<!-- TODO：对于表格内编辑的集成-->
 <!-- XXX：后续经过使用补全el-table和el-table-column的属性-->
 <!---->
 <template>
@@ -133,6 +132,8 @@ let emit = defineEmits<{
 }>();
 const tableRef = ref<InstanceType<typeof ElTable>>();
 let pageData = ref<PaginationConfig>(props.paginationConfig);
+
+// --------------------------------------------------------
 /**
  * 设置表格行的样式信息，注意配合element的表格样式，详情见官网同名方法
  * @param e

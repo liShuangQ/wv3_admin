@@ -19,6 +19,7 @@ export let tableColumnConfig = ref<TableColumnConfig[]>([
             {
                 label: '2-1',
                 prop: 'name00',
+                isEdit:true
             },
             {
                 label: '2-2',

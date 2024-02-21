@@ -2,7 +2,7 @@ import { FormConfig, FormItemConfig } from "@/components/globalComponents/Elemen
 
 export let formConfig:FormConfig = {
     size:'large',
-    showMessage:false
+    showMessage:true
 }
 export let formItemConfig: FormItemConfig[][] = [
     [
