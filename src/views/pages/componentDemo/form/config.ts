@@ -73,6 +73,21 @@ export let formItemConfig: FormItemConfig[][] = [
     ],
     [
         {
+            value: ['2024-02-05', '2024-02-06'],
+            key: 'datePickerkey',
+            type: 'datePicker',
+            label: 'datePicker测试',
+            elem: 'daterange',
+            col: 12,
+            editable: true,
+            unlinkPanels: false,
+            disabledDate: (time: Date) => {
+                return time.getTime() > Date.now()
+            }
+        }
+    ],
+    [
+        {
             value: '',
             key: 'name1',
             type: 'select',

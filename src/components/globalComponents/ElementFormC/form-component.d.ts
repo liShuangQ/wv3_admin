@@ -49,20 +49,24 @@ interface BaseConfig {
     disabled?: boolean
     clearable?: boolean
     size?: "large" | "small" | "default" | ""
+    elem?: 'year' | 'month' | 'date' | 'dates' | 'datetime' | 'week' | 'datetimerange' | 'daterange' | 'monthrange'
 }
 
+// <el-xxx
 // v-if="item.type === 'autocomplete'"
 //     v-model="formModel[item.key]"
 // :clearable="item.clearable"
+// :disabled="item.disabled"
 // :placeholder="
 // item.placeholder
 //     ? item.placeholder
 //     : '请输入' + item.label
 // "
+// :placement="item.placement || 'bottom-start'"
 // :size="item.size || formConfig.size || 'default'"
-// :disabled="item.disabled"
-
 // @change="(value:string|number)=>emit('handle','change',item.key,value,'')"
+//     >
+//     </el-xxx>
 interface InputConfig {
     /**
      * 在 formatter的情况下显示值，我们通常同时使用 parser
@@ -148,7 +152,33 @@ interface SelectConfig {
     border?: boolean
 }
 
-export type FormItemConfig = BaseConfig & Autocomplete & InputConfig & SelectConfig
+interface TimeSelectConfig {
+    /**
+     * 文本框可输入
+     */
+    editable?: boolean
+    /**
+     * 显示在输入框中的格式
+     */
+    format?: string
+    /**
+     * 选择范围时的分隔符
+     */
+    rangeSeparator?: string
+    valueFormat?: string
+    /**
+     * 在范围选择器里取消两个日期面板之间的联动
+     */
+    unlinkPanels?: boolean
+    /**
+     * 一个用来判断该日期是否被禁用的函数，接受一个 Date 对象作为参数。 应该返回一个 Boolean 值。
+     */
+    disabledDate?: Function
+    startPlaceholder?: string
+    endPlaceholder?: string
+}
+
+export type FormItemConfig = BaseConfig & InputConfig & SelectConfig & TimeSelectConfig
 
 export interface FormDefineExpose {
     /**
