@@ -176,6 +176,8 @@ interface TimeSelectConfig {
     disabledDate?: Function
     startPlaceholder?: string
     endPlaceholder?: string
+    dateFormat?: string
+    timeFormat?: string
 }
 
 export type FormItemConfig = BaseConfig & InputConfig & SelectConfig & TimeSelectConfig

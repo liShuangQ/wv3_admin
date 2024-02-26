@@ -73,14 +73,18 @@ export let formItemConfig: FormItemConfig[][] = [
     ],
     [
         {
-            value: ['2024-02-05', '2024-02-06'],
+            value: ["2024-02-07 17:09:16", "2024-02-16 20:48:09"],
             key: 'datePickerkey',
             type: 'datePicker',
             label: 'datePicker测试',
-            elem: 'daterange',
+            elem: 'datetimerange',
             col: 12,
             editable: true,
             unlinkPanels: false,
+            format: "YYYY-MM-DD HH:mm:ss",
+            valueFormat: "YYYY-MM-DD HH:mm:ss",
+            dateFormat: "YYYY/MM/DD ddd",
+            timeFormat: "A hh:mm:ss",
             disabledDate: (time: Date) => {
                 return time.getTime() > Date.now()
             }

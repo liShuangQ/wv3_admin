@@ -136,11 +136,12 @@
                         v-if="item.type === 'datePicker'"
                         v-model="formModel[item.key]"
                         :clearable="item.clearable"
+                        :date-format="item.dateFormat"
                         :disabled="item.disabled"
                         :disabled-date="(time: Date)=>item.disabledDate?item.disabledDate(time):null"
                         :editable="item.editable || false"
                         :end-placeholder="item.endPlaceholder || 'end'"
-                        :format="item.format || 'YYYY-MM-DD'"
+                        :format="item.format"
                         :placeholder="
                             item.placeholder
                                 ? item.placeholder
@@ -150,9 +151,10 @@
                         :range-separator="item.rangeSeparator || '-'"
                         :size="item.size || formConfig.size || 'default'"
                         :start-placeholder="item.startPlaceholder || 'start'"
+                        :time-format="item.timeFormat"
                         :type="item.elem || 'date'"
                         :unlink-panels="item.unlinkPanels || false"
-                        :value-format="item.valueFormat || 'YYYY-MM-DD'"
+                        :value-format="item.valueFormat || item.format"
                         @change="(value:string|number)=>emit('handle','change',item.key,value,'')"
                     >
                     </el-date-picker>
