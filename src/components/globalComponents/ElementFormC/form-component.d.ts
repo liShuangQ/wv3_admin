@@ -61,22 +61,8 @@ interface BaseConfig {
 // "
 // :size="item.size || formConfig.size || 'default'"
 // :disabled="item.disabled"
-interface Autocomplete {
-    /**
-     * 是否开启插槽
-     */
-    suffix?: boolean
-    /**
-     * 输入建议对象中用于显示的键名
-     */
-    valueKey?: string
-    /**
-     * 获取输入建议的防抖延时，单位为毫秒
-     */
-    debounce?: number
-    placement?: 'top' | 'top- start' | 'top-end' | 'bottom' | 'bottom-start' | 'bottom-end'
-}
 
+// @change="(value:string|number)=>emit('handle','change',item.key,value,'')"
 interface InputConfig {
     /**
      * 在 formatter的情况下显示值，我们通常同时使用 parser
@@ -123,12 +109,26 @@ interface InputConfig {
      * 允许你通过设置 show-word-limit 到 true 来显示剩余字数。
      */
     showWordLimit?: boolean
+    /**
+     * 是否开启插槽
+     */
+    suffix?: boolean
+    /**
+     * 输入建议对象中用于显示的键名
+     */
+    valueKey?: string
+    /**
+     * 获取输入建议的防抖延时，单位为毫秒
+     */
+    debounce?: number
+    placement?: 'top' | 'top- start' | 'top-end' | 'bottom' | 'bottom-start' | 'bottom-end'
 }
 
 interface SelectConfig {
     option?: {
         value: string,
         label: string
+        disabled?: boolean
     }[],
     /**
      * 为 el-select 设置 multiple 属性即可启用多选， 此时 v-model 的值为当前选中值所组成的数组。 默认情况下选中值会以 Tag 组件的形式展现。
@@ -142,6 +142,10 @@ interface SelectConfig {
      * 您可以使用 collapse-tags-tooltip 属性来启用鼠标悬停折叠文字以显示具体所选值的行为。
      */
     collapseTagsTooltip?: boolean
+    min?: number
+    max?: number
+    button?: boolean
+    border?: boolean
 }
 
 export type FormItemConfig = BaseConfig & Autocomplete & InputConfig & SelectConfig

@@ -99,7 +99,39 @@
                             <slot :name="'append-' + item.key"></slot>
                         </template>
                     </el-input>
-                    <!--                    select-->
+                    <!--                    checkbox-->
+                    <el-checkbox-group
+                        v-if="item.type === 'checkbox'"
+                        v-model="formModel[item.key]"
+                        :clearable="item.clearable"
+                        :disabled="item.disabled"
+                        :max="item.max"
+                        :min="item.min"
+                        :placeholder="
+                            item.placeholder
+                                ? item.placeholder
+                                : '请输入' + item.label
+                        "
+                        :size="item.size || formConfig.size || 'default'"
+                        @change="(value:string|number)=>emit('handle','change',item.key,value,'')"
+                    >
+                        <template v-if="item.button || false">
+                            <el-checkbox-button v-for="optionItem in item.option" :key="optionItem.value"
+                                                :disabled="optionItem.disabled"
+                                                :label="optionItem.value">
+                                {{ optionItem.label }}
+                            </el-checkbox-button>
+                        </template>
+                        <template v-else>
+                            <el-checkbox v-for="optionItem in item.option" :key="optionItem.value"
+                                         :border="item.border"
+                                         :disabled="optionItem.disabled"
+                                         :label="optionItem.value">
+                                {{ optionItem.label }}
+                            </el-checkbox>
+                        </template>
+                    </el-checkbox-group>
+                    <!--                    select未补全-->
                     <el-select
                         v-if="item.type === 'select'"
                         v-model="formModel[item.key]"

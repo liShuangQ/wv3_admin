@@ -56,6 +56,23 @@ export let formItemConfig: FormItemConfig[][] = [
     ],
     [
         {
+            value: ['1'],
+            key: 'checkboxkey',
+            type: 'checkbox',
+            label: 'checkbox测试',
+            option: [
+                {value: '1', label: '1-1'},
+                {value: '2', label: '2-2'},
+                {value: '3', label: '3-3', disabled: true},
+                {value: '4', label: '4-4'},
+            ],
+            min: 1, max: 2,
+            button: false,
+            border: true
+        }
+    ],
+    [
+        {
             value: '',
             key: 'name1',
             type: 'select',

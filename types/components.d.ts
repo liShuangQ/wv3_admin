@@ -9,6 +9,9 @@ declare module 'vue' {
   export interface GlobalComponents {
     ElAutocomplete: typeof import('element-plus/es')['ElAutocomplete']
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
+    ElCheckboxButton: typeof import('element-plus/es')['ElCheckboxButton']
+    ElCheckboxGroup: typeof import('element-plus/es')['ElCheckboxGroup']
     ElCol: typeof import('element-plus/es')['ElCol']
     ElementFormC: typeof import('./../src/components/globalComponents/ElementFormC/index.vue')['default']
     ElementTableC: typeof import('./../src/components/globalComponents/ElementTableC/index.vue')['default']
