@@ -125,7 +125,7 @@ const props = withDefaults(
         },
     }
 );
-let emit = defineEmits<{
+const emit = defineEmits<{
     (event: "handle", type: string, data: any): void;
     (event: "tableRowClassName", e: any, fn: Function): string;
     (event: "indexMethod", e: number, fn: Function): string;

@@ -1,16 +1,16 @@
-import { FormConfig, FormItemConfig } from "@/components/globalComponents/ElementFormC/form-component"
+import {FormConfig, FormItemConfig} from "@/components/globalComponents/ElementFormC/form-component"
 
-export let formConfig:FormConfig = {
-    size:'large',
-    showMessage:true
+export let formConfig: FormConfig = {
+    size: 'default',
+    showMessage: true
 }
 export let formItemConfig: FormItemConfig[][] = [
     [
         {
             value: '',
-            key: 'name',
+            key: 'inputkey',
             type: 'input',
-            label: '输入框测试',
+            label: 'input测试',
             rule: [
                 {required: true, message: 'Please input Activity name', trigger: 'blur'},
                 {min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur'},
@@ -19,11 +19,11 @@ export let formItemConfig: FormItemConfig[][] = [
             disabled: false,
             clearable: true,
             showPassword: false,
-            prepend:true,
-            append:true,
-            size:'default',
-            maxlength:'10',
-            showWordLimit:true,
+            prepend: true,
+            append: true,
+            size: 'large',
+            maxlength: '10',
+            showWordLimit: true,
             // formatter: (value:string)=>{
             //     return `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
             // },
@@ -35,11 +35,24 @@ export let formItemConfig: FormItemConfig[][] = [
             // textarea:true,
             // autosize:true,
         },
+    ],
+    [
         {
             col: 12,
-            key: 'customDemo',
+            key: 'customkey',
             type: 'custom',
         },
+    ],
+    [
+        {
+            value: '',
+            key: 'autocompletekey',
+            type: 'autocomplete',
+            label: 'autocomplete测试',
+            suffix: true,
+            clearable: true,
+            valueKey: 'value'
+        }
     ],
     [
         {

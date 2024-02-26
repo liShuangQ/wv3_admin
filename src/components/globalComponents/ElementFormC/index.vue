@@ -5,28 +5,25 @@
     <div>
         {{ formModel }}
     </div>
-    <div>
-        {{ formItemConfig }}
-    </div>
     <el-form
         ref="formRef"
-        :model="formModel"
-        :rules="formRule"
-        :inline="formConfig.inline"
-        :label-position="formConfig.labelPosition || 'right'"
-        :label-width="formConfig.labelWidth || ''"
-        :label-suffix="formConfig.labelSuffix || ''"
+        :disabled="formConfig.disabled"
         :hide-required-asterisk="formConfig.hideRequiredAsterisk"
+        :inline="formConfig.inline"
+        :inline-message="formConfig.inlineMessage"
+        :label-position="formConfig.labelPosition || 'right'"
+        :label-suffix="formConfig.labelSuffix || ''"
+        :label-width="formConfig.labelWidth || ''"
+        :model="formModel"
         :require-asterisk-position="
             formConfig.requireAsteriskPosition || 'left'
         "
+        :rules="formRule"
+        :scroll-to-error="formConfig.scrollToError"
         :show-message="formConfig?.showMessage ?? true"
-        :inline-message="formConfig.inlineMessage"
+        :size="formConfig.size || 'default'"
         :status-icon="formConfig.statusIcon"
         :validate-on-rule-change="formConfig?.validateOnRuleChange ?? true"
-        :size="formConfig.size"
-        :disabled="formConfig.disabled"
-        :scroll-to-error="formConfig.scrollToError"
         class="demo-ruleForm"
     >
         <!--        :gutter="20"-->
@@ -37,35 +34,62 @@
                     :label="item.label"
                     :prop="item.key"
                 >
-                    <!--                    input-->
-                    <!-- formatter,parser 是否存在冗余性能问题？ -->
-                    <el-input
-                        v-if="item.type === 'input'"
+                    <!--                    autocomplete-->
+                    <el-autocomplete
+                        v-if="item.type === 'autocomplete'"
                         v-model="formModel[item.key]"
+                        :clearable="item.clearable"
+                        :debounce="item.debounce || 300"
+                        :disabled="item.disabled"
+                        :fetch-suggestions="(querystring:string,cb)=>emit('handle','autocomplete',item.key,querystring,cb)"
                         :placeholder="
                             item.placeholder
                                 ? item.placeholder
                                 : '请输入' + item.label
                         "
-                        :disabled="item.disabled"
+                        :placement="item.placement || 'bottom-start'"
+                        :size="item.size || formConfig.size || 'default'"
+                        :value-key="item.valueKey || 'value'"
+                        @select="(value:Object)=>emit('handle','select',item.key,toRaw(value),'')"
+                    >
+                        <template v-if="item.suffix" #suffix>
+                            <slot :name="'suffix-' + item.key"></slot>
+                        </template>
+                        <!--                        不生效 待看-->
+                        <!--                        <template v-if="item.custom" #default="{ item }">-->
+                        <!--                            <slot :name="'default-' + item.key"></slot>-->
+                        <!--                        </template>-->
+
+                    </el-autocomplete>
+                    <!--                    input-->
+                    <!-- formatter,parser 是否存在冗余性能问题？ -->
+                    <el-input
+                        v-if="item.type === 'input'"
+                        v-model="formModel[item.key]"
+                        :autosize="(item.autosize as any) || false"
                         :clearable="item.clearable"
+                        :disabled="item.disabled"
                         :formatter="
                             (value:string | number) =>
                                 item.formatter ? item.formatter(value) : value
                         "
+                        :maxlength="item.maxlength as any"
+                        :minlength="item.minlength"
                         :parser="
                             (value:string | number) =>
                                 item.parser ? item.parser(value) : value
                         "
-                        :showPassword="item.showPassword"
-                        :suffix-icon="item.suffixIcon"
-                        :prefix-icon="item.prefixIcon"
-                        :type="item.textarea ? 'textarea' : 'text'"
-                        :autosize="item.autosize"
-                        :size="item.size || 'default'"
-                        :maxlength="item.maxlength"
-                        :minlength="item.minlength"
+                        :placeholder="
+                            item.placeholder
+                                ? item.placeholder
+                                : '请输入' + item.label
+                        "
+                        :prefix-icon="item.prefixIcon || ''"
                         :show-word-limit="item.showWordLimit"
+                        :showPassword="item.showPassword"
+                        :size="item.size || formConfig.size || 'default'"
+                        :suffix-icon="item.suffixIcon || ''"
+                        :type="item.textarea ? 'textarea' : 'text'"
                         @change="(value:string|number)=>emit('handle','change',item.key,value,'')"
                     >
                         <template v-if="item.prepend" #prepend>
@@ -79,12 +103,17 @@
                     <el-select
                         v-if="item.type === 'select'"
                         v-model="formModel[item.key]"
+                        :clearable="item.clearable"
+                        :collapse-tags="item.collapseTags"
+                        :collapse-tags-tooltip="item.collapseTagsTooltip"
+                        :disabled="item.disabled"
+                        :multiple="item.multiple"
                         :placeholder="
                             item.placeholder
                                 ? item.placeholder
                                 : '请选择' + item.label
                         "
-                        :disabled="item.disabled"
+                        :size="item.size || 'default'"
                     >
                         <el-option
                             v-for="op in item.option"
@@ -95,19 +124,17 @@
                     </el-select>
                 </el-form-item>
                 <!-- 自定义 -->
-                <slot v-if="item.type === 'custom-'" :name="item.key"></slot>
+                <slot v-if="item.type === 'custom'" :name="'custom-' + item.key"></slot>
             </el-col>
         </el-row>
     </el-form>
 </template>
 
 <script lang="ts" setup>
-import type { FormInstance } from "element-plus";
-import {
-    FormConfig,
-    FormDefineExpose,
-    FormItemConfig,
-} from "@/components/globalComponents/ElementFormC/form-component";
+import type {FormInstance} from "element-plus";
+import {FormConfig, FormDefineExpose, FormItemConfig,} from "@/components/globalComponents/ElementFormC/form-component";
+import {toRaw} from "vue";
+import * as querystring from "querystring";
 
 const props = withDefaults(
     defineProps<{
@@ -148,9 +175,9 @@ const setFormOption = (options: FormItemConfig[]) => {
             if (fi !== -1) {
                 // HACK 根据是否单独管理的变量调整
                 Object.hasOwn(item, "value") &&
-                    (formModel.value[item.key] = item.value);
+                (formModel.value[item.key] = item.value);
                 Object.hasOwn(item, "rule") &&
-                    (formRule.value[item.key] = item.rule);
+                (formRule.value[item.key] = item.rule);
                 formItemConfig.value[i][fi] = {
                     ...formItemConfig.value[i][fi],
                     ...item,

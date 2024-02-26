@@ -6,12 +6,17 @@
             :formItemConfig="formItemConfig"
             @handle="formHandle"
         >
-            <template #prepend-name> 11 </template>
-            <template #append-name> 22 </template>
-            <template #custom-Demo="props">
+            <template #prepend-inputkey>11</template>
+            <template #append-inputkey>22</template>
+            <template #custom-customkey="props">
                 <span class="text-red-300 float-left leading-8"
-                    >自定义插槽{{ props }}</span
+                >自定义插槽{{ props }}</span
                 >
+            </template>
+            <template #suffix-autocompletekey>
+                <el-icon class="el-input__icon">
+                    <edit/>
+                </el-icon>
             </template>
         </ElementFormC>
         <el-button @click="getFromValue()">获取表单值</el-button>
@@ -27,7 +32,7 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { formConfig, formItemConfig } from "./config";
+import {formConfig, formItemConfig} from "./config";
 import {
     FormConfig,
     FormDefineExpose,
@@ -75,6 +80,9 @@ const getFromValue = () => {
 };
 const formHandle = (type: string, key: string, data: any, other: any) => {
     console.log(type, key, data, other);
+    if (type === 'autocomplete' && key === 'autocompletekey') {
+        other([{value: '1'}, {value: '2'}])
+    }
 };
 </script>
 
