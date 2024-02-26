@@ -158,6 +158,26 @@
                         @change="(value:string|number)=>emit('handle','change',item.key,value,'')"
                     >
                     </el-date-picker>
+                    <!--                    timeSelect-->
+                    <el-time-select
+                        v-if="item.type === 'timeSelect'"
+                        v-model="formModel[item.key]"
+                        :clearable="item.clearable"
+                        :disabled="item.disabled"
+                        :end="item.end"
+                        :format="(item.format as any) || 'HH:mm'"
+                        :placeholder="
+                        item.placeholder
+                            ? item.placeholder
+                            : '请选择' + item.label
+                        "
+                        :placement="item.placement || 'bottom-start'"
+                        :size="item.size || formConfig.size || 'default'"
+                        :start="item.start"
+                        :step="item.step"
+                        @change="(value:string|number)=>emit('handle','change',item.key,value,'')"
+                    >
+                    </el-time-select>
                     <!--                    select未补全-->
                     <el-select
                         v-if="item.type === 'select'"

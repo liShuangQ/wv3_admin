@@ -178,6 +178,17 @@ interface TimeSelectConfig {
     endPlaceholder?: string
     dateFormat?: string
     timeFormat?: string
+    /**
+     * 是否为时间范围选择
+     */
+    isRange?: boolean
+    /**
+     *    是否使用箭头进行时间选择
+     */
+    arrowControl?: boolean
+    start?: string
+    step?: string
+    end?: string
 }
 
 export type FormItemConfig = BaseConfig & InputConfig & SelectConfig & TimeSelectConfig
