@@ -121,7 +121,6 @@
                     >
                     </el-date-picker>
                     <!--                    input-->
-                    <!-- formatter,parser 是否存在冗余性能问题？ -->
                     <el-input
                         v-if="item.type === 'input'"
                         v-model="formModel[item.key]"
@@ -151,6 +150,7 @@
                         :type="item.textarea ? 'textarea' : 'text'"
                         @change="(value:string|number)=>emit('handle','change',item.key,value,'')"
                     >
+                        <!-- XXX: formatter,parser 是否存在冗余性能问题？ -->
                         <template v-if="item.prepend" #prepend>
                             <slot :name="'prepend-' + item.key"></slot>
                         </template>
@@ -243,6 +243,36 @@
                             :value="op.value"
                         />
                     </el-select>
+                    <!--                    radio-->
+                    <el-radio-group
+                        v-if="item.type === 'radio'"
+                        v-model="formModel[item.key]"
+                        :clearable="item.clearable"
+                        :disabled="item.disabled"
+                        :placeholder="
+                            item.placeholder
+                                ? item.placeholder
+                                : '请输入' + item.label
+                            "
+                        :size="item.size || formConfig.size || 'default'"
+                        @change="(value:string|number)=>emit('handle','change',item.key,value,'')"
+                    >
+                        <template v-if="item.button || false">
+                            <el-radio-button v-for="optionItem in item.option" :key="optionItem.value"
+                                             :disabled="optionItem.disabled"
+                                             :label="optionItem.value">
+                                {{ optionItem.label }}
+                            </el-radio-button>
+                        </template>
+                        <template v-else>
+                            <el-radio v-for="optionItem in item.option" :key="optionItem.value"
+                                      :border="item.border"
+                                      :disabled="optionItem.disabled"
+                                      :label="optionItem.value">
+                                {{ optionItem.label }}
+                            </el-radio>
+                        </template>
+                    </el-radio-group>
                 </el-form-item>
                 <!-- 自定义 -->
                 <slot v-if="item.type === 'custom'" :name="'custom-' + item.key"></slot>

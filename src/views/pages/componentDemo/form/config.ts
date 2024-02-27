@@ -157,4 +157,21 @@ export let formItemConfig: FormItemConfig[][] = [
             controlsPosition: 'right'
         },
     ],
+    [
+        {
+            value: '1',
+            key: 'radiokey',
+            type: 'radio',
+            label: 'radio测试',
+            option: [
+                {value: '1', label: '1-1'},
+                {value: '2', label: '2-2'},
+                {value: '3', label: '3-3', disabled: true},
+                {value: '4', label: '4-4'},
+            ],
+            min: 1, max: 2,
+            button: true,
+            border: false
+        }
+    ],
 ]
