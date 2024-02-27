@@ -146,10 +146,10 @@ export let formItemConfig: FormItemConfig[][] = [
     ],
     [
         {
+            value: 0,
             col: 12,
             key: 'inputNumberkey',
             type: 'inputNumber',
-            value: '',
             label: 'inputNumber测试',
             step: 0.2,
             stepStrictly: true,
@@ -187,6 +187,43 @@ export let formItemConfig: FormItemConfig[][] = [
             scoreTemplate: 'star',
             voidIcon: "ChatRound",
             colors: ['#409eff', '#67c23a', '#FF9900']
+        }
+    ],
+    [
+        {
+            value: [10, 60],
+            key: 'sliderkey',
+            type: 'slider',
+            label: 'slider测试',
+            col: 12,
+            formatTooltip: (val: number) => {
+                return val + '%'
+            },
+            showInput: true,
+            range: true,
+            marks: {
+                0: '0°C',
+                8: '8°C',
+                37: '37°C',
+                50: {
+                    style: {
+                        color: '#1989FA',
+                    },
+                    label: '50%',
+                },
+            }
+        }
+    ],
+    [
+        {
+            value: false,
+            key: 'switchkey',
+            type: 'switch',
+            label: 'switch测试',
+            col: 12,
+            activeText: '关',
+            inactiveText: '开',
+            // inlinePrompt: true,
         }
     ],
 ]

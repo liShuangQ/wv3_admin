@@ -180,46 +180,6 @@
                         @change="(value:string|number)=>emit('handle','change',item.key,value,'')"
                     >
                     </el-input-number>
-                    <!--                    timePicker-->
-                    <el-time-picker
-                        v-if="item.type === 'timePicker'"
-                        v-model="formModel[item.key]"
-                        :arrow-control="item.arrowControl"
-                        :clearable="item.clearable"
-                        :disabled="item.disabled"
-                        :end="item.end"
-                        :format="(item.format as any) || 'HH:mm:ss'"
-                        :is-range="item.isRange"
-                        :placeholder="
-                        item.placeholder
-                            ? item.placeholder
-                            : '请选择' + item.label
-                        "
-                        :size="item.size || formConfig.size || 'default'"
-                        :value-format="item.valueFormat || item.format"
-                        @change="(value:string|number)=>emit('handle','change',item.key,value,'')"
-                    >
-                    </el-time-picker>
-                    <!--                    timeSelect-->
-                    <el-time-select
-                        v-if="item.type === 'timeSelect'"
-                        v-model="formModel[item.key]"
-                        :clearable="item.clearable"
-                        :disabled="item.disabled"
-                        :end="item.end"
-                        :format="(item.format as any) || 'HH:mm'"
-                        :placeholder="
-                        item.placeholder
-                            ? item.placeholder
-                            : '请选择' + item.label
-                        "
-                        :placement="item.placement || 'bottom-start'"
-                        :size="item.size || formConfig.size || 'default'"
-                        :start="item.start"
-                        :step="item.step"
-                        @change="(value:string|number)=>emit('handle','change',item.key,value,'')"
-                    >
-                    </el-time-select>
                     <!--                    radio-->
                     <el-radio-group
                         v-if="item.type === 'radio'"
@@ -275,8 +235,6 @@
                         @change="(value:string|number)=>emit('handle','change',item.key,value,'')"
                     >
                     </el-rate>
-
-
                     <!--                    select未补全-->
                     <el-select
                         v-if="item.type === 'select'"
@@ -300,6 +258,81 @@
                             :value="op.value"
                         />
                     </el-select>
+                    <!--                    slider-->
+                    <el-slider
+                        v-if="item.type === 'slider'"
+                        v-model="formModel[item.key]"
+                        :clearable="item.clearable"
+                        :disabled="item.disabled"
+                        :format-tooltip="(value:number)=>item.formatTooltip ? item.formatTooltip(value) : value "
+                        :marks="item.marks || null"
+                        :placement="item.placement || 'bottom-start'"
+                        :range="item.range"
+                        :show-input="item.showInput"
+                        :show-stops="item.showStops"
+                        :size="item.size || formConfig.size || 'default'"
+                        :step="item.step || 1"
+                        @change="(value:string|number)=>emit('handle','change',item.key,value,'')"
+                    >
+                    </el-slider>
+                    <!--                    switch-->
+                    <el-switch
+                        v-if="item.type === 'switch'"
+                        v-model="formModel[item.key]"
+                        :active-text="item.activeText"
+                        :active-value="item.activeValue || true"
+                        :clearable="item.clearable"
+                        :disabled="item.disabled"
+                        :inactive-text="item.inactiveText"
+                        :inactive-value="item.inactiveValue || false"
+                        :inline-prompt="item.inlinePrompt"
+                        :loading="item.loading"
+                        :placement="item.placement || 'bottom-start'"
+                        :size="item.size || formConfig.size || 'default'"
+                        :style="{'--el-switch-on-color':item.onColor, '--el-switch-off-color':item.offColor}"
+                        @change="(value:string|number)=>emit('handle','change',item.key,value,'')"
+                    >
+                    </el-switch>
+                    <!--                    timePicker-->
+                    <el-time-picker
+                        v-if="item.type === 'timePicker'"
+                        v-model="formModel[item.key]"
+                        :arrow-control="item.arrowControl"
+                        :clearable="item.clearable"
+                        :disabled="item.disabled"
+                        :end="item.end"
+                        :format="(item.format as any) || 'HH:mm:ss'"
+                        :is-range="item.isRange"
+                        :placeholder="
+                        item.placeholder
+                            ? item.placeholder
+                            : '请选择' + item.label
+                        "
+                        :size="item.size || formConfig.size || 'default'"
+                        :value-format="item.valueFormat || item.format"
+                        @change="(value:string|number)=>emit('handle','change',item.key,value,'')"
+                    >
+                    </el-time-picker>
+                    <!--                    timeSelect-->
+                    <el-time-select
+                        v-if="item.type === 'timeSelect'"
+                        v-model="formModel[item.key]"
+                        :clearable="item.clearable"
+                        :disabled="item.disabled"
+                        :end="item.end"
+                        :format="(item.format as any) || 'HH:mm'"
+                        :placeholder="
+                        item.placeholder
+                            ? item.placeholder
+                            : '请选择' + item.label
+                        "
+                        :placement="item.placement || 'bottom-start'"
+                        :size="item.size || formConfig.size || 'default'"
+                        :start="item.start"
+                        :step="item.step"
+                        @change="(value:string|number)=>emit('handle','change',item.key,value,'')"
+                    >
+                    </el-time-select>
                 </el-form-item>
                 <!-- 自定义 -->
                 <slot v-if="item.type === 'custom'" :name="'custom-' + item.key"></slot>

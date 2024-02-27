@@ -18,6 +18,8 @@
                     <edit/>
                 </el-icon>
             </template>
+            <template #action-switchkey>T</template>
+            <template #inactive-switchkey>F</template>
         </ElementFormC>
         <el-button @click="getFromValue()">获取表单值</el-button>
         <el-button @click="setFormOption()">改变</el-button>

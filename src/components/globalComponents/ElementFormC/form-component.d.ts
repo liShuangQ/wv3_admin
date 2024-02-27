@@ -52,21 +52,6 @@ interface BaseConfig {
     elem?: 'year' | 'month' | 'date' | 'dates' | 'datetime' | 'week' | 'datetimerange' | 'daterange' | 'monthrange'
 }
 
-// <el-xxx
-// v-if="item.type === 'autocomplete'"
-//     v-model="formModel[item.key]"
-// :clearable="item.clearable"
-// :disabled="item.disabled"
-// :placeholder="
-// item.placeholder
-//     ? item.placeholder
-//     : '请输入' + item.label
-// "
-// :placement="item.placement || 'bottom-start'"
-// :size="item.size || formConfig.size || 'default'"
-// @change="(value:string|number)=>emit('handle','change',item.key,value,'')"
-//     >
-//     </el-xxx>
 interface InputConfig {
     /**
      * 在 formatter的情况下显示值，我们通常同时使用 parser
@@ -162,6 +147,52 @@ interface SelectConfig {
     max?: number
     button?: boolean
     border?: boolean
+    /**
+     * 自定义slider的返回显示。 :format-tooltip="(value:number)=>formatTooltip(value)"
+     */
+    formatTooltip?: Function
+    /**
+     * 改变step的值可以改变步长， 通过设置 show-stops 属性可以显示间断点
+     */
+    showStops?: boolean
+    /**
+     * 通过输入框输入来改变当前的值。设置 show-input 属性会在右侧显示一个输入框
+     */
+    showInput?: boolean
+    /**
+     * 配置 range 属性以激活范围选择模式，该属性的绑定值是一个数组，由最小边界值和最大边界值组成。
+     */
+    range?: boolean
+    /**
+     * 设置 marks 属性可以在滑块上显示标记。
+     */
+    marks?: Object
+    /**
+     * 使用active-text属性与inactive-text属性来设置开关的文字描述。
+     */
+    activeText?: string
+    /**
+     * 使用active-text属性与inactive-text属性来设置开关的文字描述。
+     */
+    inactiveText?: string
+    /**
+     * 使用 inline-prompt 属性来控制文本是否显示在点内。
+     */
+    inlinePrompt?: boolean
+    /**
+     * 开关的颜色onColor offColor
+     */
+    onColor?: string
+    offColor?: string
+    /**
+     * 设置 active-value 和 inactive-value 属性， 它们接受 Boolean、String 或 Number 类型的值。
+     */
+    activeValue?: boolean | string | number
+    /**
+     * 设置 active-value 和 inactive-value 属性， 它们接受 Boolean、String 或 Number 类型的值。
+     */
+    inactiveValue?: boolean | string | number
+    loading?: boolean
 }
 
 interface TimeSelectConfig {
