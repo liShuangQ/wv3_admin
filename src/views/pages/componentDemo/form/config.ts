@@ -117,9 +117,9 @@ export let formItemConfig: FormItemConfig[][] = [
     [
         {
             value: '',
-            key: 'name1',
+            key: 'selectkey',
             type: 'select',
-            label: '选择框测试',
+            label: 'select测试',
             rule: [
                 {
                     required: true,
@@ -150,7 +150,7 @@ export let formItemConfig: FormItemConfig[][] = [
             key: 'inputNumberkey',
             type: 'inputNumber',
             value: '',
-            label: '数字选择测试',
+            label: 'inputNumber测试',
             step: 0.2,
             stepStrictly: true,
             precision: 2,
@@ -172,6 +172,21 @@ export let formItemConfig: FormItemConfig[][] = [
             min: 1, max: 2,
             button: true,
             border: false
+        }
+    ],
+    [
+        {
+            value: 1,
+            key: 'ratekey',
+            type: 'rate',
+            label: 'rate测试',
+            allowHalf: true,
+            showScore: true,
+            showText: false,
+            textColor: '#ff9900',
+            scoreTemplate: 'star',
+            voidIcon: "ChatRound",
+            colors: ['#409eff', '#67c23a', '#FF9900']
         }
     ],
 ]

@@ -220,29 +220,6 @@
                         @change="(value:string|number)=>emit('handle','change',item.key,value,'')"
                     >
                     </el-time-select>
-                    <!--                    select未补全-->
-                    <el-select
-                        v-if="item.type === 'select'"
-                        v-model="formModel[item.key]"
-                        :clearable="item.clearable"
-                        :collapse-tags="item.collapseTags"
-                        :collapse-tags-tooltip="item.collapseTagsTooltip"
-                        :disabled="item.disabled"
-                        :multiple="item.multiple"
-                        :placeholder="
-                            item.placeholder
-                                ? item.placeholder
-                                : '请选择' + item.label
-                        "
-                        :size="item.size || 'default'"
-                    >
-                        <el-option
-                            v-for="op in item.option"
-                            :key="op.value"
-                            :label="op.label"
-                            :value="op.value"
-                        />
-                    </el-select>
                     <!--                    radio-->
                     <el-radio-group
                         v-if="item.type === 'radio'"
@@ -273,6 +250,56 @@
                             </el-radio>
                         </template>
                     </el-radio-group>
+                    <!--                    rate-->
+                    <el-rate
+                        v-if="item.type === 'rate'"
+                        v-model="formModel[item.key]"
+                        :allow-half="item.allowHalf"
+                        :clearable="item.clearable"
+                        :colors="item.colors || ['#F7BA2A', '#F7BA2A', '#F7BA2A']"
+                        :disabled="item.disabled"
+                        :icons="item.icons as any || [StarFilled, StarFilled, StarFilled]"
+                        :placeholder="
+                            item.placeholder
+                                ? item.placeholder
+                                : '请输入' + item.label
+                            "
+                        :placement="item.placement || 'bottom-start'"
+                        :scoreTemplate="formModel[item.key]+item.scoreTemplate"
+                        :show-score="item.showScore"
+                        :show-text="item.showText"
+                        :size="item.size || formConfig.size || 'default'"
+                        :text-color="item.textColor"
+                        :texts="item.texts || []"
+                        :void-icon="item.voidIcon as any || Star"
+                        @change="(value:string|number)=>emit('handle','change',item.key,value,'')"
+                    >
+                    </el-rate>
+
+
+                    <!--                    select未补全-->
+                    <el-select
+                        v-if="item.type === 'select'"
+                        v-model="formModel[item.key]"
+                        :clearable="item.clearable"
+                        :collapse-tags="item.collapseTags"
+                        :collapse-tags-tooltip="item.collapseTagsTooltip"
+                        :disabled="item.disabled"
+                        :multiple="item.multiple"
+                        :placeholder="
+                            item.placeholder
+                                ? item.placeholder
+                                : '请选择' + item.label
+                        "
+                        :size="item.size || 'default'"
+                    >
+                        <el-option
+                            v-for="op in item.option"
+                            :key="op.value"
+                            :label="op.label"
+                            :value="op.value"
+                        />
+                    </el-select>
                 </el-form-item>
                 <!-- 自定义 -->
                 <slot v-if="item.type === 'custom'" :name="'custom-' + item.key"></slot>
@@ -286,6 +313,7 @@ import type {FormInstance} from "element-plus";
 import {FormConfig, FormDefineExpose, FormItemConfig,} from "@/components/globalComponents/ElementFormC/form-component";
 import {toRaw} from "vue";
 import * as querystring from "querystring";
+import {Star, StarFilled} from "@element-plus/icons-vue";
 
 const props = withDefaults(
     defineProps<{

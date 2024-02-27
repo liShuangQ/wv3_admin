@@ -201,6 +201,27 @@ interface TimeSelectConfig {
     start?: string
     step?: string | number
     end?: string
+    colors?: string[]
+    /**
+     * 为组件设置 show-text 属性会在右侧显示辅助文字。 通过设置 texts 可以为每一个分值指定对应的辅助文字。 texts 为一个数组，长度应等于最大值 max。
+     */
+    texts?: string[]
+    /**
+     * 属性 allow-half 允许出现半星
+     */
+    allowHalf?: boolean
+    icons?: string
+    voidIcon?: string
+    /**
+     * 是否显示当前分数， show-score 和 show-text 不能同时为真
+     */
+    showScore?: boolean
+    /**
+     * 是否显示辅助文字，若为真，则会从 texts 数组中选取当前分数对应的文字内容
+     */
+    showText?: boolean
+    textColor?: string
+    scoreTemplate?: string
 }
 
 export type FormItemConfig = BaseConfig & InputConfig & SelectConfig & TimeSelectConfig

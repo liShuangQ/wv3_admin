@@ -43,7 +43,7 @@ const formComRef = ref<FormDefineExpose>();
 const setFormOption = () => {
     formComRef.value!.setFormOption([
         {
-            key: "name1",
+            key: "selectkey",
             value: "",
             option: [
                 {
