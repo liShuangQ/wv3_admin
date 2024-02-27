@@ -61,44 +61,6 @@
                         <!--                        </template>-->
 
                     </el-autocomplete>
-                    <!--                    input-->
-                    <!-- formatter,parser 是否存在冗余性能问题？ -->
-                    <el-input
-                        v-if="item.type === 'input'"
-                        v-model="formModel[item.key]"
-                        :autosize="(item.autosize as any) || false"
-                        :clearable="item.clearable"
-                        :disabled="item.disabled"
-                        :formatter="
-                            (value:string | number) =>
-                                item.formatter ? item.formatter(value) : value
-                        "
-                        :maxlength="item.maxlength as any"
-                        :minlength="item.minlength"
-                        :parser="
-                            (value:string | number) =>
-                                item.parser ? item.parser(value) : value
-                        "
-                        :placeholder="
-                            item.placeholder
-                                ? item.placeholder
-                                : '请输入' + item.label
-                        "
-                        :prefix-icon="item.prefixIcon || ''"
-                        :show-word-limit="item.showWordLimit"
-                        :showPassword="item.showPassword"
-                        :size="item.size || formConfig.size || 'default'"
-                        :suffix-icon="item.suffixIcon || ''"
-                        :type="item.textarea ? 'textarea' : 'text'"
-                        @change="(value:string|number)=>emit('handle','change',item.key,value,'')"
-                    >
-                        <template v-if="item.prepend" #prepend>
-                            <slot :name="'prepend-' + item.key"></slot>
-                        </template>
-                        <template v-if="item.append" #append>
-                            <slot :name="'append-' + item.key"></slot>
-                        </template>
-                    </el-input>
                     <!--                    checkbox-->
                     <el-checkbox-group
                         v-if="item.type === 'checkbox'"
@@ -158,6 +120,66 @@
                         @change="(value:string|number)=>emit('handle','change',item.key,value,'')"
                     >
                     </el-date-picker>
+                    <!--                    input-->
+                    <!-- formatter,parser 是否存在冗余性能问题？ -->
+                    <el-input
+                        v-if="item.type === 'input'"
+                        v-model="formModel[item.key]"
+                        :autosize="(item.autosize as any) || false"
+                        :clearable="item.clearable"
+                        :disabled="item.disabled"
+                        :formatter="
+                            (value:string | number) =>
+                                item.formatter ? item.formatter(value) : value
+                        "
+                        :maxlength="item.maxlength as any"
+                        :minlength="item.minlength"
+                        :parser="
+                            (value:string | number) =>
+                                item.parser ? item.parser(value) : value
+                        "
+                        :placeholder="
+                            item.placeholder
+                                ? item.placeholder
+                                : '请输入' + item.label
+                        "
+                        :prefix-icon="item.prefixIcon || ''"
+                        :show-word-limit="item.showWordLimit"
+                        :showPassword="item.showPassword"
+                        :size="item.size || formConfig.size || 'default'"
+                        :suffix-icon="item.suffixIcon || ''"
+                        :type="item.textarea ? 'textarea' : 'text'"
+                        @change="(value:string|number)=>emit('handle','change',item.key,value,'')"
+                    >
+                        <template v-if="item.prepend" #prepend>
+                            <slot :name="'prepend-' + item.key"></slot>
+                        </template>
+                        <template v-if="item.append" #append>
+                            <slot :name="'append-' + item.key"></slot>
+                        </template>
+                    </el-input>
+                    <!--                    inputNumber-->
+                    <el-input-number
+                        v-if="item.type === 'inputNumber'"
+                        v-model="formModel[item.key]"
+                        :clearable="item.clearable"
+                        :controls-position="item.controlsPosition || ''"
+                        :disabled="item.disabled"
+                        :max="item.max"
+                        :min="item.min"
+                        :placeholder="
+                            item.placeholder
+                                ? item.placeholder
+                                : '请输入' + item.label
+                            "
+                        :placement="item.placement || 'bottom-start'"
+                        :precision="item.precision"
+                        :size="item.size || formConfig.size || 'default'"
+                        :step="item.step || 1"
+                        :step-strictly="item.stepStrictly"
+                        @change="(value:string|number)=>emit('handle','change',item.key,value,'')"
+                    >
+                    </el-input-number>
                     <!--                    timeSelect-->
                     <el-time-select
                         v-if="item.type === 'timeSelect'"
@@ -239,7 +261,7 @@ const formRule = ref<any>({});
 formItemConfig.value.forEach((row: FormItemConfig[]) => {
     row.forEach((item: FormItemConfig) => {
         // HACK 影响setFormOption方法。此时formConfig里面的value和rule是冗余的，但是为了避免不必要的开销，暂时不动
-        formModel.value[item.key] = item.value;
+        formModel.value[item.key] = item?.value ?? "";
         formRule.value[item.key] = item?.rule ?? [];
     });
 });

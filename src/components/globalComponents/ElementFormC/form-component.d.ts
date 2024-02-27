@@ -126,6 +126,18 @@ interface InputConfig {
      */
     debounce?: number
     placement?: 'top' | 'top- start' | 'top-end' | 'bottom' | 'bottom-start' | 'bottom-end'
+    /**
+     * step-strictly属性接受一个Boolean。 如果这个属性被设置为 true，则只能输入步进的倍数。
+     */
+    stepStrictly?: boolean
+    /**
+     * 设置 precision 属性可以控制数值精度，接收一个 Number
+     */
+    precision?: number
+    /**
+     * 控制按钮位置
+     */
+    controlsPosition?: '' | 'right'
 }
 
 interface SelectConfig {
@@ -187,7 +199,7 @@ interface TimeSelectConfig {
      */
     arrowControl?: boolean
     start?: string
-    step?: string
+    step?: string | number
     end?: string
 }
 

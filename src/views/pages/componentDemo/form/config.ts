@@ -98,7 +98,6 @@ export let formItemConfig: FormItemConfig[][] = [
             label: 'timePicker测试',
             format: "HH:mm:ss",
             col: 12,
-
         }
     ],
     [
@@ -144,5 +143,17 @@ export let formItemConfig: FormItemConfig[][] = [
             ]
         },
     ],
-
+    [
+        {
+            col: 12,
+            key: 'inputNumberkey',
+            type: 'inputNumber',
+            value: '',
+            label: '数字选择测试',
+            step: 0.2,
+            stepStrictly: true,
+            precision: 2,
+            controlsPosition: 'right'
+        },
+    ],
 ]
