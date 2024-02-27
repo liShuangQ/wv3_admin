@@ -1,8 +1,9 @@
-import { createApp } from "vue";
+import {createApp} from "vue";
 import App from "./App.vue";
-import router, { setupRouter } from "./router/index";
-import { setupPlugins } from "@/plugins";
+import router, {setupRouter} from "./router/index";
+import {setupPlugins} from "@/plugins";
 import "./style/tailwind.css"
+import "./style/element.scss"
 import 'element-plus/dist/index.css'
 import setGlobalProperties from "./store/vue/globalProperties";
 import globalVars from "./store/vue/globalVars";
@@ -19,7 +20,7 @@ const bootstrap = async () => {
     // -------------
     setupPlugins(app);
     await setupRouter(app);
-    await router.isReady(); 
+    await router.isReady();
     app.mount("#app");
 };
 

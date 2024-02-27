@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const baseConfig = require("./webpack.base.js");
-const {merge} = require("webpack-merge");
-const FriendlyErrorsWebpackPlugin = require("friendly-errors-webpack-plugin");
-const ESLintPlugin = require("eslint-webpack-plugin");
-module.exports = merge(baseConfig, {
+const baseConfig = require( "./webpack.base.js" );
+const { merge } = require( "webpack-merge" );
+const FriendlyErrorsWebpackPlugin = require( "friendly-errors-webpack-plugin" );
+const ESLintPlugin = require( "eslint-webpack-plugin" );
+module.exports = merge( baseConfig, {
     mode: "development",
     target: "web",
     devServer: {
         port: '8077',
         hot: true,
-        open: true,
+        open: false,
         client: {
             overlay: false,
         },
@@ -21,6 +21,6 @@ module.exports = merge(baseConfig, {
     devtool: "eval-cheap-module-source-map",//eval-cheap-module-source-map
     plugins: [
         new FriendlyErrorsWebpackPlugin(),
-        new ESLintPlugin({extensions: ["js", "ts", "vue"]}),
+        new ESLintPlugin( { extensions: [ "js", "ts", "vue" ] } ),
     ],
-});
+} );

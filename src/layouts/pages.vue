@@ -1,15 +1,15 @@
 <template>
     <div class="common-layout h-screen bg-gray-100">
         <el-container>
-            <el-aside class="h-screen"
-                      :style="{display:fullScreenValue?'none':'block',width:'auto'}">
+            <el-aside :style="{display:fullScreenValue?'none':'block',width:'auto'}"
+                      class="h-screen">
                 <Menu></Menu>
             </el-aside>
             <el-container>
                 <el-header :style="{display:fullScreenValue?'none':'block',height: 'max-content',padding:'0'}">
                     <div class="h-[40px] flex justify-between items-center bg-white mb-2">
                         <Breadcrumb></Breadcrumb>
-                        <BarUtil @refreshPage="refreshPage" @pageFullScreen="pageFullScreen"></BarUtil>
+                        <BarUtil @pageFullScreen="pageFullScreen" @refreshPage="refreshPage"></BarUtil>
                     </div>
                     <div class="flex items-center justify-between ml-1">
                         <div>
@@ -21,14 +21,14 @@
                         </div>
                     </div>
                 </el-header>
-                <el-main class="overflow-hidden " style="padding: 8px;overflow: hidden;">
+                <el-main style="padding: 8px;overflow: hidden;height: calc(100vh - 75px)">
                     <router-view
                         v-slot="{ Component }"
-                        class="h-full w-full bg-white "
+                        class="h-full w-full bg-white overflow-auto"
                     >
                         <Transition appear enter-active-class="animate__animated animate__fadeIn">
                             <component
-                                v-if="refreshPageValue" :is="Component"></component>
+                                :is="Component" v-if="refreshPageValue"></component>
                         </Transition>
                     </router-view>
                 </el-main>

@@ -6,7 +6,6 @@
         </div>
         <div class="bg-red-200">
             <div class="text-blue-400">全局组件：</div>
-            <all1></all1>
         </div>
         <div class="bg-red-200">
             <div class="text-blue-400">请求：</div>
@@ -68,7 +67,7 @@ const axiosTest = (t: string) => {
         http.request<any>({
             baseURL: "http://127.0.0.1:8083",
             url: '/user/adminLogin',
-            method: "post",
+            method: 'post',
             q_spinning: true,
             // q_contentType: 'json',
             data: {"userName": 'test', "password": 'testtest'},
