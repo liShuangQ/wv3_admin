@@ -64,7 +64,7 @@ export default [
     {
         path: 'zhujian',
         faPath: [],
-        title: '组件',
+        title: '公共全局组件',
         icon: 'Menu',
         children: [
             {

@@ -1,4 +1,5 @@
 <!---->
+<!-- liShuangQ-->
 <!-- 不支持树形-->
 <!-- 合计功能考虑没必要，后端返回或自己计算即可-->
 <!-- 合并单元格后续考虑加入-->
@@ -85,14 +86,9 @@
     />
 </template>
 <script lang="ts" setup>
-import {
-    PaginationConfig,
-    TableColumnConfig,
-    TableConfig,
-    TableDefineExpose,
-} from "./table-component";
+import {PaginationConfig, TableColumnConfig, TableConfig, TableDefineExpose,} from "./table-component";
 import subColumn from "@/components/globalComponents/ElementTableC/subColumn.vue";
-import { ElTable } from "element-plus";
+import {ElTable} from "element-plus";
 
 const props = withDefaults(
     defineProps<{

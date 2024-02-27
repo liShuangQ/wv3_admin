@@ -1,6 +1,5 @@
 <template>
     <div class="overflow-y-scroll">
-        {{ tableData }}
         <div class="h-[500px]">
             <ElementTableC
                 ref="tableComRef"
@@ -19,11 +18,12 @@
                         <p m="t-0 b-2">City: city</p>
                     </div>
                 </template>
-                <template #header-address> 自定义表头 </template>
+                <template #header-address> 自定义表头</template>
                 <template #address="scope">
                     <el-button size="small" @click="editFun(scope.row)">{{
-                        scope.row.name00Edit ? "保存" : "编辑"
-                    }}</el-button>
+                            scope.row.name00Edit ? "保存" : "编辑"
+                        }}
+                    </el-button>
                     <div>自定义表格（只支持一级表头的表格）{{ scope.row }}</div>
                 </template>
             </ElementTableC>
@@ -33,11 +33,12 @@
                 @click="
                     tableComRef!.toggleSelection([tableData[1], tableData[2]])
                 "
-                >控制选中
+            >控制选中
             </el-button>
 
             <el-button @click="tableComRef!.toggleSelection()"
-                >清除选中</el-button
+            >清除选中
+            </el-button
             >
 
             <el-button @click="tableComRef!.tableMethod('clearSelection')">
@@ -46,7 +47,8 @@
         </div>
         <div style="margin-top: 20px">
             <el-button @click="tableComRef!.resetDateFilter(['date22'])"
-                >清除筛选</el-button
+            >清除筛选
+            </el-button
             >
             <el-button @click="tdadd()">添加数据</el-button>
             <el-button @click="pageChange()">改变页码</el-button>
@@ -60,7 +62,7 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { TableDefineExpose } from "@/components/globalComponents/ElementTableC/table-component";
+import {TableDefineExpose} from "@/components/globalComponents/ElementTableC/table-component";
 import {
     paginationConfig,
     tableColumnConfig,

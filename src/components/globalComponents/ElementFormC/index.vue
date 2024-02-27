@@ -1,10 +1,8 @@
 <!---->
+<!-- liShuangQ-->
 <!-- XXX：不同类型的表单形式，暂不考虑使用component is分离组件，认为存在多余变量和方法的开销，为了可维护性 下面要更加注意表单之间的代码分离-->
 <!---->
 <template>
-    <div>
-        {{ formModel }}
-    </div>
     <el-form
         ref="formRef"
         :disabled="formConfig.disabled"
