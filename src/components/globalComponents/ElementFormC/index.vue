@@ -55,11 +55,6 @@
                         <template v-if="item.suffix" #suffix>
                             <slot :name="'suffix-' + item.key"></slot>
                         </template>
-                        <!--                        不生效 待看-->
-                        <!--                        <template v-if="item.custom" #default="{ item }">-->
-                        <!--                            <slot :name="'default-' + item.key"></slot>-->
-                        <!--                        </template>-->
-
                     </el-autocomplete>
                     <!--                    checkbox-->
                     <el-checkbox-group
@@ -235,14 +230,16 @@
                         @change="(value:string|number)=>emit('handle','change',item.key,value,'')"
                     >
                     </el-rate>
-                    <!--                    select未补全-->
+                    <!--                    select-->
                     <el-select
                         v-if="item.type === 'select'"
                         v-model="formModel[item.key]"
+                        :allow-create="item.allowCreate"
                         :clearable="item.clearable"
                         :collapse-tags="item.collapseTags"
                         :collapse-tags-tooltip="item.collapseTagsTooltip"
                         :disabled="item.disabled"
+                        :filterable="item.filterable"
                         :multiple="item.multiple"
                         :placeholder="
                             item.placeholder
@@ -250,13 +247,38 @@
                                 : '请选择' + item.label
                         "
                         :size="item.size || 'default'"
+                        value-key="value"
                     >
-                        <el-option
-                            v-for="op in item.option"
-                            :key="op.value"
-                            :label="op.label"
-                            :value="op.value"
-                        />
+                        <template v-if="(item.optionGroup && item.optionGroup.length > 0) || false">
+                            <el-option-group
+                                v-for="group in item.optionGroup"
+                                :key="group.label"
+                                :label="group.label"
+                            >
+                                <el-option
+                                    v-for="optionItem in group.option"
+                                    :key="optionItem.value"
+                                    :label="optionItem.label"
+                                    :value="optionItem.value"
+                                >
+                                    <template v-if="item.optionCustom">
+                                        <slot :item="optionItem" :name="'optionCustom-' + item.key"></slot>
+                                    </template>
+                                </el-option>
+                            </el-option-group>
+                        </template>
+                        <template v-else>
+                            <el-option
+                                v-for="optionItem in item.option"
+                                :key="optionItem.value"
+                                :label="optionItem.label"
+                                :value="optionItem.value"
+                            >
+                                <template v-if="item.optionCustom">
+                                    <slot :item="optionItem" :name="'optionCustom-' + item.key"></slot>
+                                </template>
+                            </el-option>
+                        </template>
                     </el-select>
                     <!--                    slider-->
                     <el-slider

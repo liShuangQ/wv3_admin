@@ -8,6 +8,14 @@
         >
             <template #prepend-inputkey>11</template>
             <template #append-inputkey>22</template>
+            <template #optionCustom-selectkey="{item}">
+                <span style="float: left">{{ item.label }}</span>
+                <span style="float: right;color: var(--el-text-color-secondary);font-size: 13px;">
+                                    {{ item.value }}
+                </span>
+            </template>
+
+
             <template #custom-customkey="props">
                 <span class="text-red-300 float-left leading-8"
                 >自定义插槽{{ props }}</span

@@ -116,7 +116,7 @@ export let formItemConfig: FormItemConfig[][] = [
     ],
     [
         {
-            value: '',
+            value: [],
             key: 'selectkey',
             type: 'select',
             label: 'select测试',
@@ -128,20 +128,42 @@ export let formItemConfig: FormItemConfig[][] = [
                 },
             ],
             col: 12,
-            option: [
+            multiple: true,
+            optionCustom: true,
+            optionGroup: [
                 {
-                    value: '1',
-                    label: "1"
+                    label: 'A组',
+                    option: [
+                        {
+                            value: '1',
+                            label: "标题1"
+                        },
+                        {
+                            value: '2',
+                            label: "标题2"
+                        }
+                    ]
                 },
                 {
-                    value: '2',
-                    label: "2"
-                },
-                {
-                    value: '3',
-                    label: "3"
+                    label: 'B组',
+                    option: [
+                        {
+                            value: '3',
+                            label: "标题3"
+                        }
+                    ]
                 }
-            ]
+            ],
+            // option: [
+            //     {
+            //         value: '1',
+            //         label: "标题1"
+            //     },
+            //     {
+            //         value: '2',
+            //         label: "标题2"
+            //     }
+            // ]
         },
     ],
     [
@@ -200,7 +222,9 @@ export let formItemConfig: FormItemConfig[][] = [
                 return val + '%'
             },
             showInput: true,
+            showStops: true,
             range: true,
+            step: 5,
             marks: {
                 0: '0°C',
                 8: '8°C',

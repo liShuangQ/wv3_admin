@@ -132,6 +132,17 @@ interface SelectConfig {
         disabled?: boolean
     }[],
     /**
+     * 你可以为选项进行分组来区分不同的选项,它的 label 属性为分组名
+     */
+    optionGroup?: {
+        label: string,
+        option: {
+            value: string,
+            label: string
+            disabled?: boolean
+        }[]
+    }[]
+    /**
      * 为 el-select 设置 multiple 属性即可启用多选， 此时 v-model 的值为当前选中值所组成的数组。 默认情况下选中值会以 Tag 组件的形式展现。
      */
     multiple?: boolean
@@ -143,6 +154,21 @@ interface SelectConfig {
      * 您可以使用 collapse-tags-tooltip 属性来启用鼠标悬停折叠文字以显示具体所选值的行为。
      */
     collapseTagsTooltip?: boolean
+    /**
+     * 为el-select添加filterable属性即可启用搜索功能。 默认情况下，Select 会找出所有 label 属性包含输入值的选项。
+     */
+    filterable?: boolean
+    /**
+     * 创建并选中未包含在初始选项中的条目。
+     */
+    allowCreate?: boolean
+    /**
+     * 设置自定义option的插槽，插槽传出item
+     * <template v-if="item.optionCustom">
+     *     <slot :item="optionItem" :name="'optionCustom-' + item.key"></slot>
+     * </template>
+     */
+    optionCustom?: boolean
     min?: number
     max?: number
     button?: boolean
