@@ -22,6 +22,7 @@ declare module 'vue' {
     ElOption: typeof import('element-plus/es')['ElOption']
     ElRow: typeof import('element-plus/es')['ElRow']
     ElSelect: typeof import('element-plus/es')['ElSelect']
+    ElTimePicker: typeof import('element-plus/es')['ElTimePicker']
     ElTimeSelect: typeof import('element-plus/es')['ElTimeSelect']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

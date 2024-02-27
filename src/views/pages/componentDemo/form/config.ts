@@ -92,12 +92,13 @@ export let formItemConfig: FormItemConfig[][] = [
     ],
     [
         {
-            value: '23:53:29',
+            value: '',
             key: 'timePickerkey',
             type: 'timePicker',
             label: 'timePicker测试',
             format: "HH:mm:ss",
             col: 12,
+            arrowControl: true
         }
     ],
     [

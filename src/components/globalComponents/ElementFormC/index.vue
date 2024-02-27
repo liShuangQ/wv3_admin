@@ -180,6 +180,26 @@
                         @change="(value:string|number)=>emit('handle','change',item.key,value,'')"
                     >
                     </el-input-number>
+                    <!--                    timePicker-->
+                    <el-time-picker
+                        v-if="item.type === 'timePicker'"
+                        v-model="formModel[item.key]"
+                        :arrow-control="item.arrowControl"
+                        :clearable="item.clearable"
+                        :disabled="item.disabled"
+                        :end="item.end"
+                        :format="(item.format as any) || 'HH:mm:ss'"
+                        :is-range="item.isRange"
+                        :placeholder="
+                        item.placeholder
+                            ? item.placeholder
+                            : '请选择' + item.label
+                        "
+                        :size="item.size || formConfig.size || 'default'"
+                        :value-format="item.valueFormat || item.format"
+                        @change="(value:string|number)=>emit('handle','change',item.key,value,'')"
+                    >
+                    </el-time-picker>
                     <!--                    timeSelect-->
                     <el-time-select
                         v-if="item.type === 'timeSelect'"
