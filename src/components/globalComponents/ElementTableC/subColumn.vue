@@ -54,7 +54,6 @@ const props = defineProps<{
     faEmit?: any
 }>();
 
-
 </script>
 
 <style scoped></style>

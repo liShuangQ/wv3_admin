@@ -82,7 +82,6 @@ const tdadd = () => {
         name11: "add",
         name22: "add",
         name33: "add",
-        address: "add",
     });
     paginationConfig.value.total = tableData.value.length;
 };
