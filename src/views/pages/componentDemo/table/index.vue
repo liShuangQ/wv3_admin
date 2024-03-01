@@ -81,7 +81,7 @@ const tdadd = () => {
         name00Edit: false,
         name11: "add",
         name22: "add",
-        address: "add",
+        name33: "add",
     });
     paginationConfig.value.total = tableData.value.length;
 };
@@ -115,8 +115,8 @@ const tableRowClassName = (
     // return fn('')
 };
 
-const tableHandle = (t: string, d: any) => {
-    console.log(t, d, "tableHandle");
+const tableHandle = (t: string, d: any, key: string) => {
+    console.log("tableHandle:::", t, d, key);
 };
 const indexMethod = (index: number, fn: Function) => {
     // fn(index * 2)

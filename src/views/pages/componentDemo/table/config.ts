@@ -9,7 +9,7 @@ export let tableColumnConfig = ref<TableColumnConfig[]>([
         label: '表头1',
         prop: 'date',
         width: 200,
-        sortable: true
+        sortable: true,
     },
     {
         label: '表头2',
@@ -19,7 +19,7 @@ export let tableColumnConfig = ref<TableColumnConfig[]>([
             {
                 label: '2-1',
                 prop: 'name00',
-                isEdit:true
+                isEdit: true
             },
             {
                 label: '2-2',
@@ -42,6 +42,11 @@ export let tableColumnConfig = ref<TableColumnConfig[]>([
                         label: '2-2-2',
                         prop: 'name22',
                         slot: true,
+                    },
+                    {
+                        label: '3-3-3',
+                        prop: 'name33',
+                        isLink: 'success',
                     },
                 ]
             },

@@ -16,9 +16,10 @@
         :stripe="props.tableConfig.stripe || false"
         :table-layout="props.tableConfig.tableLayout || 'fixed'"
         style="width: 100%; height: calc(100% - 48px)"
-        @selection-change="(e) => emit('handle', 'selection', e)"
-        @current-change="(e) => emit('handle', 'current', e)"
+        @selection-change="(e) => emit('handle', 'selection', e,'selection')"
+        @current-change="(e) => emit('handle', 'current', e,'current')"
     >
+
         <!--        功能区-->
         <el-table-column
             v-if="props.tableConfig.index || false"
@@ -67,6 +68,7 @@
             <sub-column
                 v-else
                 :columnConfig="item"
+                :faEmit="emit"
                 :tooltip="props.tableConfig.tooltip || false"
             ></sub-column>
         </template>
@@ -81,8 +83,8 @@
         :small="pageData.small"
         :total="pageData.total"
         class="mt-4 float-right"
-        @size-change="(e:number)=>emit('handle', 'handleSizeChange', {val:e,currentPage:pageData.currentPage,pageSize:pageData.pageSize})"
-        @current-change="(e:number)=>emit('handle', 'handleCurrentChange', {val:e,currentPage:pageData.currentPage,pageSize:pageData.pageSize})"
+        @size-change="(e:number)=>emit('handle', 'handleSizeChange', {val:e,currentPage:pageData.currentPage,pageSize:pageData.pageSize},'handleSizeChange')"
+        @current-change="(e:number)=>emit('handle', 'handleCurrentChange', {val:e,currentPage:pageData.currentPage,pageSize:pageData.pageSize},'handleCurrentChange')"
     />
 </template>
 <script lang="ts" setup>
@@ -122,7 +124,7 @@ const props = withDefaults(
     }
 );
 const emit = defineEmits<{
-    (event: "handle", type: string, data: any): void;
+    (event: "handle", type: string, data: any, key: string): void;
     (event: "tableRowClassName", e: any, fn: Function): string;
     (event: "indexMethod", e: number, fn: Function): string;
 }>();
