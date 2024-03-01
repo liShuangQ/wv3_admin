@@ -7,14 +7,8 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    ElAside: typeof import('element-plus/es')['ElAside']
-    ElButton: typeof import('element-plus/es')['ElButton']
-    ElContainer: typeof import('element-plus/es')['ElContainer']
     ElementFormC: typeof import('./../src/components/globalComponents/ElementFormC/index.vue')['default']
     ElementTableC: typeof import('./../src/components/globalComponents/ElementTableC/index.vue')['default']
-    ElHeader: typeof import('element-plus/es')['ElHeader']
-    ElInput: typeof import('element-plus/es')['ElInput']
-    ElMain: typeof import('element-plus/es')['ElMain']
     ElPagination: typeof import('element-plus/es')['ElPagination']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     RouterLink: typeof import('vue-router')['RouterLink']

@@ -17,8 +17,8 @@
         :table-layout="props.tableConfig.tableLayout || 'fixed'"
         style="width: 100%; height: calc(100% - 48px)"
         @selection-change="(e) => emit('handle', 'selection', e,'selection')"
+        @current-change="(e) => emit('handle', 'current', e,'current')"
     >
-        <!--        @current-change="(e) => emit('handle', 'current', e,'current')"-->
 
         <!--        功能区-->
         <el-table-column
