@@ -282,6 +282,7 @@ interface TimeSelectConfig {
 }
 
 export type FormItemConfig = BaseConfig & InputConfig & SelectConfig & TimeSelectConfig
+export type FormItemConfigs = FormItemConfig[][]
 
 export interface FormDefineExpose {
     /**
