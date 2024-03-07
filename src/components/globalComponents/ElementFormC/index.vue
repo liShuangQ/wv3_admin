@@ -39,7 +39,7 @@
                         :clearable="item.clearable"
                         :debounce="item.debounce || 300"
                         :disabled="item.disabled"
-                        :fetch-suggestions="(querystring:string,cb)=>emit('handle','autocomplete',item.key,querystring,cb)"
+                        :fetch-suggestions="(querystring:string,cb:any)=>emit('handle','autocomplete',item.key,querystring,cb)"
                         :placeholder="
                             item.placeholder
                                 ? item.placeholder
@@ -71,17 +71,23 @@
                         @change="(value:string|number)=>emit('handle','change',item.key,value,'')"
                     >
                         <template v-if="item.button || false">
-                            <el-checkbox-button v-for="optionItem in item.option" :key="optionItem.value"
-                                                :disabled="optionItem.disabled"
-                                                :label="optionItem.value">
+                            <el-checkbox-button
+                                v-for="optionItem in item.option"
+                                :key="optionItem.value"
+                                :disabled="optionItem.disabled"
+                                :label="optionItem.value"
+                            >
                                 {{ optionItem.label }}
                             </el-checkbox-button>
                         </template>
                         <template v-else>
-                            <el-checkbox v-for="optionItem in item.option" :key="optionItem.value"
-                                         :border="item.border"
-                                         :disabled="optionItem.disabled"
-                                         :label="optionItem.value">
+                            <el-checkbox
+                                v-for="optionItem in item.option"
+                                :key="optionItem.value"
+                                :border="item.border"
+                                :disabled="optionItem.disabled"
+                                :label="optionItem.value"
+                            >
                                 {{ optionItem.label }}
                             </el-checkbox>
                         </template>
@@ -164,7 +170,7 @@
                             item.placeholder
                                 ? item.placeholder
                                 : '请输入' + item.label
-                            "
+                        "
                         :placement="item.placement || 'bottom-start'"
                         :precision="item.precision"
                         :size="item.size || formConfig.size || 'default'"
@@ -183,22 +189,28 @@
                             item.placeholder
                                 ? item.placeholder
                                 : '请输入' + item.label
-                            "
+                        "
                         :size="item.size || formConfig.size || 'default'"
                         @change="(value:string|number)=>emit('handle','change',item.key,value,'')"
                     >
                         <template v-if="item.button || false">
-                            <el-radio-button v-for="optionItem in item.option" :key="optionItem.value"
-                                             :disabled="optionItem.disabled"
-                                             :label="optionItem.value">
+                            <el-radio-button
+                                v-for="optionItem in item.option"
+                                :key="optionItem.value"
+                                :disabled="optionItem.disabled"
+                                :label="optionItem.value"
+                            >
                                 {{ optionItem.label }}
                             </el-radio-button>
                         </template>
                         <template v-else>
-                            <el-radio v-for="optionItem in item.option" :key="optionItem.value"
-                                      :border="item.border"
-                                      :disabled="optionItem.disabled"
-                                      :label="optionItem.value">
+                            <el-radio
+                                v-for="optionItem in item.option"
+                                :key="optionItem.value"
+                                :border="item.border"
+                                :disabled="optionItem.disabled"
+                                :label="optionItem.value"
+                            >
                                 {{ optionItem.label }}
                             </el-radio>
                         </template>
@@ -209,16 +221,20 @@
                         v-model="formModel[item.key]"
                         :allow-half="item.allowHalf"
                         :clearable="item.clearable"
-                        :colors="item.colors || ['#F7BA2A', '#F7BA2A', '#F7BA2A']"
+                        :colors="
+                            item.colors || ['#F7BA2A', '#F7BA2A', '#F7BA2A']
+                        "
                         :disabled="item.disabled"
                         :icons="item.icons as any || [StarFilled, StarFilled, StarFilled]"
                         :placeholder="
                             item.placeholder
                                 ? item.placeholder
                                 : '请输入' + item.label
-                            "
+                        "
                         :placement="item.placement || 'bottom-start'"
-                        :scoreTemplate="formModel[item.key]+item.scoreTemplate"
+                        :scoreTemplate="
+                            formModel[item.key] + item.scoreTemplate
+                        "
                         :show-score="item.showScore"
                         :show-text="item.showText"
                         :size="item.size || formConfig.size || 'default'"
@@ -247,7 +263,13 @@
                         :size="item.size || 'default'"
                         value-key="value"
                     >
-                        <template v-if="(item.optionGroup && item.optionGroup.length > 0) || false">
+                        <template
+                            v-if="
+                                (item.optionGroup &&
+                                    item.optionGroup.length > 0) ||
+                                false
+                            "
+                        >
                             <el-option-group
                                 v-for="group in item.optionGroup"
                                 :key="group.label"
@@ -260,7 +282,10 @@
                                     :value="optionItem.value"
                                 >
                                     <template v-if="item.optionCustom">
-                                        <slot :item="optionItem" :name="'optionCustom-' + item.key"></slot>
+                                        <slot
+                                            :item="optionItem"
+                                            :name="'optionCustom-' + item.key"
+                                        ></slot>
                                     </template>
                                 </el-option>
                             </el-option-group>
@@ -273,7 +298,10 @@
                                 :value="optionItem.value"
                             >
                                 <template v-if="item.optionCustom">
-                                    <slot :item="optionItem" :name="'optionCustom-' + item.key"></slot>
+                                    <slot
+                                        :item="optionItem"
+                                        :name="'optionCustom-' + item.key"
+                                    ></slot>
                                 </template>
                             </el-option>
                         </template>
@@ -309,7 +337,10 @@
                         :loading="item.loading"
                         :placement="item.placement || 'bottom-start'"
                         :size="item.size || formConfig.size || 'default'"
-                        :style="{'--el-switch-on-color':item.onColor, '--el-switch-off-color':item.offColor}"
+                        :style="{
+                            '--el-switch-on-color': item.onColor,
+                            '--el-switch-off-color': item.offColor,
+                        }"
                         @change="(value:string|number)=>emit('handle','change',item.key,value,'')"
                     >
                     </el-switch>
@@ -324,9 +355,9 @@
                         :format="(item.format as any) || 'HH:mm:ss'"
                         :is-range="item.isRange"
                         :placeholder="
-                        item.placeholder
-                            ? item.placeholder
-                            : '请选择' + item.label
+                            item.placeholder
+                                ? item.placeholder
+                                : '请选择' + item.label
                         "
                         :size="item.size || formConfig.size || 'default'"
                         :value-format="item.valueFormat || item.format"
@@ -342,9 +373,9 @@
                         :end="item.end"
                         :format="(item.format as any) || 'HH:mm'"
                         :placeholder="
-                        item.placeholder
-                            ? item.placeholder
-                            : '请选择' + item.label
+                            item.placeholder
+                                ? item.placeholder
+                                : '请选择' + item.label
                         "
                         :placement="item.placement || 'bottom-start'"
                         :size="item.size || formConfig.size || 'default'"
@@ -355,18 +386,25 @@
                     </el-time-select>
                 </el-form-item>
                 <!-- 自定义 -->
-                <slot v-if="item.type === 'custom'" :name="'custom-' + item.key"></slot>
+                <slot
+                    v-if="item.type === 'custom'"
+                    :name="'custom-' + item.key"
+                ></slot>
             </el-col>
         </el-row>
     </el-form>
 </template>
 
 <script lang="ts" setup>
-import type {FormInstance} from "element-plus";
-import {FormConfig, FormDefineExpose, FormItemConfig,} from "@/components/globalComponents/ElementFormC/form-component";
-import {toRaw} from "vue";
+import type { FormInstance } from "element-plus";
+import {
+    FormConfig,
+    FormDefineExpose,
+    FormItemConfig,
+} from "@/components/globalComponents/ElementFormC/form-component";
+import { toRaw } from "vue";
 import * as querystring from "querystring";
-import {Star, StarFilled} from "@element-plus/icons-vue";
+import { Star, StarFilled } from "@element-plus/icons-vue";
 
 const props = withDefaults(
     defineProps<{
@@ -407,9 +445,9 @@ const setFormOption = (options: FormItemConfig[]) => {
             if (fi !== -1) {
                 // HACK 根据是否单独管理的变量调整
                 Object.hasOwn(item, "value") &&
-                (formModel.value[item.key] = item.value);
+                    (formModel.value[item.key] = item.value);
                 Object.hasOwn(item, "rule") &&
-                (formRule.value[item.key] = item.rule);
+                    (formRule.value[item.key] = item.rule);
                 formItemConfig.value[i][fi] = {
                     ...formItemConfig.value[i][fi],
                     ...item,
