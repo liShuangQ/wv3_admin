@@ -35,13 +35,12 @@ export let formItemConfig: FormItemConfigs = [
             // textarea:true,
             // autosize:true,
         },
-    ],
-    [
         {
             col: 12,
             key: 'customkey',
             type: 'custom',
         },
+
     ],
     [
         {
