@@ -41,7 +41,13 @@ export let tableColumnConfig = ref<TableColumnConfig[]>([
                     {
                         label: '2-2-2',
                         prop: 'name22',
-                        slot: true,
+                        headerSlot: true,
+                        contentSlot: true,
+                    },
+                    {
+                        label: '3-3-3',
+                        prop: 'name33',
+                        isLink: 'success',
                     },
                     {
                         label: '3-3-3',
@@ -56,7 +62,7 @@ export let tableColumnConfig = ref<TableColumnConfig[]>([
         label: '表头3',
         prop: 'address',
         width: 'auto',
-        slot: true,
+        contentSlot: true,
     }
 ])
 export let tableConfig = ref<TableConfig>({
@@ -67,7 +73,6 @@ export let tableConfig = ref<TableConfig>({
     // expand: true,
     // index: true,
     // highlightCurrentRow: true,
-    // customColumn: false,
     // height: 500,
     // maxHeight: 500,
     // tableLayout: 'fixed'

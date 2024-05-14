@@ -18,12 +18,26 @@
                 v-for="item in columnConfig.children"
                 :key="item.prop"
                 :columnConfig="item"
-                :faEmit="props.faEmit"
                 :tooltip="props.tooltip"
+                :fa-emit="props.faEmit"
+                :fa-slots="props.faSlots"
             >
+                <template v-for="(val , code) in props.faSlots" #[code]="scope" :key="code">
+                    <slot :name="code" v-bind="{...scope}"></slot>
+                </template>
             </sub-column>
         </template>
-        <template v-if="columnConfig.isLink" #default="scope">
+
+
+        <template v-if="columnConfig.headerSlot || false" #header>
+            <slot :name="`header-${columnConfig.prop}`"></slot>
+        </template>
+
+        <template v-if="columnConfig.contentSlot || false" #default="scope">
+            <slot :name="`content-${columnConfig.prop}`" v-bind="{...scope}"></slot>
+        </template>
+
+        <template v-if="columnConfig.isLink || false" #default="scope">
             <el-button
                 :type="columnConfig.isLink || 'primary'"
                 link
@@ -32,7 +46,7 @@
             </el-button>
         </template>
         <!-- XXX: 可能会小概率引发和自身的data变量的key冲突 -->
-        <template v-if="columnConfig.isEdit" #default="scope">
+        <template v-if="columnConfig.isEdit || false" #default="scope">
             <el-input
                 v-if="scope.row[columnConfig.prop + 'Edit']"
                 v-model="scope.row[columnConfig.prop]"
@@ -50,6 +64,7 @@ import {toRaw} from 'vue'
 
 const props = defineProps<{
     columnConfig: TableColumnConfig;
+    faSlots: any;
     tooltip?: boolean;
     faEmit?: any
 }>();
