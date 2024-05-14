@@ -43,29 +43,16 @@
             v-for="item in props.tableColumnConfig"
             :key="item.prop"
         >
-            <el-table-column
-                v-if="item.slot"
-                :align="item.align || 'center'"
-                :column-key="item.prop"
-                :header-align="item.headerAlign || 'center'"
-                :label="item.label"
-                :prop="item.prop"
-                :show-overflow-tooltip="props.tableConfig.tooltip || false"
-                :width="item.width || ''"
-            >
-                <template #header>
-                    <slot :name="'header-' + item.prop"></slot>
-                </template>
-                <template #default="scope">
-                    <slot :name="item.prop" :row="scope.row"></slot>
-                </template>
-            </el-table-column>
             <sub-column
-                v-else
                 :columnConfig="item"
-                :faEmit="emit"
                 :tooltip="props.tableConfig.tooltip || false"
-            ></sub-column>
+                :fa-emit="emit"
+                :fa-slots="slots"
+            >
+                <template v-for="(val , code) in slots" #[code]="scope" :key="code">
+                    <slot :name="code" v-bind="{...scope}"></slot>
+                </template>
+            </sub-column>
         </template>
     </el-table>
     <el-pagination
@@ -81,7 +68,9 @@
         @size-change="(e:number)=>emit('handle', 'handleSizeChange', {val:e,currentPage:pageData.currentPage,pageSize:pageData.pageSize},'handleSizeChange')"
         @current-change="(e:number)=>emit('handle', 'handleCurrentChange', {val:e,currentPage:pageData.currentPage,pageSize:pageData.pageSize},'handleCurrentChange')"
     />
+
 </template>
+
 <script lang="ts" setup>
 import {PaginationConfig, TableColumnConfig, TableConfig, TableDefineExpose,} from "./table-component";
 import subColumn from "@/components/globalComponents/ElementTableC/subColumn.vue";
@@ -123,8 +112,34 @@ const emit = defineEmits<{
     (event: "tableRowClassName", e: any, fn: Function): string;
     (event: "indexMethod", e: number, fn: Function): string;
 }>();
+const slots = useSlots()
 const tableRef = ref<InstanceType<typeof ElTable>>();
 let pageData = ref<PaginationConfig>(props.paginationConfig);
+
+// const findEditableProps = (items: any) => {
+//     let props: any = [];
+//     items.forEach((item: any) => {
+//         if (item.isEdit === true) {
+//             props.push(item.prop);
+//         }
+//         if (item.children && item.children.length > 0) {
+//             props = props.concat(findEditableProps(item.children));
+//         }
+//     });
+//     return props;
+// }
+// let editColumnProps = findEditableProps(toRaw(props.tableColumnConfig))
+// let editTableData = computed(() => {
+//     return props.tableData.map((e: any) => {
+//         editColumnProps.forEach((k: string) => {
+//             e[`${k}Edit`] = false
+//         })
+//         return e
+//     })
+// })
+// watch(props.tableColumnConfig, (newValue, oldValue) => {
+//     editColumnProps = findEditableProps(toRaw(newValue))
+// })
 
 // --------------------------------------------------------
 /**

@@ -75,9 +75,15 @@ export interface TableColumnConfig {
      */
     sortable?: boolean
     /**
-     * 自定义一级表头的el-table-column
+     * 是否开启表头的自定义
+     * <template #header-${TableColumnConfig.prop}> 自定义表头</template>
      */
-    slot?: boolean
+    headerSlot?: boolean
+    /**
+     * 是否开启表格数据的自定义
+     * <template #content-${TableColumnConfig.prop}="scope"> {{ scope.row }} </template>
+     */
+    contentSlot?: boolean
     /**
      * filters 是一个数组，决定可筛选的选项
      */
@@ -95,7 +101,7 @@ export interface TableColumnConfig {
      */
     headerAlign?: 'left' | 'center' | 'right'
     /**
-     * 表格中的数据是否可编辑，*需要在表格数据中（tableData）的每个list中添加用于控制编辑状态的变量，变量key为 [prop + 'Edit']*
+     * 表格中的数据是否可编辑，*需要在表格数据中（tableData）的每个list中添加用于控制编辑状态的变量，变量key为 [${TableColumnConfig.prop} + 'Edit']*
      */
     isEdit?: boolean
     /**

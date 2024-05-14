@@ -41,7 +41,8 @@ export let tableColumnConfig = ref<TableColumnConfig[]>([
                     {
                         label: '2-2-2',
                         prop: 'name22',
-                        slot: true,
+                        headerSlot: true,
+                        contentSlot: true,
                     },
                     {
                         label: '3-3-3',
@@ -56,7 +57,7 @@ export let tableColumnConfig = ref<TableColumnConfig[]>([
         label: '表头3',
         prop: 'address',
         width: 'auto',
-        slot: true,
+        contentSlot: true,
     }
 ])
 export let tableConfig = ref<TableConfig>({
