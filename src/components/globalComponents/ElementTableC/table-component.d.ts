@@ -20,11 +20,6 @@ export interface TableConfig {
      */
     tooltip?: boolean
     /**
-     * XXX 自定义el-table-column，要使用插槽时使用，插槽名称为 #subColumn
-     * 可配合sub-column组件进行使用
-     */
-    customColumn?: boolean
-    /**
      * 实现多选
      */
     selection?: boolean

@@ -67,7 +67,6 @@ export let tableConfig = ref<TableConfig>({
     // expand: true,
     // index: true,
     // highlightCurrentRow: true,
-    // customColumn: false,
     // height: 500,
     // maxHeight: 500,
     // tableLayout: 'fixed'

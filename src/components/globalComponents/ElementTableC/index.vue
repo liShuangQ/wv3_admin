@@ -39,13 +39,8 @@
             width="50"
         />
         <!--         ----->
-        <slot
-            v-if="props.tableConfig.customColumn || false"
-            name="subColumn"
-        ></slot>
         <template
             v-for="item in props.tableColumnConfig"
-            v-else
             :key="item.prop"
         >
             <el-table-column
