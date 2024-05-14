@@ -45,6 +45,7 @@
         >
             <sub-column
                 :columnConfig="item"
+                :faEmit="emit"
                 :tooltip="props.tableConfig.tooltip || false"
                 :fa-emit="emit"
                 :fa-slots="slots"

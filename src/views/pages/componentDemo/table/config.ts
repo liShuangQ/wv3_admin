@@ -49,6 +49,11 @@ export let tableColumnConfig = ref<TableColumnConfig[]>([
                         prop: 'name33',
                         isLink: 'success',
                     },
+                    {
+                        label: '3-3-3',
+                        prop: 'name33',
+                        isLink: 'success',
+                    },
                 ]
             },
         ]
