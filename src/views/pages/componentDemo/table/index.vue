@@ -1,6 +1,6 @@
 <template>
     <div class="overflow-y-scroll">
-        <div class="h-[500px]">
+        <div class="h-[700px]">
             <ElementTableC
                 ref="tableComRef"
                 :paginationConfig="paginationConfig"
@@ -18,13 +18,11 @@
                         <p m="t-0 b-2">City: city</p>
                     </div>
                 </template>
-                <template #header-name22> 自定义表头1</template>
-                <template #content-name22="scope"> {{ scope.row }} </template>
+                <template #header-data6> 自定义插槽</template>
+                <template #content-data6="scope"> {{ scope.row }}</template>
 
-                <template #content-address="scope">
-                    <el-button size="small" @click="editFun(scope.row)">{{
-                            scope.row.name00Edit ? "保存" : "编辑"
-                        }}
+                <template #content-data8="scope">
+                    <el-button size="small" @click="editFun(scope.row)">编辑开关
                     </el-button>
                 </template>
             </ElementTableC>
@@ -47,7 +45,7 @@
             </el-button>
         </div>
         <div style="margin-top: 20px">
-            <el-button @click="tableComRef!.resetDateFilter(['date22'])"
+            <el-button @click="tableComRef!.resetDateFilter(['data5'])"
             >清除筛选
             </el-button
             >
@@ -72,19 +70,24 @@ import {
 } from "@/views/pages/componentDemo/table/config";
 
 const tableComRef = ref<TableDefineExpose>();
+let editProps = {}
+// 获取用于编辑控制的变量
+nextTick(() => {
+    editProps = tableComRef.value!.getEditProps()
+})
 const tdadd = () => {
-    tableData.value.push({
-        date: new Date(),
-        date11: "add",
-        date22: "add",
-        address: "add",
-        name: "add",
-        name00: "add",
-        name00Edit: false,
-        name11: "add",
-        name22: "add",
-        name33: "add",
-    });
+    let itemD = {}
+    for (let i = 1; i <= 8; i++) {
+        if (i === 1) {
+            itemD['data' + i] = new Date()
+        } else if (i === 5) {
+            itemD['data' + i] = Math.random() < 0.5 ? 1 : 2
+        } else {
+            itemD['data' + i] = '演示数据' + new Date().getTime()
+        }
+    }
+    // 添加用于编辑控制的变量
+    tableData.value.push({...itemD, ...editProps});
     paginationConfig.value.total = tableData.value.length;
 };
 const pageChange = () => {
@@ -93,13 +96,11 @@ const pageChange = () => {
     console.log(paginationConfig, "paginationConfig");
 };
 const editFun = (row: any) => {
-    console.log(toRaw(row));
-    if (toRaw(row).name00.indexOf("0") !== -1) {
-        ElMessage.warning("模拟数据检验");
-        return;
-    }
-    row.name00Edit = !row.name00Edit;
+    Object.keys(editProps).forEach((k: string) => {
+        row[k] = !row[k]
+    })
 };
+
 // 注意和stripe会冲突
 const tableRowClassName = (
     e: {
@@ -121,7 +122,7 @@ const tableHandle = (t: string, d: any, key: string) => {
     console.log("tableHandle:::", t, d, key);
 };
 const indexMethod = (index: number, fn: Function) => {
-    // fn(index * 2)
+    fn('-' + index)
 };
 </script>
 

@@ -14,7 +14,8 @@
         :row-class-name="tableRowClassNameFun"
         :size="props.tableConfig.size || 'default'"
         :stripe="props.tableConfig.stripe || false"
-        :table-layout="props.tableConfig.tableLayout || 'fixed'"
+        :table-layout="props.tableConfig.tableLayout || 'auto'"
+        :max-height="props.tableConfig.maxHeight || null"
         style="width: 100%; height: calc(100% - 48px)"
         @selection-change="(e) => emit('handle', 'selection', e,'selection')"
         @current-change="(e) => emit('handle', 'current', e,'current')"
@@ -24,6 +25,7 @@
         <el-table-column
             v-if="props.tableConfig.index || false"
             :index="indexMethodFun"
+            :align="props.tableConfig.align || 'center'"
             type="index"
         />
         <el-table-column v-if="props.tableConfig.expand || false" type="expand">
@@ -33,7 +35,7 @@
         </el-table-column>
         <el-table-column
             v-if="props.tableConfig.selection || false"
-            align="center"
+            :align="props.tableConfig.align || 'center'"
             header-align="center"
             type="selection"
             width="50"
@@ -116,30 +118,18 @@ const slots = useSlots()
 const tableRef = ref<InstanceType<typeof ElTable>>();
 let pageData = ref<PaginationConfig>(props.paginationConfig);
 
-// const findEditableProps = (items: any) => {
-//     let props: any = [];
-//     items.forEach((item: any) => {
-//         if (item.isEdit === true) {
-//             props.push(item.prop);
-//         }
-//         if (item.children && item.children.length > 0) {
-//             props = props.concat(findEditableProps(item.children));
-//         }
-//     });
-//     return props;
-// }
-// let editColumnProps = findEditableProps(toRaw(props.tableColumnConfig))
-// let editTableData = computed(() => {
-//     return props.tableData.map((e: any) => {
-//         editColumnProps.forEach((k: string) => {
-//             e[`${k}Edit`] = false
-//         })
-//         return e
-//     })
-// })
-// watch(props.tableColumnConfig, (newValue, oldValue) => {
-//     editColumnProps = findEditableProps(toRaw(newValue))
-// })
+const findEditableProps = (items: any) => {
+    let props: any = [];
+    items.forEach((item: any) => {
+        if (item.isEdit === true) {
+            props.push(item.prop);
+        }
+        if (item.children && item.children.length > 0) {
+            props = props.concat(findEditableProps(item.children));
+        }
+    });
+    return props;
+}
 
 // --------------------------------------------------------
 /**
@@ -170,6 +160,14 @@ const indexMethodFun = (index: number) => {
 };
 
 // ------------------------供外部调用-------------------------
+
+const getEditProps = (): Object => {
+    let editProps = {}
+    findEditableProps(toRaw(props.tableColumnConfig)).forEach((k: string) => {
+        editProps[k + 'EEdit'] = false
+    })
+    return editProps
+}
 const toggleSelection = (rows?: any[]): void => {
     if (rows) {
         rows.forEach((row) => {
@@ -192,10 +190,11 @@ const tableMethod = (methodName: string, ...d: any): void => {
     tableRef.value![methodName](...d);
 };
 
+
 defineExpose<TableDefineExpose>({
     toggleSelection,
     resetDateFilter,
     tableMethod,
+    getEditProps
 });
 </script>
-<style scoped></style>

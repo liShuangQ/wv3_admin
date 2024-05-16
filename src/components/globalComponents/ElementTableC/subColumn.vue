@@ -48,7 +48,7 @@
         <!-- XXX: 可能会小概率引发和自身的data变量的key冲突 -->
         <template v-if="columnConfig.isEdit || false" #default="scope">
             <el-input
-                v-if="scope.row[columnConfig.prop + 'Edit']"
+                v-if="scope.row[columnConfig.prop + 'EEdit']"
                 v-model="scope.row[columnConfig.prop]"
                 :size="'default'"
                 placeholder=""

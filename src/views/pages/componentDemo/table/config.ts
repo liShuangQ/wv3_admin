@@ -6,28 +6,29 @@ import {
 
 export let tableColumnConfig = ref<TableColumnConfig[]>([
     {
-        label: '表头1',
-        prop: 'date',
+        label: '排序&编辑',
+        prop: 'data1',
         width: 200,
         sortable: true,
+        isEdit: true
     },
     {
-        label: '表头2',
-        prop: 'name',
+        label: '多级表格',
+        prop: 'data2',
         width: 500,
         children: [
             {
-                label: '2-1',
-                prop: 'name00',
+                label: '表格编辑',
+                prop: 'data3',
                 isEdit: true
             },
             {
-                label: '2-2',
-                prop: 'name11',
+                label: '二级表格',
+                prop: 'data4',
                 children: [
                     {
-                        label: '2-2-1',
-                        prop: 'date22',
+                        label: '排序&过滤',
+                        prop: 'data5',
                         sortable: true,
                         filters: [
                             {text: '1', value: '1'},
@@ -39,14 +40,14 @@ export let tableColumnConfig = ref<TableColumnConfig[]>([
                         }
                     },
                     {
-                        label: '2-2-2',
-                        prop: 'name22',
+                        label: '',
+                        prop: 'data6',
                         headerSlot: true,
                         contentSlot: true,
                     },
                     {
-                        label: '3-3-3',
-                        prop: 'name33',
+                        label: '是否按钮',
+                        prop: 'data7',
                         isLink: 'success',
                     },
                 ]
@@ -55,22 +56,22 @@ export let tableColumnConfig = ref<TableColumnConfig[]>([
     },
     {
         label: '表头3',
-        prop: 'address',
+        prop: 'data8',
         width: 'auto',
         contentSlot: true,
     }
 ])
 export let tableConfig = ref<TableConfig>({
-    // stripe: true,
+    align:'center',
+    stripe: true,
     border: false,
-    // tooltip: true,
+    tooltip: true,
     selection: true,
-    // expand: true,
-    // index: true,
-    // highlightCurrentRow: true,
-    // height: 500,
-    // maxHeight: 500,
-    // tableLayout: 'fixed'
+    expand: true,
+    index: true,
+    highlightCurrentRow: true,
+    maxHeight: 600,  // 一般不设置
+    tableLayout: 'fixed'
 })
 export let tableData = ref<any[]>([])
 export let paginationConfig = ref<PaginationConfig>({
