@@ -118,7 +118,6 @@ const emit = defineEmits<{
 const slots = useSlots()
 const tableRef = ref<InstanceType<typeof ElTable>>();
 let pageData = ref<PaginationConfig>(props.paginationConfig);
-
 const findEditableProps = (items: any) => {
     let props: any = [];
     items.forEach((item: any) => {
