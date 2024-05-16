@@ -1,5 +1,9 @@
 export interface TableConfig {
     /**
+     * 功能区的对齐方式，默认center
+     */
+    align?: 'left' | 'center' | 'right'
+    /**
      * stripe 可以创建带斑马纹的表格。 如果 true, 表格将会带有斑马纹。
      */
     stripe?: boolean
@@ -101,7 +105,9 @@ export interface TableColumnConfig {
      */
     headerAlign?: 'left' | 'center' | 'right'
     /**
-     * 表格中的数据是否可编辑，*需要在表格数据中（tableData）的每个list中添加用于控制编辑状态的变量，变量key为 [${TableColumnConfig.prop} + 'Edit']*
+     * 表格中的数据是否可编辑，目前只可支持编辑框为input框，编辑后直接修改表格数据
+     * 需要在表格数据中（tableData）的每个map中添加用于控制编辑状态的变量，可通过getEditProps方法获取{...,...[xxxref].getEditProps()}
+     * 后手动控制每个key的布尔值。key一般为[${prop} + 'EEdit']，默认布尔值为false
      */
     isEdit?: boolean
     /**
@@ -122,6 +128,10 @@ export interface PaginationConfig {
 }
 
 export interface TableDefineExpose {
+    /**
+     * 获取编辑列的的用于控制编辑框的编辑值
+     */
+    getEditProps: () => Object
     /**
      * 多选时控制选中信息，rows不传入时全部去除
      * @param rows

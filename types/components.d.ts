@@ -7,8 +7,10 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    ElButton: typeof import('element-plus/es')['ElButton']
     ElementFormC: typeof import('./../src/components/globalComponents/ElementFormC/index.vue')['default']
     ElementTableC: typeof import('./../src/components/globalComponents/ElementTableC/index.vue')['default']
+    ElInput: typeof import('element-plus/es')['ElInput']
     ElPagination: typeof import('element-plus/es')['ElPagination']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     RouterLink: typeof import('vue-router')['RouterLink']
