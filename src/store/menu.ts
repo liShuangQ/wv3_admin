@@ -1,34 +1,34 @@
-import {defineStore} from "pinia";
-import menuData, {PagesMenu} from '@/router/menu'
-import {cloneDeep} from "lodash";
+import { defineStore } from "pinia";
+import menuData, { PagesMenu } from "@/router/menu";
+import { cloneDeep } from "lodash";
 import menu from "@/router/menu";
 
 export default defineStore("menu", {
     state: (): {
-        menu: PagesMenu[] | null
-        flatMenu: PagesMenu[],
-        history: PagesMenu[]
+        menu: PagesMenu[] | null;
+        flatMenu: PagesMenu[];
+        history: PagesMenu[];
     } => {
         return {
             menu: null,
             flatMenu: [],
-            history: []
+            history: [],
         };
     },
     actions: {
         setMenu(data: PagesMenu[]): void {
-            this.history=[]
+            this.history = [];
             this.menu = data;
-            this.setFlatMenu()
+            this.setFlatMenu();
         },
         getMenu(): PagesMenu[] | null {
-            return this.menu
+            return this.menu;
         },
         setFlatMenu(): void {
-            const flatMenu: PagesMenu[] = []
+            const flatMenu: PagesMenu[] = [];
 
             function deep(d: PagesMenu[]) {
-                d.forEach(ele => {
+                d.forEach((ele) => {
                     if (!ele.children || ele.children.length === 0) {
                         flatMenu.push(ele);
                         return;
@@ -36,35 +36,38 @@ export default defineStore("menu", {
                         flatMenu.push(ele);
                         ele.children && deep(ele.children);
                     }
-                })
+                });
             }
 
-            cloneDeep(this.menu as PagesMenu[]).forEach(e => {
+            cloneDeep(this.menu as PagesMenu[]).forEach((e) => {
                 if (!e.children || e.children.length === 0) {
-                    flatMenu.push(e)
+                    flatMenu.push(e);
                 } else {
-                    flatMenu.push(e)
-                    deep(e.children)
+                    flatMenu.push(e);
+                    deep(e.children);
                 }
-            })
-            this.flatMenu = flatMenu
+            });
+            this.flatMenu = flatMenu;
         },
         setHistoryAdd(data: PagesMenu): void {
             if (this.history.length >= 7) {
-                this.history.splice(1);
+                this.history.splice(0, 1);
             }
-            if (this.history.find(e => e.path === data.path)) {
+            if (this.history.find((e) => e.path === data.path)) {
                 return;
             }
-            this.history.push(data)
+            this.history.push(data);
         },
         setHistoryDel(data: PagesMenu): void {
-            this.history = this.history.filter(e => e.path !== data.path)
+            this.history = this.history.filter((e) => e.path !== data.path);
         },
         getHistory(): PagesMenu[] {
-            return this.history
+            return this.history;
         },
-        handleHistoryMenu(selectedKeys: string, type: "left" | "right" | "now"): void {
+        handleHistoryMenu(
+            selectedKeys: string,
+            type: "left" | "right" | "now"
+        ): void {
             if (type === "left") {
                 let i = 0;
                 for (let index = 0; index < this.history.length; index++) {
