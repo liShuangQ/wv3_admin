@@ -55,12 +55,27 @@ module.exports = {
             {
                 test: /\.(sa|sc|c)ss$/,
                 use: devMode
-                    ? ["style-loader", "css-loader", "postcss-loader", "sass-loader"]
+                    ? ["style-loader", "css-loader", "postcss-loader", {
+                        loader: 'sass-loader',
+                        options: {
+                            sassOptions: {
+                                silenceDeprecations: ['legacy-js-api'],
+                            },
+                        },
+                    },]
                     : [
                         MiniCssExtractPlugin.loader,
                         "css-loader",
                         "postcss-loader",
-                        "sass-loader",
+                        {
+                            loader: 'sass-loader',
+                            options: {
+                                sassOptions: {
+                                    silenceDeprecations: ['legacy-js-api'],
+                                    quietDeps: true, // 抑制弃用警告
+                                },
+                            },
+                        },
                     ],
             },
         ],
