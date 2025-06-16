@@ -2,6 +2,7 @@ import {createApp} from "vue";
 import App from "./App.vue";
 import router, {setupRouter} from "./router/index";
 import {setupPlugins} from "@/plugins";
+import "./style/preflight.css"
 import "./style/tailwind.css"
 import "./style/element.scss"
 import 'element-plus/dist/index.css'
